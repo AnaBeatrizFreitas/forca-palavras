@@ -13,12 +13,12 @@ async function loadWords() {
   try {
     const res = await fetch("https://anabeatrizfreitas.github.io/forca-palavras/palavras.json");
     const data = await res.json();
-    ORIGINAL_WORDS = data;
-    wordPool = shuffleWords();
+    ORIGINAL_WORDS = [...data]; // copia original
+    wordPool = shuffleWords();  // embaralha uma vez
     startGame();
   } catch (err) {
     console.error("Erro ao carregar palavras:", err);
-    statusEl.textContent = "Erro ao carregar palavras.";
+    if (statusEl) statusEl.textContent = "Erro ao carregar palavras.";
   }
 }
 
@@ -37,6 +37,7 @@ function normalize(s) {
 
 function pickWord() {
   if (wordPool.length === 0) {
+    alert("Todas as palavras foram usadas! Reiniciando...");
     wordPool = shuffleWords();
   }
   const item = wordPool.pop();
