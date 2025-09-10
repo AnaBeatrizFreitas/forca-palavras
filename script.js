@@ -11,7 +11,7 @@ let wordEl, hintEl, keyboardEl, statusEl, livesEl, categoryEl;
 
 async function loadWords() {
   try {
-    const res = await fetch("https://seu-usuario.github.io/forca-palavras/palavras.json");
+    const res = await fetch("https://anabeatrizfreitas.github.io/forca-palavras/palavras.json");
     const data = await res.json();
     ORIGINAL_WORDS = data;
     wordPool = shuffleWords();
