@@ -13,49 +13,6 @@
 * {
   box-sizing: border-box;
 }
-#victory-scene {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 999;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#victory-scene.show {
-  display: flex;
-  animation: fadeIn 1s ease forwards;
-}
-
-.glow {
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(16,185,129,0.3), rgba(0,0,0,0.8));
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  animation: shine 2s ease-in-out forwards;
-}
-
-.victory-message {
-  color: var(--good);
-  font-size: 32px;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px black;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes shine {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
 
 body {
   margin: 0;
@@ -67,6 +24,7 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
 }
 
+/* App container */
 .app {
   width: min(900px, 94vw);
   background: linear-gradient(180deg, #0b1020 0%, #0d1324 100%);
@@ -76,6 +34,7 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
 }
 
+/* Header */
 header {
   display: flex;
   align-items: center;
@@ -90,58 +49,6 @@ h1 {
   letter-spacing: .5px;
   color: #f3f4f6;
 }
-#death-scene {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 999;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#death-scene.show {
-  display: flex;
-  animation: fadeIn 1s ease forwards;
-}
-
-.blood {
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9));
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  animation: drip 2s ease-in-out forwards;
-}
-
-.death-message {
-  color: #ff4d4d;
-  font-size: 32px;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px black;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes drip {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
 
 .stats {
   display: flex;
@@ -154,6 +61,7 @@ h1 {
   color: var(--ink);
 }
 
+/* Game board */
 .board {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -167,6 +75,7 @@ h1 {
   padding: 16px;
 }
 
+/* Word display */
 .word {
   display: flex;
   flex-wrap: wrap;
@@ -196,6 +105,7 @@ h1 {
   margin-top: 6px;
 }
 
+/* Keyboard */
 .keyboard {
   display: grid;
   grid-template-columns: repeat(14, 1fr);
@@ -241,6 +151,7 @@ button.key.bad {
   color: #fecaca;
 }
 
+/* Actions */
 .actions {
   display: flex;
   gap: 10px;
@@ -263,6 +174,7 @@ button.key.bad {
   border-color: #374151;
 }
 
+/* Status */
 .status {
   text-align: center;
   margin-top: 6px;
@@ -278,6 +190,7 @@ button.key.bad {
   color: var(--bad);
 }
 
+/* Gallows SVG */
 .gallows {
   width: 100%;
   height: 280px;
@@ -304,13 +217,7 @@ button.key.bad {
   stroke: var(--boy);
 }
 
-footer {
-  margin-top: 12px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-}
-
+/* Character selection */
 #character-select {
   text-align: center;
   margin-bottom: 20px;
@@ -337,11 +244,93 @@ footer {
   background: #1f2937;
 }
 
-@media (max-width: 760px) {
-  .board {
-    grid-template-columns: 1fr;
-  }
-  .keyboard {
-    grid-template-columns: repeat(10, 1fr);
-  }
+/* Death scene */
+#death-scene {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#death-scene.show {
+  display: flex;
+  animation: fadeIn 1s ease forwards;
+}
+
+.blood {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9));
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  animation: drip 2s ease-in-out forwards;
+}
+
+.death-message {
+  color: #ff4d4d;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px black;
+  animation: pulse 1.5s infinite;
+}
+
+/* Victory scene */
+#victory-scene {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#victory-scene.show {
+  display: flex;
+  animation: fadeIn 1s ease forwards;
+}
+
+.glow {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(16,185,129,0.3), rgba(0,0,0,0.8));
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  animation: shine 2s ease-in-out forwards;
+}
+
+.victory-message {
+  color: var(--good);
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px black;
+  animation: pulse 1.5s infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes drip {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shine {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
