@@ -13,8 +13,17 @@ async function loadWords() {
   try {
     const res = await fetch("https://anabeatrizfreitas.github.io/forca-palavras/palavras.json");
     const data = await res.json();
-    ORIGINAL_WORDS = [...data]; // copia original
-    wordPool = shuffleWords();  // embaralha uma vez
+
+    // Filtra palavras válidas: só letras, sem espaços ou símbolos
+    ORIGINAL_WORDS = data.filter(item =>
+      /^[A-ZÇÁÉÍÓÚÀÂÊÔÃÕÜ]+$/i.test(item.w)
+    );
+
+    if (ORIGINAL_WORDS.length === 0) {
+      throw new Error("Nenhuma palavra válida encontrada.");
+    }
+
+    wordPool = shuffleWords();
     startGame();
   } catch (err) {
     console.error("Erro ao carregar palavras:", err);
@@ -36,12 +45,14 @@ function normalize(s) {
 }
 
 function pickWord() {
-  console.log("Palavra escolhida:", item.w);
   if (wordPool.length === 0) {
     alert("Todas as palavras foram usadas! Reiniciando...");
     wordPool = shuffleWords();
   }
+
   const item = wordPool.pop();
+  console.log("Palavra escolhida:", item); // 👀 log para depuração
+
   return {
     original: item.w.toUpperCase(),
     clean: normalize(item.w.toUpperCase()),
