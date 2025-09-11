@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadWords();
   });
 
-    document.getElementById("boy").addEventListener("click", () => {
+  document.getElementById("boy").addEventListener("click", () => {
     character = "boy";
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
