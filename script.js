@@ -36,6 +36,7 @@ function normalize(s) {
 }
 
 function pickWord() {
+  console.log("Palavra escolhida:", item.w);
   if (wordPool.length === 0) {
     alert("Todas as palavras foram usadas! Reiniciando...");
     wordPool = shuffleWords();
