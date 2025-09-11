@@ -62,8 +62,6 @@ function pickWord() {
   }
 
   const item = wordPool.pop();
-  console.log("Palavra escolhida:", item);
-
   return {
     original: item.w.toUpperCase(),
     clean: normalize(item.w.toUpperCase()),
@@ -156,6 +154,7 @@ function updateStatus() {
     statusEl.className = "status win";
     statusEl.textContent = "Você venceu! Pressione Enter ou clique em Reiniciar.";
     lockKeyboard();
+    showVictoryScene();
   } else if (isLose()) {
     statusEl.className = "status lose";
     statusEl.textContent = `Você perdeu… A palavra era: ${chosen.original}.`;
@@ -171,6 +170,18 @@ function updateStatus() {
 function showDeathScene() {
   const scene = document.getElementById("death-scene");
   if (scene) scene.classList.add("show");
+}
+
+function showVictoryScene() {
+  const scene = document.getElementById("victory-scene");
+  if (scene) {
+    scene.classList.add("show");
+    setTimeout(() => {
+      scene.classList.remove("show");
+      chosen = pickWord();
+      reset(false);
+    }, 6000);
+  }
 }
 
 function revealAll() {
@@ -200,6 +211,7 @@ function reset(preserveWord = true) {
   updateHangman();
   unlockKeyboard();
   document.getElementById("death-scene")?.classList.remove("show");
+  document.getElementById("victory-scene")?.classList.remove("show");
   if (!preserveWord) chosen = pickWord();
   drawWord();
   hintEl.textContent = `Dica: ${chosen.hint}`;
@@ -247,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadWords();
   });
 
-  document.getElementById("boy").addEventListener("click", () => {
+    document.getElementById("boy").addEventListener("click", () => {
     character = "boy";
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
