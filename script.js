@@ -1,9 +1,9 @@
-let character = null;
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 
 const KEYS = "A B C Ç D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" ");
-const MAX_ERRORS = 6;
+let MAX_ERRORS = 8;
+let character = null;
 
 let chosen, revealed, guessed, errors;
 
@@ -15,16 +15,13 @@ async function loadWords() {
     const res = await fetch("https://anabeatrizfreitas.github.io/forca-palavras/palavras.json");
     const data = await res.json();
 
-    // Filtra palavras válidas: sem espaços, números ou símbolos
     ORIGINAL_WORDS = data.filter(item =>
       item.w &&
       typeof item.w === "string" &&
       /^[A-ZÇÁÉÍÓÚÀÂÊÔÃÕÜ]{3,}$/i.test(item.w.trim())
     );
 
-    if (ORIGINAL_WORDS.length === 0) {
-      throw new Error("Nenhuma palavra válida encontrada.");
-    }
+    if (ORIGINAL_WORDS.length === 0) throw new Error("Nenhuma palavra válida encontrada.");
 
     wordPool = shuffleWords();
     startGame();
@@ -124,10 +121,20 @@ function onGuess(letter) {
 
 function updateHangman() {
   livesEl.textContent = (MAX_ERRORS - errors);
+
   for (let i = 0; i < MAX_ERRORS; i++) {
     const el = document.getElementById("p" + i);
     if (!el) continue;
     el.classList.toggle("show", i < errors);
+  }
+
+  // Personalização visual
+  if (character === "girl") {
+    if (errors >= 7) document.getElementById("p6")?.classList.add("show"); // cabelinho
+    if (errors >= 8) document.getElementById("p7")?.classList.add("show"); // laço
+  } else if (character === "boy") {
+    if (errors >= 7) document.getElementById("p6")?.classList.add("show"); // chapéu
+    if (errors >= 8) document.getElementById("p7")?.classList.add("show"); // calça
   }
 }
 
@@ -209,8 +216,9 @@ function startGame() {
     reset(false);
   });
 }
+
+// Espera escolha de personagem antes de iniciar
 document.addEventListener("DOMContentLoaded", () => {
-  // Espera o jogador escolher entre menino ou menina
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
     MAX_ERRORS = 8;
@@ -225,4 +233,3 @@ document.addEventListener("DOMContentLoaded", () => {
     loadWords();
   });
 });
-
