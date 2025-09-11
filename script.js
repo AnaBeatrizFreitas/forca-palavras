@@ -1,3 +1,4 @@
+let character = null;
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 
@@ -208,5 +209,20 @@ function startGame() {
     reset(false);
   });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  // Espera o jogador escolher entre menino ou menina
+  document.getElementById("girl").addEventListener("click", () => {
+    character = "girl";
+    MAX_ERRORS = 8;
+    document.getElementById("character-select").style.display = "none";
+    loadWords();
+  });
 
-document.addEventListener("DOMContentLoaded", loadWords);
+  document.getElementById("boy").addEventListener("click", () => {
+    character = "boy";
+    MAX_ERRORS = 8;
+    document.getElementById("character-select").style.display = "none";
+    loadWords();
+  });
+});
+
