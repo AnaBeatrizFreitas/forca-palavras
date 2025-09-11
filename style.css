@@ -12,6 +12,18 @@
   box-sizing: border-box;
 }
 
+.part.show {
+  stroke: #e5e7eb;
+}
+
+.part.girl {
+  stroke: #f472b6; /* rosa */
+}
+
+.part.boy {
+  stroke: #60a5fa; /* azul */
+}
+
 body {
   margin: 0;
   min-height: 100vh;
