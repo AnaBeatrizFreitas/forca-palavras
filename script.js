@@ -130,11 +130,11 @@ function updateHangman() {
 
   // Personalização visual
   if (character === "girl") {
-    if (errors >= 7) document.getElementById("p6")?.classList.add("show"); // cabelinho
-    if (errors >= 8) document.getElementById("p7")?.classList.add("show"); // laço
+    if (errors >= 7) document.getElementById("p6")?.classList.add("show", "girl"); // cabelinho
+    if (errors >= 8) document.getElementById("p7")?.classList.add("show", "girl"); // laço
   } else if (character === "boy") {
-    if (errors >= 7) document.getElementById("p6")?.classList.add("show"); // chapéu
-    if (errors >= 8) document.getElementById("p7")?.classList.add("show"); // calça
+    if (errors >= 7) document.getElementById("p6")?.classList.add("show", "boy"); // chapéu
+    if (errors >= 8) document.getElementById("p7")?.classList.add("show", "boy"); // calça
   }
 }
 
@@ -217,7 +217,7 @@ function startGame() {
   });
 }
 
-// Espera escolha de personagem antes de iniciar
+// Escolha de personagem antes de iniciar
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
