@@ -40,7 +40,7 @@ function shuffleWords() {
   return copy;
 }
 
-function normalize(s) {
+normalize(s) {
   return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/gi, "c");
 }
 
