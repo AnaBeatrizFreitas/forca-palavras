@@ -10,6 +10,17 @@ let chosen, revealed, guessed, errors;
 const $ = (sel) => document.querySelector(sel);
 let wordEl, hintEl, keyboardEl, statusEl, livesEl, categoryEl;
 
+const SHAPES = {
+  girl: {
+    p6: "M165 75 Q190 50 215 75",                // cabelinho
+    p7: "M182 80 L190 70 L198 80 L190 90 Z"      // laço
+  },
+  boy: {
+    p6: "M165 75 L215 75 L190 50 Z",             // chapéu
+    p7: "M175 200 L175 240 M205 200 L205 240"    // calça
+  }
+};
+
 async function loadWords() {
   try {
     const res = await fetch("https://anabeatrizfreitas.github.io/forca-palavras/palavras.json");
@@ -121,20 +132,10 @@ function onGuess(letter) {
 
 function updateHangman() {
   livesEl.textContent = (MAX_ERRORS - errors);
-
   for (let i = 0; i < MAX_ERRORS; i++) {
     const el = document.getElementById("p" + i);
     if (!el) continue;
     el.classList.toggle("show", i < errors);
-  }
-
-  // Personalização visual
-  if (character === "girl") {
-    if (errors >= 7) document.getElementById("p6")?.classList.add("show", "girl"); // cabelinho
-    if (errors >= 8) document.getElementById("p7")?.classList.add("show", "girl"); // laço
-  } else if (character === "boy") {
-    if (errors >= 7) document.getElementById("p6")?.classList.add("show", "boy"); // chapéu
-    if (errors >= 8) document.getElementById("p7")?.classList.add("show", "boy"); // calça
   }
 }
 
@@ -160,10 +161,16 @@ function updateStatus() {
     statusEl.textContent = `Você perdeu… A palavra era: ${chosen.original}.`;
     revealAll();
     lockKeyboard();
+    showDeathScene();
   } else {
     statusEl.className = "status";
     statusEl.textContent = "";
   }
+}
+
+function showDeathScene() {
+  const scene = document.getElementById("death-scene");
+  if (scene) scene.classList.add("show");
 }
 
 function revealAll() {
@@ -192,10 +199,24 @@ function reset(preserveWord = true) {
   guessed = new Set();
   updateHangman();
   unlockKeyboard();
+  document.getElementById("death-scene")?.classList.remove("show");
   if (!preserveWord) chosen = pickWord();
   drawWord();
   hintEl.textContent = `Dica: ${chosen.hint}`;
   categoryEl.textContent = chosen.hint;
+}
+
+function applyCharacterShapes(kind) {
+  const p6 = document.getElementById("p6");
+  const p7 = document.getElementById("p7");
+  if (p6 && p7) {
+    p6.setAttribute("d", SHAPES[kind].p6);
+    p7.setAttribute("d", SHAPES[kind].p7);
+    p6.classList.remove("girl", "boy");
+    p7.classList.remove("girl", "boy");
+    p6.classList.add(kind);
+    p7.classList.add(kind);
+  }
 }
 
 function startGame() {
@@ -217,12 +238,12 @@ function startGame() {
   });
 }
 
-// Escolha de personagem antes de iniciar
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
+    applyCharacterShapes("girl");
     loadWords();
   });
 
@@ -230,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     character = "boy";
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
+    applyCharacterShapes("boy");
     loadWords();
   });
 });
