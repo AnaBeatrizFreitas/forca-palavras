@@ -6,22 +6,12 @@
   --accent: #60a5fa;
   --bad: #ef4444;
   --good: #10b981;
+  --girl: #f472b6;
+  --boy: #60a5fa;
 }
 
 * {
   box-sizing: border-box;
-}
-
-.part.show {
-  stroke: #e5e7eb;
-}
-
-.part.girl {
-  stroke: #f472b6; /* rosa */
-}
-
-.part.boy {
-  stroke: #60a5fa; /* azul */
 }
 
 body {
@@ -203,10 +193,20 @@ button.key.bad {
 .part {
   opacity: 0;
   transition: opacity .25s ease;
+  stroke: var(--ink);
+  stroke-width: 5;
 }
 
 .part.show {
   opacity: 1;
+}
+
+.part.show.girl {
+  stroke: var(--girl);
+}
+
+.part.show.boy {
+  stroke: var(--boy);
 }
 
 footer {
@@ -214,6 +214,32 @@ footer {
   text-align: center;
   color: var(--muted);
   font-size: 12px;
+}
+
+#character-select {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#character-select h2 {
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+#character-select button {
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 10px;
+  border: 2px solid var(--panel);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+#character-select button:hover {
+  background: #1f2937;
 }
 
 @media (max-width: 760px) {
