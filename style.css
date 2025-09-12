@@ -10,10 +10,6 @@
   --boy: #60a5fa;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   min-height: 100vh;
@@ -24,194 +20,52 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
 }
 
-.app {
-  width: min(900px, 94vw);
-  background: linear-gradient(180deg, #0b1020 0%, #0d1324 100%);
-  border: 1px solid #1f2937;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+/* Botões de personagem com estilo */
+#character-select {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-h1 {
-  font-size: 20px;
-  margin: 0;
-  letter-spacing: .5px;
-  color: #f3f4f6;
-}
-
-.stats {
-  display: flex;
-  gap: 14px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.stats b {
+#character-select h2 {
   color: var(--ink);
+  margin-bottom: 10px;
 }
 
-.board {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 18px;
-}
-
-.panel {
-  background: var(--panel);
-  border: 1px solid #1f2937;
+#character-select button {
+  font-size: 18px;
+  padding: 12px 22px;
+  margin: 0 10px;
   border-radius: 12px;
-  padding: 16px;
-}
-
-.word {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  padding: 10px 0 4px;
-  font-size: clamp(22px, 5vw, 36px);
-  letter-spacing: 2px;
-}
-
-.slot {
-  width: 28px;
-  border-bottom: 3px solid #374151;
-  text-align: center;
-  padding-bottom: 6px;
-}
-
-.slot.revealed {
-  border-color: #475569;
-  color: #e2e8f0;
-}
-
-.hint {
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
-  margin-top: 6px;
-}
-
-.keyboard {
-  display: grid;
-  grid-template-columns: repeat(14, 1fr);
-  gap: 6px;
-  margin-top: 12px;
-}
-
-button.key {
-  background: #111827;
-  border: 1px solid #1f2937;
+  border: 2px solid #273245;
+  background: linear-gradient(180deg, #0f172a, #0b1221);
   color: #e5e7eb;
-  border-radius: 8px;
-  padding: 8px 0;
-  font-weight: 600;
-  letter-spacing: .3px;
   cursor: pointer;
-  transition: transform .04s ease, background .2s ease, border-color .2s ease;
-  user-select: none;
+  transition: transform .08s ease, background .2s ease, box-shadow .2s ease, border-color .2s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
 }
 
-button.key:hover {
-  background: #0f172a;
+#girl {
+  border-color: rgba(244,114,182,.5);
+  box-shadow: 0 10px 24px rgba(244,114,182,.18), inset 0 1px 0 rgba(255,255,255,.06);
 }
 
-button.key:active {
-  transform: translateY(1px);
+#boy {
+  border-color: rgba(96,165,250,.5);
+  box-shadow: 0 10px 24px rgba(96,165,250,.18), inset 0 1px 0 rgba(255,255,255,.06);
 }
 
-button.key[disabled] {
-  opacity: .45;
-  cursor: not-allowed;
+#character-select button:hover {
+  background: linear-gradient(180deg, #111a30, #0b1326);
+  transform: translateY(-1px);
 }
 
-button.key.good {
-  background: rgba(16,185,129,.1);
-  border-color: rgba(16,185,129,.35);
-  color: #a7f3d0;
+#character-select button:active {
+  transform: translateY(0);
 }
 
-button.key.bad {
-  background: rgba(239,68,68,.08);
-  border-color: rgba(239,68,68,.35);
-  color: #fecaca;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 12px;
-}
-
-.btn {
-  background: #0b1020;
-  border: 1px solid #1f2937;
-  color: #e5e7eb;
-  border-radius: 10px;
-  padding: 10px 14px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease;
-}
-
-.btn.primary {
-  background: #1f2937;
-  border-color: #374151;
-}
-
-.btn:hover {
-  background: #1f2937;
-}
-
-.status {
-  text-align: center;
-  margin-top: 6px;
-  font-weight: 700;
-  letter-spacing: .3px;
-}
-
-.status.win {
-  color: var(--good);
-}
-
-.status.lose {
-  color: var(--bad);
-}
-
-.gallows {
-  width: 100%;
-  height: 280px;
-  display: block;
-  margin: 0 auto;
-}
-
-.part {
-  opacity: 0;
-  transition: opacity .25s ease;
-  stroke: var(--ink);
-  stroke-width: 5;
-}
-
-.part.show {
-  opacity: 1;
-}
-
-.part.show.girl {
-  stroke: var(--girl);
-}
-
-.part.show.boy {
-  stroke: var(--boy);
+#character-select button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* Tela de derrota */
@@ -228,6 +82,7 @@ button.key.bad {
 
 #death-scene.show {
   display: flex;
+  pointer-events: auto;
   animation: fadeIn 1s ease forwards;
 }
 
@@ -239,6 +94,7 @@ button.key.bad {
   inset: 0;
   z-index: -1;
   animation: drip 2s ease-in-out forwards;
+  pointer-events: none;
 }
 
 .death-message {
@@ -249,21 +105,33 @@ button.key.bad {
   animation: pulse 1.5s infinite;
 }
 
+/* Botão “Tente novamente” */
 #try-again {
   margin-top: 20px;
-  padding: 10px 16px;
+  padding: 12px 18px;
   font-size: 16px;
-  font-weight: 600;
-  background: #1f2937;
+  font-weight: 700;
+  background: linear-gradient(180deg, #1f2937, #111827);
   border: 2px solid #374151;
   color: #e5e7eb;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: transform .08s ease, background .2s ease, box-shadow .2s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
 }
 
 #try-again:hover {
-  background: #374151;
+  background: linear-gradient(180deg, #263244, #121826);
+}
+
+#try-again:active {
+  transform: translateY(1px);
+}
+
+#try-again:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(16,185,129,.15);
 }
 
 /* Tela de vitória */
@@ -322,6 +190,7 @@ button.key.bad {
   50% { transform: scale(1.05); }
 }
 
+/* Responsivo */
 @media (max-width: 760px) {
   .board {
     grid-template-columns: 1fr;
@@ -331,22 +200,11 @@ button.key.bad {
     grid-template-columns: repeat(10, 1fr);
   }
 
-  .word {
-    font-size: 24px;
-  }
-
-  .panel {
+  #character-select button {
+    width: calc(50% - 10px);
+    margin: 6px 5px;
+    font-size: 16px;
     padding: 12px;
-  }
-
-  .btn {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-
-  #try-again {
-    font-size: 14px;
-    padding: 8px 12px;
   }
 
   .death-message,
@@ -354,5 +212,10 @@ button.key.bad {
     font-size: 24px;
     text-align: center;
     padding: 0 10px;
+  }
+
+  #try-again {
+    font-size: 14px;
+    padding: 10px 14px;
   }
 }
