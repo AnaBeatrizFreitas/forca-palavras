@@ -125,6 +125,11 @@ function onGuess(letter) {
     errors++;
     updateHangman();
     updateStatus();
+
+    // 💡 Mostra a dica automaticamente quando restarem 3 chances
+    if ((MAX_ERRORS - errors) === 3) {
+      hintEl.textContent = `Dica: ${chosen.hint}`;
+    }
   }
 }
 
@@ -224,7 +229,7 @@ function reset(preserveWord = true) {
   document.getElementById("victory-scene")?.classList.remove("show");
   if (!preserveWord) chosen = pickWord();
   drawWord();
-  hintEl.textContent = `Dica: ${chosen.hint}`;
+  hintEl.textContent = ""; // limpa a dica no início
   categoryEl.textContent = chosen.hint;
 }
 
