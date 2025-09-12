@@ -266,8 +266,7 @@ header h1 {
 .glow {
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, rgba(16,185,129,0.3), rgba(58, 219, 98, 0.8));
-   background-color: #0c6e19;
+  background: radial-gradient(circle at center, rgba(16,185,129,0.3), rgba(5, 110, 53, 0.911));
   position: absolute;
   inset: 0;
   z-index: -1;
