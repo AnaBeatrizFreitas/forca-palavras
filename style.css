@@ -220,6 +220,25 @@ header h1 {
   animation: drip 2s ease-in-out forwards;
   pointer-events: none;
 }
+/* Dica contextual no topo */
+#contextual-hint {
+  display: none;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 12px;
+  background-color: var(--panel);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 500;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+#contextual-hint strong {
+  color: var(--accent);
+}
+
 
 .death-message {
   color: #ff4d4d;
