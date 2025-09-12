@@ -169,7 +169,11 @@ function updateStatus() {
 
 function showDeathScene() {
   const scene = document.getElementById("death-scene");
-  if (scene) scene.classList.add("show");
+  if (scene) {
+    scene.classList.add("show");
+    const btn = document.getElementById("try-again");
+    if (btn) setTimeout(() => btn.focus(), 50);
+  }
 }
 
 function showVictoryScene() {
@@ -249,10 +253,14 @@ function startGame() {
     reset(false);
   });
 
-  document.getElementById("try-again").addEventListener("click", () => {
-    chosen = pickWord();
-    reset(false);
-  });
+  const tryAgain = document.getElementById("try-again");
+  if (tryAgain) {
+    tryAgain.addEventListener("click", () => {
+      document.getElementById("death-scene")?.classList.remove("show");
+      chosen = pickWord();
+      reset(false);
+    });
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -271,4 +279,13 @@ document.addEventListener("DOMContentLoaded", () => {
     applyCharacterShapes("boy");
     loadWords();
   });
+
+  const tryAgain = document.getElementById("try-again");
+  if (tryAgain) {
+    tryAgain.addEventListener("click", () => {
+      document.getElementById("death-scene")?.classList.remove("show");
+      chosen = pickWord();
+      reset(false);
+    });
+  }
 });
