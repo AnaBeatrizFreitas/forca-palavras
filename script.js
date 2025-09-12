@@ -126,9 +126,36 @@ function onGuess(letter) {
     updateHangman();
     updateStatus();
 
-    // 💡 Mostra a dica automaticamente quando restarem 3 chances
+    // 💡 Dica contextual quando restam 3 chances
     if ((MAX_ERRORS - errors) === 3) {
-      hintEl.textContent = `Dica: ${chosen.hint}`;
+      hintEl.textContent = ""; // oculta a dica padrão
+
+      const contextual = document.getElementById("contextual-hint");
+      if (contextual) {
+        const tema = chosen.hint;
+        const palavraFormatada = chosen.original
+          .split("")
+          .map((ch) => revealed.has(normalize(ch)) ? ch : "_")
+          .join(" ");
+
+        let dicaExtra = "";
+        if (tema.toLowerCase() === "animal") {
+          dicaExtra = "Animal comum de ter no deserto";
+        } else if (tema.toLowerCase() === "objeto médico") {
+          dicaExtra = "Usado em hospitais ou consultórios";
+        } else if (tema.toLowerCase() === "fruta") {
+          dicaExtra = "Pode ser encontrada em feiras ou mercados";
+        } else {
+          dicaExtra = "Pense bem, você está quase lá!";
+        }
+
+        contextual.innerHTML = `
+          <div><strong>Tema:</strong> ${tema}</div>
+          <div><strong>Palavra:</strong> ${palavraFormatada}</div>
+          <div><strong>Dica:</strong> ${dicaExtra}</div>
+        `;
+        contextual.style.display = "block";
+      }
     }
   }
 }
@@ -229,8 +256,15 @@ function reset(preserveWord = true) {
   document.getElementById("victory-scene")?.classList.remove("show");
   if (!preserveWord) chosen = pickWord();
   drawWord();
-  hintEl.textContent = ""; // ❌ oculta a dica no início
+  hintEl.textContent = ""; // oculta a dica padrão
   categoryEl.textContent = chosen.hint;
+
+  // 🧼 Limpa dica contextual
+  const contextual = document.getElementById("contextual-hint");
+  if (contextual) {
+    contextual.style.display = "none";
+    contextual.innerHTML = "";
+  }
 }
 
 function applyCharacterShapes(kind) {
@@ -271,7 +305,9 @@ document.addEventListener("DOMContentLoaded", () => {
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
     applyCharacterShapes("girl");
-    
+    loadWords();
+  });
+
   document.getElementById("boy").addEventListener("click", () => {
     character = "boy";
     MAX_ERRORS = 8;
