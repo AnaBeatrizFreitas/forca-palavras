@@ -20,7 +20,7 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
 }
 
-/* Botões de personagem com estilo */
+/* Botões de personagem com estilo aprimorado */
 #character-select {
   text-align: center;
   margin-bottom: 20px;
@@ -33,39 +33,24 @@ body {
 
 #character-select button {
   font-size: 18px;
-  padding: 12px 22px;
+  padding: 10px 20px;
   margin: 0 10px;
-  border-radius: 12px;
-  border: 2px solid #273245;
-  background: linear-gradient(180deg, #0f172a, #0b1221);
+  border-radius: 10px;
+  border: 2px solid #374151;
+  background: #1f2937;
   color: #e5e7eb;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform .08s ease, background .2s ease, box-shadow .2s ease, border-color .2s ease;
-  box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
-}
-
-#girl {
-  border-color: rgba(244,114,182,.5);
-  box-shadow: 0 10px 24px rgba(244,114,182,.18), inset 0 1px 0 rgba(255,255,255,.06);
-}
-
-#boy {
-  border-color: rgba(96,165,250,.5);
-  box-shadow: 0 10px 24px rgba(96,165,250,.18), inset 0 1px 0 rgba(255,255,255,.06);
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 #character-select button:hover {
-  background: linear-gradient(180deg, #111a30, #0b1326);
+  background: #374151;
   transform: translateY(-1px);
 }
 
 #character-select button:active {
   transform: translateY(0);
-}
-
-#character-select button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
 }
 
 /* Tela de derrota */
@@ -105,33 +90,22 @@ body {
   animation: pulse 1.5s infinite;
 }
 
-/* Botão “Tente novamente” */
+/* Botão “Tente novamente” funcional */
 #try-again {
   margin-top: 20px;
-  padding: 12px 18px;
+  padding: 10px 16px;
   font-size: 16px;
-  font-weight: 700;
-  background: linear-gradient(180deg, #1f2937, #111827);
+  font-weight: 600;
+  background: #1f2937;
   border: 2px solid #374151;
   color: #e5e7eb;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: transform .08s ease, background .2s ease, box-shadow .2s ease;
-  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  transition: background 0.2s ease;
 }
 
 #try-again:hover {
-  background: linear-gradient(180deg, #263244, #121826);
-}
-
-#try-again:active {
-  transform: translateY(1px);
-}
-
-#try-again:focus-visible {
-  outline: 2px solid #10b981;
-  outline-offset: 3px;
-  box-shadow: 0 0 0 6px rgba(16,185,129,.15);
+  background: #374151;
 }
 
 /* Tela de vitória */
@@ -188,34 +162,4 @@ body {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-}
-
-/* Responsivo */
-@media (max-width: 760px) {
-  .board {
-    grid-template-columns: 1fr;
-  }
-
-  .keyboard {
-    grid-template-columns: repeat(10, 1fr);
-  }
-
-  #character-select button {
-    width: calc(50% - 10px);
-    margin: 6px 5px;
-    font-size: 16px;
-    padding: 12px;
-  }
-
-  .death-message,
-  .victory-message {
-    font-size: 24px;
-    text-align: center;
-    padding: 0 10px;
-  }
-
-  #try-again {
-    font-size: 14px;
-    padding: 10px 14px;
-  }
 }
