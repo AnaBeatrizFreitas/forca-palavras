@@ -12,12 +12,12 @@ let wordEl, hintEl, keyboardEl, statusEl, livesEl, categoryEl;
 
 const SHAPES = {
   girl: {
-    p6: "M165 75 Q190 50 215 75",                // cabelinho
-    p7: "M182 80 L190 70 L198 80 L190 90 Z"      // laço
+    p6: "M165 75 Q190 50 215 75",
+    p7: "M182 80 L190 70 L198 80 L190 90 Z"
   },
   boy: {
-    p6: "M165 75 L215 75 L190 50 Z",             // chapéu
-    p7: "M175 200 L175 240 M205 200 L205 240"    // calça
+    p6: "M165 75 L215 75 L190 50 Z",
+    p7: "M175 200 L175 240 M205 200 L205 240"
   }
 };
 
@@ -172,7 +172,13 @@ function showDeathScene() {
   if (scene) {
     scene.classList.add("show");
     const btn = document.getElementById("try-again");
-    if (btn) setTimeout(() => btn.focus(), 50);
+    if (btn) {
+      btn.onclick = () => {
+        scene.classList.remove("show");
+        chosen = pickWord();
+        reset(false);
+      };
+    }
   }
 }
 
@@ -252,15 +258,6 @@ function startGame() {
     chosen = pickWord();
     reset(false);
   });
-
-  const tryAgain = document.getElementById("try-again");
-  if (tryAgain) {
-    tryAgain.addEventListener("click", () => {
-      document.getElementById("death-scene")?.classList.remove("show");
-      chosen = pickWord();
-      reset(false);
-    });
-  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -279,13 +276,4 @@ document.addEventListener("DOMContentLoaded", () => {
     applyCharacterShapes("boy");
     loadWords();
   });
-
-  const tryAgain = document.getElementById("try-again");
-  if (tryAgain) {
-    tryAgain.addEventListener("click", () => {
-      document.getElementById("death-scene")?.classList.remove("show");
-      chosen = pickWord();
-      reset(false);
-    });
-  }
 });
