@@ -248,6 +248,11 @@ function startGame() {
     chosen = pickWord();
     reset(false);
   });
+
+  document.getElementById("try-again").addEventListener("click", () => {
+    chosen = pickWord();
+    reset(false);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
