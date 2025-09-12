@@ -229,7 +229,7 @@ function reset(preserveWord = true) {
   document.getElementById("victory-scene")?.classList.remove("show");
   if (!preserveWord) chosen = pickWord();
   drawWord();
-  hintEl.textContent = ""; // limpa a dica no início
+  hintEl.textContent = ""; // ❌ oculta a dica no início
   categoryEl.textContent = chosen.hint;
 }
 
@@ -271,9 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
     applyCharacterShapes("girl");
-    loadWords();
-  });
-
+    
   document.getElementById("boy").addEventListener("click", () => {
     character = "boy";
     MAX_ERRORS = 8;
