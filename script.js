@@ -21,18 +21,18 @@ const SHAPES = {
   }
 };
 
-async function loadWords() {
+async function loadWordsFromTheme(theme) {
   try {
-    const res = await fetch("https://anabeatrizfreitas.github.io/forca-palavras/palavras.json");
+    const res = await fetch(`palavras/${theme}/palavras.json`);
     const data = await res.json();
 
     ORIGINAL_WORDS = data.filter(item =>
-      item.w &&
-      typeof item.w === "string" &&
-      /^[A-ZÇÁÉÍÓÚÀÂÊÔÃÕÜ]{3,}$/i.test(item.w.trim())
-    );
-
-    if (ORIGINAL_WORDS.length === 0) throw new Error("Nenhuma palavra válida encontrada.");
+      item.w && typeof item.w === "string"
+    ).map(item => ({
+      w: item.w.toUpperCase(),
+      dica: item.dica || "Sem dica disponível",
+      h: theme.replace(/-/g, " ")
+    }));
 
     wordPool = shuffleWords();
     startGame();
@@ -63,9 +63,10 @@ function pickWord() {
 
   const item = wordPool.pop();
   return {
-    original: item.w.toUpperCase(),
-    clean: normalize(item.w.toUpperCase()),
-    hint: item.h || "Geral"
+    original: item.w,
+    clean: normalize(item.w),
+    hint: item.h,
+    dica: item.dica
   };
 }
 
@@ -126,33 +127,20 @@ function onGuess(letter) {
     updateHangman();
     updateStatus();
 
-    // 💡 Dica contextual quando restam 3 chances
     if ((MAX_ERRORS - errors) === 3) {
-      hintEl.textContent = ""; // oculta a dica padrão
+      hintEl.textContent = "";
 
       const contextual = document.getElementById("contextual-hint");
       if (contextual) {
-        const tema = chosen.hint;
         const palavraFormatada = chosen.original
           .split("")
           .map((ch) => revealed.has(normalize(ch)) ? ch : "_")
           .join(" ");
 
-        let dicaExtra = "";
-        if (tema.toLowerCase() === "animal") {
-          dicaExtra = "Animal comum de ter no deserto";
-        } else if (tema.toLowerCase() === "objeto médico") {
-          dicaExtra = "Usado em hospitais ou consultórios";
-        } else if (tema.toLowerCase() === "fruta") {
-          dicaExtra = "Pode ser encontrada em feiras ou mercados";
-        } else {
-          dicaExtra = "Pense bem, você está quase lá!";
-        }
-
         contextual.innerHTML = `
-          <div><strong>Tema:</strong> ${tema}</div>
+          <div><strong>Tema:</strong> ${chosen.hint}</div>
           <div><strong>Palavra:</strong> ${palavraFormatada}</div>
-          <div><strong>Dica:</strong> ${dicaExtra}</div>
+          <div><strong>Dica:</strong> ${chosen.dica}</div>
         `;
         contextual.style.display = "block";
       }
@@ -256,10 +244,9 @@ function reset(preserveWord = true) {
   document.getElementById("victory-scene")?.classList.remove("show");
   if (!preserveWord) chosen = pickWord();
   drawWord();
-  hintEl.textContent = ""; // oculta a dica padrão
+  hintEl.textContent = "";
   categoryEl.textContent = chosen.hint;
 
-  // 🧼 Limpa dica contextual
   const contextual = document.getElementById("contextual-hint");
   if (contextual) {
     contextual.style.display = "none";
@@ -300,12 +287,13 @@ function startGame() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Escolha de personagem
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
     applyCharacterShapes("girl");
-    loadWords();
+    document.getElementById("theme-select").style.display = "block";
   });
 
   document.getElementById("boy").addEventListener("click", () => {
@@ -313,6 +301,15 @@ document.addEventListener("DOMContentLoaded", () => {
     MAX_ERRORS = 8;
     document.getElementById("character-select").style.display = "none";
     applyCharacterShapes("boy");
-    loadWords();
+    document.getElementById("theme-select").style.display = "block";
+  });
+
+  // Escolha de tema
+  document.querySelectorAll("#theme-select button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const theme = btn.dataset.theme;
+      document.getElementById("theme-select").style.display = "none";
+      loadWordsFromTheme(theme);
+    });
   });
 });
