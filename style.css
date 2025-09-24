@@ -176,6 +176,40 @@ header h1 {
   background-color: #333;
 }
 
+/* Escolha de tema */
+#theme-select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.theme-btn {
+  background: linear-gradient(135deg, #1f2937, #374151);
+  color: var(--ink);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-btn:hover {
+  background: linear-gradient(135deg, #374151, #1f2937);
+  transform: scale(1.05);
+}
+
+.theme-btn:active {
+  transform: scale(0.98);
+}
+
 /* SVG da forca */
 .gallows {
   width: 100%;
@@ -220,6 +254,7 @@ header h1 {
   animation: drip 2s ease-in-out forwards;
   pointer-events: none;
 }
+
 /* Dica contextual no topo */
 #contextual-hint {
   display: none;
@@ -238,7 +273,6 @@ header h1 {
 #contextual-hint strong {
   color: var(--accent);
 }
-
 
 .death-message {
   color: #ff4d4d;
@@ -289,7 +323,7 @@ header h1 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  animation: shine 0,5s ease-in-out forwards;
+  animation: shine 0.5s ease-in-out forwards;
   pointer-events: none;
 }
 
