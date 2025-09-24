@@ -161,19 +161,21 @@ header h1 {
 
 #character-select button {
   font-size: 16px;
-  padding: 8px 16px;
+  padding: 10px 24px;
   margin: 0 8px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background-color: #222;
-  color: #eee;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 #character-select button:hover {
-  background-color: #333;
+  background-color: #3b82f6;
+  transform: scale(1.05);
 }
 
 /* Escolha de tema */
@@ -187,27 +189,28 @@ header h1 {
 }
 
 .theme-btn {
-  background: linear-gradient(135deg, #1f2937, #374151);
-  color: var(--ink);
-  border: 1px solid #444;
-  border-radius: 10px;
-  padding: 10px 18px;
-  font-size: 15px;
-  font-weight: 600;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background-color 0.3s ease;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .theme-btn:hover {
-  background: linear-gradient(135deg, #374151, #1f2937);
+  background-color: #3b82f6;
   transform: scale(1.05);
 }
 
 .theme-btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 /* SVG da forca */
@@ -226,7 +229,7 @@ header h1 {
   display: block;
 }
 
-/* Tela de derrota com brilho vermelho */
+/* Tela de derrota */
 #death-scene {
   position: fixed;
   inset: 0;
@@ -255,25 +258,6 @@ header h1 {
   pointer-events: none;
 }
 
-/* Dica contextual no topo */
-#contextual-hint {
-  display: none;
-  text-align: center;
-  margin-bottom: 20px;
-  padding: 12px;
-  background-color: var(--panel);
-  border: 1px solid #374151;
-  border-radius: 8px;
-  color: var(--ink);
-  font-size: 16px;
-  font-weight: 500;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-#contextual-hint strong {
-  color: var(--accent);
-}
-
 .death-message {
   color: #ff4d4d;
   font-size: 28px;
@@ -282,7 +266,6 @@ header h1 {
   animation: pulse 1.5s infinite;
 }
 
-/* Botão “Tente novamente” */
 #try-again {
   margin-top: 20px;
   padding: 8px 16px;
@@ -298,7 +281,7 @@ header h1 {
   background-color: #dd5d5d;
 }
 
-/* Tela de vitória com brilho verde */
+/* Tela de vitória */
 #victory-scene {
   position: fixed;
   inset: 0;
@@ -333,6 +316,25 @@ header h1 {
   font-weight: bold;
   text-shadow: 2px 2px 6px black;
   animation: pulse 1.5s infinite;
+}
+
+/* Dica contextual */
+#contextual-hint {
+  display: none;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 12px;
+  background-color: var(--panel);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 500;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+#contextual-hint strong {
+  color: var(--accent);
 }
 
 /* Animações */
