@@ -8,15 +8,12 @@
 </head>
 <body>
   <div class="app">
-
-    <!-- Escolha de personagem -->
     <div id="character-select">
       <h2>Escolha seu personagem:</h2>
       <button id="girl">👧 Menina</button>
       <button id="boy">👦 Menino</button>
     </div>
 
-    <!-- Escolha de tema (já aparece junto) -->
     <h2 id="theme-title">Escolha o tema:</h2>
     <div id="theme-select">
       <button data-theme="pais">País</button>
@@ -29,49 +26,10 @@
       <button data-theme="comida">Comida</button>
     </div>
 
-    <!-- Painel do jogo -->
-    <div class="board">
-      <div class="panel">
-        <div class="word" id="word"></div>
-        <div class="hint" id="hint"></div>
-        <div id="contextual-hint"></div>
-        <div class="keyboard" id="keyboard"></div>
-        <div class="actions">
-          <button id="reset" class="btn">Reiniciar</button>
-          <button id="shuffle" class="btn">Nova Palavra</button>
-        </div>
-        <div class="status" id="status"></div>
-      </div>
-
-      <div class="panel">
-        <svg class="gallows" viewBox="0 0 400 400">
-          <line id="p0" class="part" x1="50" y1="350" x2="350" y2="350" />
-          <line id="p1" class="part" x1="100" y1="350" x2="100" y2="50" />
-          <line id="p2" class="part" x1="100" y1="50" x2="250" y2="50" />
-          <line id="p3" class="part" x1="250" y1="50" x2="250" y2="100" />
-          <circle id="p4" class="part" cx="250" cy="125" r="25" />
-          <line id="p5" class="part" x1="250" y1="150" x2="250" y2="250" />
-          <path id="p6" class="part" d="" />
-          <path id="p7" class="part" d="" />
-          <line id="p8" class="part" x1="250" y1="250" x2="230" y2="300" />
-        </svg>
-        <div><strong>Erros restantes:</strong> <span id="lives">8</span></div>
-        <div><strong>Tema:</strong> <span id="category">---</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tela de derrota -->
-  <div id="death-scene">
-    <div class="blood"></div>
-    <div class="death-message">Você perdeu!</div>
-    <button id="try-again">Tentar novamente</button>
-  </div>
-
-  <!-- Tela de vitória -->
-  <div id="victory-scene">
-    <div class="glow"></div>
-    <div class="victory-message">Parabéns! Você venceu!</div>
+    <div class="word" id="word"></div>
+    <div id="hint"></div>
+    <div class="keyboard" id="keyboard"></div>
+    <div class="status" id="status"></div>
   </div>
 
   <script src="script.js"></script>
