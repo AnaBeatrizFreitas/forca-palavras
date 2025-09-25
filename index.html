@@ -8,29 +8,29 @@
 </head>
 <body>
 
-  <!-- Dica contextual (aparece com 3 chances restantes) -->
-  <div id="contextual-hint" style="display: none; text-align: center; margin-bottom: 10px;">
-    <!-- Conteúdo gerado via JS -->
-  </div>
-
-  <div id="theme-select">
-  <h2>Escolha o tema:</h2>
-  <button data-theme="pais">🌍 País</button>
-  <button data-theme="profissao">👩‍⚕️ Profissão</button>
-  <button data-theme="objeto">📦 Objeto</button>
-  <button data-theme="animal">🐾 Animal</button>
-  <button data-theme="estilo-musica">🎶 Estilo de Música</button>
-  <button data-theme="cantores">🎤 Cantores</button>
-  <button data-theme="filmes">🎬 Filmes</button>
-  <button data-theme="comida">🍔 Comida</button>
-</div>
-
-  <!-- Escolha de personagem -->
+  <!-- Bloco de seleção inicial -->
   <div id="character-select">
-    <h2>Escolha seu personagem:</h2>
-    <button id="girl">👧 Menina</button>
-    <button id="boy">👦 Menino</button>
+    <h2 id="selection-title">Escolha seu personagem:</h2>
+    <div id="character-buttons">
+      <button id="girl">👧 Menina</button>
+      <button id="boy">👦 Menino</button>
+    </div>
+
+    <div id="theme-buttons" style="display: none;">
+      <h2>Escolha o tema:</h2>
+      <button data-theme="pais">🌍 País</button>
+      <button data-theme="profissao">👩‍⚕️ Profissão</button>
+      <button data-theme="objeto">📦 Objeto</button>
+      <button data-theme="animal">🐾 Animal</button>
+      <button data-theme="estilo-musica">🎶 Estilo de Música</button>
+      <button data-theme="cantores">🎤 Cantores</button>
+      <button data-theme="filmes">🎬 Filmes</button>
+      <button data-theme="comida">🍔 Comida</button>
+    </div>
   </div>
+
+  <!-- Dica contextual -->
+  <div id="contextual-hint" style="display: none;"></div>
 
   <!-- Interface principal -->
   <div class="app">
@@ -46,21 +46,16 @@
       <!-- Painel da forca -->
       <div class="panel">
         <svg class="gallows" viewBox="0 0 300 300" aria-label="Forca">
-          <!-- Estrutura da forca -->
           <line x1="20" y1="280" x2="160" y2="280" stroke="#6b7280" stroke-width="8"/>
           <line x1="60" y1="280" x2="60" y2="40"  stroke="#6b7280" stroke-width="8"/>
           <line x1="60" y1="40"  x2="190" y2="40"  stroke="#6b7280" stroke-width="8"/>
           <line x1="190" y1="40" x2="190" y2="70"  stroke="#6b7280" stroke-width="6"/>
-
-          <!-- Boneco padrão -->
           <circle class="part" id="p0" cx="190" cy="95" r="25" fill="none"/>
           <line class="part" id="p1" x1="190" y1="120" x2="190" y2="185"/>
           <line class="part" id="p2" x1="190" y1="135" x2="165" y2="160"/>
           <line class="part" id="p3" x1="190" y1="135" x2="215" y2="160"/>
           <line class="part" id="p4" x1="190" y1="185" x2="170" y2="220"/>
           <line class="part" id="p5" x1="190" y1="185" x2="210" y2="220"/>
-
-          <!-- Acessórios dinâmicos -->
           <path class="part" id="p6" d="" fill="none"></path>
           <path class="part" id="p7" d="" fill="none"></path>
         </svg>
