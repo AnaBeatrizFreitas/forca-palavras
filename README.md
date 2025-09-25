@@ -1,1 +1,1 @@
-a pasta está com a codificação correta. foi preciso mudar os arquivos json (palavras) para que ficasse melhor ajustado no código.
+a pasta JOGO-DA-FORCA está com a codificação correta. foi preciso mudar os arquivos json (palavras) para que ficasse melhor ajustado no código. recomendo que você baixe os arquivos no computador, delete tudo neste repositório, e faça o upload neste repositório novamente. 
