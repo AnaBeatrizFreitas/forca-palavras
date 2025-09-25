@@ -21,8 +21,25 @@ const SHAPES = {
   }
 };
 
-function normalize(s) {
-  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/gi, "c");
+async function loadWordsFromTheme(theme) {
+  try {
+    const res = await fetch(`palavras/${theme}/palavras.json`);
+    const data = await res.json();
+
+    ORIGINAL_WORDS = data.filter(item =>
+      item.w && typeof item.w === "string"
+    ).map(item => ({
+      w: item.w.toUpperCase(),
+      dica: item.dica || "Sem dica disponível",
+      h: theme.replace(/-/g, " ")
+    }));
+
+    wordPool = shuffleWords();
+    startGame();
+  } catch (err) {
+    console.error("Erro ao carregar palavras:", err);
+    if (statusEl) statusEl.textContent = "Erro ao carregar palavras.";
+  }
 }
 
 function shuffleWords() {
@@ -32,6 +49,10 @@ function shuffleWords() {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
+}
+
+function normalize(s) {
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/gi, "c");
 }
 
 function pickWord() {
@@ -245,28 +266,6 @@ function applyCharacterShapes(kind) {
     p7.classList.add(kind);
   }
 }
-
-async function loadWordsFromTheme(theme) {
-  try {
-    const res = await fetch(`palavras/${theme}/palavras.json`);
-    const data = await res.json();
-
-    ORIGINAL_WORDS = data.filter(item =>
-      item.w && typeof item.w === "string"
-    ).map(item => ({
-      w: item.w.toUpperCase(),
-      dica: item.dica || "Sem dica disponível",
-      h: theme.replace(/-/g, " ")
-    }));
-
-    wordPool = shuffleWords();
-    startGame();
-  } catch (err) {
-    console.error("Erro ao carregar palavras:", err);
-    if (statusEl) statusEl.textContent = "Erro ao carregar palavras.";
-  }
-}
-
 function startGame() {
   wordEl = $("#word");
   hintEl = $("#hint");
@@ -279,51 +278,28 @@ function startGame() {
   buildKeyboard();
   reset(false);
 
-  const resetBtn = document.getElementById("reset");
-  const shuffleBtn = document.getElementById("shuffle");
-
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => reset(true));
-  }
-
-  if (shuffleBtn) {
-    shuffleBtn.addEventListener("click", () => {
-      chosen = pickWord();
-      reset(false);
-    });
-  }
+  document.getElementById("reset").addEventListener("click", () => reset(true));
+  document.getElementById("shuffle").addEventListener("click", () => {
+    chosen = pickWord();
+    reset(false);
+  });
 }
 
-// Fluxo inicial do jogo
+// Fluxo inicial — personagem e tema juntos
 document.addEventListener("DOMContentLoaded", () => {
-  const characterSelect = document.getElementById("character-select");
-  const themeSelect = document.getElementById("theme-select");
-  const themeTitle = document.getElementById("theme-title");
-
-  themeSelect.style.display = "none";
-  if (themeTitle) themeTitle.style.display = "none";
-
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
     applyCharacterShapes("girl");
-    characterSelect.style.display = "none";
-    themeSelect.style.display = "flex";
-    if (themeTitle) themeTitle.style.display = "block";
   });
 
   document.getElementById("boy").addEventListener("click", () => {
     character = "boy";
     applyCharacterShapes("boy");
-    characterSelect.style.display = "none";
-    themeSelect.style.display = "flex";
-    if (themeTitle) themeTitle.style.display = "block";
   });
 
   document.querySelectorAll("#theme-select button").forEach(btn => {
     btn.addEventListener("click", () => {
       const theme = btn.dataset.theme;
-      themeSelect.style.display = "none";
-      if (themeTitle) themeTitle.style.display = "none";
       loadWordsFromTheme(theme);
     });
   });
