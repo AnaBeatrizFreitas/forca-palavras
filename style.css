@@ -1,3 +1,4 @@
+/* Bloco de seleção inicial */
 #character-select {
   text-align: center;
   margin-bottom: 20px;
@@ -8,6 +9,7 @@
   font-size: 20px;
 }
 
+/* Botões de personagem e tema com estilo unificado */
 #character-buttons,
 #theme-buttons {
   display: flex;
@@ -21,6 +23,7 @@
 #theme-buttons button {
   font-size: 16px;
   padding: 8px 16px;
+  margin: 0 8px;
   border-radius: 6px;
   border: 1px solid #444;
   background-color: #222;
