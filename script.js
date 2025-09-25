@@ -266,6 +266,7 @@ function applyCharacterShapes(kind) {
     p7.classList.add(kind);
   }
 }
+
 function startGame() {
   wordEl = $("#word");
   hintEl = $("#hint");
@@ -285,7 +286,6 @@ function startGame() {
   });
 }
 
-// Fluxo inicial — personagem e tema juntos
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
