@@ -1,41 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
   const characterSelect = document.getElementById("character-select");
-  const themeSelect = document.getElementById("theme-select");
-  const themeTitle = document.getElementById("theme-title"); // <h2>Escolha o tema:</h2>
+  const characterButtons = document.getElementById("character-buttons");
+  const themeButtons = document.getElementById("theme-buttons");
+  const selectionTitle = document.getElementById("selection-title");
 
-  // Oculta a seleção de tema no início
-  themeSelect.style.display = "none";
-  if (themeTitle) themeTitle.style.display = "none";
+  // Oculta os botões de tema no início
+  themeButtons.style.display = "none";
 
   // Escolha de personagem
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
     MAX_ERRORS = 8;
-    characterSelect.style.display = "none";
     applyCharacterShapes("girl");
 
-    // Agora mostra a seleção de tema
-    themeSelect.style.display = "flex";
-    if (themeTitle) themeTitle.style.display = "block";
+    // Transição para escolha de tema
+    characterButtons.style.display = "none";
+    selectionTitle.textContent = "Escolha o tema:";
+    themeButtons.style.display = "block";
   });
 
   document.getElementById("boy").addEventListener("click", () => {
     character = "boy";
     MAX_ERRORS = 8;
-    characterSelect.style.display = "none";
     applyCharacterShapes("boy");
 
-    // Agora mostra a seleção de tema
-    themeSelect.style.display = "flex";
-    if (themeTitle) themeTitle.style.display = "block";
+    // Transição para escolha de tema
+    characterButtons.style.display = "none";
+    selectionTitle.textContent = "Escolha o tema:";
+    themeButtons.style.display = "block";
   });
 
   // Escolha de tema
-  document.querySelectorAll("#theme-select button").forEach(btn => {
+  document.querySelectorAll("#theme-buttons button").forEach(btn => {
     btn.addEventListener("click", () => {
       const theme = btn.dataset.theme;
-      themeSelect.style.display = "none";
-      if (themeTitle) themeTitle.style.display = "none";
+
+      // Oculta toda a área de seleção após escolha
+      characterSelect.style.display = "none";
+
+      // Carrega palavras do tema escolhido
       loadWordsFromTheme(theme);
     });
   });
