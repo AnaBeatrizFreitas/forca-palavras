@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="app">
-    
+
     <!-- Escolha de personagem -->
     <div id="character-select">
       <h2>Escolha seu personagem:</h2>
@@ -16,17 +16,17 @@
       <button id="boy">👦 Menino</button>
     </div>
 
-    <!-- Escolha de tema (aparece depois) -->
+    <!-- Escolha de tema (já aparece junto) -->
     <h2 id="theme-title">Escolha o tema:</h2>
     <div id="theme-select">
-      <button class="theme-btn" data-theme="pais">🌍 País</button>
-      <button class="theme-btn" data-theme="profissao">👔 Profissão</button>
-      <button class="theme-btn" data-theme="objeto">🧸 Objeto</button>
-      <button class="theme-btn" data-theme="animal">🐾 Animal</button>
-      <button class="theme-btn" data-theme="estilo-musica">🎶 Estilo de Música</button>
-      <button class="theme-btn" data-theme="cantores">🎤 Cantores</button>
-      <button class="theme-btn" data-theme="filmes">🎬 Filmes</button>
-      <button class="theme-btn" data-theme="comida">🍽️ Comida</button>
+      <button data-theme="pais">País</button>
+      <button data-theme="profissao">Profissão</button>
+      <button data-theme="objeto">Objeto</button>
+      <button data-theme="animal">Animal</button>
+      <button data-theme="estilo-musica">Estilo de Música</button>
+      <button data-theme="cantores">Cantores</button>
+      <button data-theme="filmes">Filmes</button>
+      <button data-theme="comida">Comida</button>
     </div>
 
     <!-- Painel do jogo -->
@@ -45,12 +45,10 @@
 
       <div class="panel">
         <svg class="gallows" viewBox="0 0 400 400">
-          <!-- Estrutura da forca -->
           <line id="p0" class="part" x1="50" y1="350" x2="350" y2="350" />
           <line id="p1" class="part" x1="100" y1="350" x2="100" y2="50" />
           <line id="p2" class="part" x1="100" y1="50" x2="250" y2="50" />
           <line id="p3" class="part" x1="250" y1="50" x2="250" y2="100" />
-          <!-- Corpo do boneco -->
           <circle id="p4" class="part" cx="250" cy="125" r="25" />
           <line id="p5" class="part" x1="250" y1="150" x2="250" y2="250" />
           <path id="p6" class="part" d="" />
