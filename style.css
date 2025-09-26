@@ -175,6 +175,10 @@ header h1 {
 #character-select button:hover {
   background-color: #333;
 }
+#character-select button.selected {
+  background-color: #1a559c; /* azul escuro */
+}
+
 
 /* Escolha de tema */
 #theme-select {
@@ -203,6 +207,10 @@ header h1 {
 .theme-btn:active {
   transform: scale(0.97);
 }
+.theme-btn.selected {
+  background-color: #1a559c; /* azul escuro */
+}
+
 
 /* SVG da forca */
 .gallows {
