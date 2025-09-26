@@ -1,12 +1,12 @@
 const temas = {
-  "Animal 🐶": "animal.json",
-  "Cantores 🎤": "cantores.json",
-  "Comida 🍔": "comida.json",
-  "Estilos de Música 🎵": "estilos_de_musica.json",
-  "Filmes 🎬": "filmes.json",
-  "Objeto 🧰": "objeto.json",
-  "País 🌍": "pais.json",
-  "Profissões 👩‍⚕️": "profissoes.json"
+  "Animal 🐶": "animal/palavras.json",
+  "Cantores 🎤": "cantores/palavras.json",
+  "Comida 🍔": "comida/palavras.json",
+  "Estilos de Música 🎵": "estilos_de_musica/palavras.json",
+  "Filmes 🎬": "filmes/palavras.json",
+  "Objeto 🧰": "objeto/palavras.json",
+  "País 🌍": "pais/palavras.json",
+  "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
 let character = null;
@@ -88,7 +88,7 @@ function selecionarTema(botao, caminho, nomeTema) {
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
-  const baseURL = `${window.location.origin}/palavras/${nomeArquivo}`;
+  const baseURL = `palavras/${nomeArquivo}`;
 
   fetch(baseURL)
     .then(res => res.json())
