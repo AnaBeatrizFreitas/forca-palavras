@@ -176,7 +176,7 @@ header h1 {
   background-color: #333;
 }
 #character-select button.selected {
-  background-color: #1a559c; /* azul escuro */
+  background-color: #16365e; /* azul escuro */
 }
 
 
@@ -208,7 +208,7 @@ header h1 {
   transform: scale(0.97);
 }
 .theme-btn.selected {
-  background-color: #1a559c; /* azul escuro */
+  background-color: #0b2e5a; /* azul escuro */
 }
 
 
