@@ -2,7 +2,6 @@ const temas = {
   "Animal 🐶": "animal/palavras.json",
   "Cantores 🎤": "cantores/palavras.json",
   "Comida 🍔": "comida/palavras.json",
-  "Estilos de Música 🎵": "estilos de musica/palavras.json",
   "Filmes 🎬": "filmes/palavras.json",
   "Objeto 🧰": "objeto/palavras.json",
   "País 🌍": "pais/palavras.json",
