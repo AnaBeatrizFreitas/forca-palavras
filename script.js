@@ -1,5 +1,5 @@
 const temas = {
-  "Animal 🐶": "../animal.json",
+  "Animal 🐶": "animal.json",
   "Cantores 🎤": "cantores.json",
   "Comida 🍔": "comida.json",
   "Estilos de Música 🎵": "estilos_de_musica.json",
@@ -18,43 +18,19 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("girl").addEventListener("click", () => {
-    character = "girl";
-    applyCharacterShapes("girl");
-    destacarPersonagem("girl");
-    mostrarTemas();
-  });
-
-  document.getElementById("boy").addEventListener("click", () => {
-    character = "boy";
-    applyCharacterShapes("boy");
-    destacarPersonagem("boy");
-    mostrarTemas();
-  });
-
-  document.getElementById("reset").addEventListener("click", () => {
-    wordPool = shuffleWords();
-    startGame();
-    document.getElementById("category").textContent = "Geral";
-    document.getElementById("death-scene").classList.remove("show");
-    document.getElementById("victory-scene").classList.remove("show");
-  });
-
-  document.getElementById("shuffle").addEventListener("click", () => {
-    startGame();
-    document.getElementById("death-scene").classList.remove("show");
-    document.getElementById("victory-scene").classList.remove("show");
-  });
-
-  document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
-  document.getElementById("try-again-win").addEventListener("click", reiniciarJogo);
+  document.getElementById("girl").addEventListener("click", () => selecionarPersonagem("girl"));
+  document.getElementById("boy").addEventListener("click", () => selecionarPersonagem("boy"));
+  document.getElementById("reset").addEventListener("click", reiniciarJogoCompleto);
+  document.getElementById("shuffle").addEventListener("click", iniciarNovaPalavra);
+  document.getElementById("try-again-loss").addEventListener("click", reiniciarJogoCompleto);
+  document.getElementById("try-again-win").addEventListener("click", reiniciarJogoCompleto);
 });
 
-function reiniciarJogo() {
-  wordPool = shuffleWords();
-  startGame();
-  document.getElementById("death-scene").classList.remove("show");
-  document.getElementById("victory-scene").classList.remove("show");
+function selecionarPersonagem(tipo) {
+  character = tipo;
+  applyCharacterShapes(tipo);
+  destacarPersonagem(tipo);
+  mostrarTemas();
 }
 
 function destacarPersonagem(selecionado) {
@@ -64,31 +40,29 @@ function destacarPersonagem(selecionado) {
 }
 
 function mostrarTemas() {
-  let themeContainer = document.getElementById("theme-select");
-  if (!themeContainer) {
-    themeContainer = document.createElement("div");
-    themeContainer.id = "theme-select";
-
-    for (const [nome, caminho] of Object.entries(temas)) {
+  let container = document.getElementById("theme-select");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "theme-select";
+    for (const [nome, arquivo] of Object.entries(temas)) {
       const btn = document.createElement("button");
       btn.className = "theme-btn";
       btn.textContent = nome;
-      btn.onclick = () => selecionarTema(btn, caminho, nome);
-      themeContainer.appendChild(btn);
+      btn.onclick = () => selecionarTema(btn, arquivo, nome);
+      container.appendChild(btn);
     }
-
-    document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
+    document.getElementById("character-select").insertAdjacentElement("afterend", container);
   }
 }
 
-function selecionarTema(botao, caminho, nomeTema) {
-  document.querySelectorAll("#theme-select .theme-btn").forEach(btn => btn.classList.remove("selected"));
+function selecionarTema(botao, arquivo, nomeTema) {
+  document.querySelectorAll(".theme-btn").forEach(btn => btn.classList.remove("selected"));
   botao.classList.add("selected");
-  carregarPalavras(caminho, nomeTema);
+  carregarPalavras(arquivo, nomeTema);
 }
 
-function carregarPalavras(nomeArquivo, nomeTema) {
-  const baseURL = `${window.location.origin}/palavras/${nomeArquivo}`;
+function carregarPalavras(arquivo, nomeTema) {
+  const baseURL = `palavras/${arquivo}`; // Caminho relativo corrigido
 
   fetch(baseURL)
     .then(res => res.json())
@@ -98,8 +72,7 @@ function carregarPalavras(nomeArquivo, nomeTema) {
           w: item.w.toUpperCase(),
           dica: item.dica || "Sem dica disponível"
         }));
-
-      wordPool = shuffleWords();
+      wordPool = embaralharPalavras();
       startGame();
       document.getElementById("category").textContent = nomeTema;
     })
@@ -109,13 +82,13 @@ function carregarPalavras(nomeArquivo, nomeTema) {
     });
 }
 
-function shuffleWords() {
-  const copy = [...ORIGINAL_WORDS];
-  for (let i = copy.length - 1; i > 0; i--) {
+function embaralharPalavras() {
+  const copia = [...ORIGINAL_WORDS];
+  for (let i = copia.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+    [copia[i], copia[j]] = [copia[j], copia[i]];
   }
-  return copy;
+  return copia;
 }
 
 function startGame() {
@@ -131,14 +104,14 @@ function startGame() {
     document.getElementById(`p${i}`)?.classList.remove("show");
   }
 
-  const next = wordPool.pop();
-  if (!next) {
+  const proxima = wordPool.pop();
+  if (!proxima) {
     alert("Acabaram as palavras!");
     return;
   }
 
-  currentWord = next.w;
-  originalHint = next.dica;
+  currentWord = proxima.w;
+  originalHint = proxima.dica;
 
   const wordContainer = document.getElementById("word");
   wordContainer.innerHTML = "";
@@ -149,15 +122,15 @@ function startGame() {
     wordContainer.appendChild(span);
   }
 
-  const keyboard = document.getElementById("keyboard");
-  keyboard.innerHTML = "";
+  const teclado = document.getElementById("keyboard");
+  teclado.innerHTML = "";
   const letras = "AÁÂÃÀBCÇDEÉÊFGHIÍJKLMNOPQRSTUÚÜVWXYZ";
   for (const letra of letras) {
     const btn = document.createElement("button");
     btn.className = "key";
     btn.textContent = letra;
     btn.onclick = () => handleGuess(letra, btn);
-    keyboard.appendChild(btn);
+    teclado.appendChild(btn);
   }
 }
 
@@ -199,8 +172,8 @@ function handleGuess(letra, btn) {
 
 function verificarVitoria() {
   const slots = document.querySelectorAll(".slot");
-  const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
-  if (letrasReveladas === currentWord) {
+  const reveladas = Array.from(slots).map(s => s.textContent).join("");
+  if (reveladas === currentWord) {
     document.getElementById("victory-scene").classList.add("show");
     document.getElementById("status").textContent = "Você venceu!";
     document.getElementById("status").className = "status win";
@@ -212,7 +185,7 @@ function mostrarParteDaForca(erros) {
   if (parte) parte.classList.add("show");
 }
 
-function applyCharacterShapes(kind) {
+function applyCharacterShapes(tipo) {
   const SHAPES = {
     girl: {
       p6: "M165 75 Q190 50 215 75",
@@ -227,11 +200,25 @@ function applyCharacterShapes(kind) {
   const p6 = document.getElementById("p6");
   const p7 = document.getElementById("p7");
   if (p6 && p7) {
-    p6.setAttribute("d", SHAPES[kind].p6);
-    p7.setAttribute("d", SHAPES[kind].p7);
+    p6.setAttribute("d", SHAPES[tipo].p6);
+    p7.setAttribute("d", SHAPES[tipo].p7);
     p6.classList.remove("girl", "boy");
     p7.classList.remove("girl", "boy");
-    p6.classList.add(kind);
-    p7.classList.add(kind);
+    p6.classList.add(tipo);
+    p7.classList.add(tipo);
   }
+}
+
+function reiniciarJogoCompleto() {
+  wordPool = embaralharPalavras();
+  startGame();
+  document.getElementById("category").textContent = "Geral";
+  document.getElementById("death-scene").classList.remove("show");
+  document.getElementById("victory-scene").classList.remove("show");
+}
+
+function iniciarNovaPalavra() {
+  startGame();
+  document.getElementById("death-scene").classList.remove("show");
+  document.getElementById("victory-scene").classList.remove("show");
 }
