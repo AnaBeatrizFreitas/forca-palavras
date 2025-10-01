@@ -3,7 +3,7 @@
   --panel: #111827;
   --ink: #e5e7eb;
   --muted: #9ca3af;
-  --accent: #5a5f64;
+  --accent: #60a5fa;
   --bad: #ef4444;
   --good: #10b981;
 }
@@ -175,10 +175,6 @@ header h1 {
 #character-select button:hover {
   background-color: #333;
 }
-#character-select button.selected {
-  background-color: #565661d2; /* azul escuro */
-}
-
 
 /* Escolha de tema */
 #theme-select {
@@ -207,10 +203,6 @@ header h1 {
 .theme-btn:active {
   transform: scale(0.97);
 }
-.theme-btn.selected {
-  background-color:  #565661d2; /* azul escuro */
-}
-
 
 /* SVG da forca */
 .gallows {
