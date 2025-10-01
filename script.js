@@ -1,5 +1,5 @@
 const temas = {
-  "Animal 🐶": "animal.json",
+  "Animal 🐶": "../animal.json",
   "Cantores 🎤": "cantores.json",
   "Comida 🍔": "comida.json",
   "Estilos de Música 🎵": "estilos_de_musica.json",
