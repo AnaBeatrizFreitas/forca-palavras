@@ -218,34 +218,36 @@ if (lives <= 0) {
   const message = deathScene.querySelector(".death-message");
   const status = document.getElementById("status");
 
+  deathScene.classList.add("show");
+
   if (modoJogo === "criancas") {
     blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
     message.textContent = "Não desista";
     status.textContent = "Não desista";
-    status.className = "status child-lose"; // nova classe para cor suave
+    status.className = "status child-lose";
   } else {
     blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
     message.textContent = "“Não é pessoal. É a lei.”";
     status.textContent = "Você perdeu!";
     status.className = "status lose";
   }
-
-  deathScene.classList.add("show");
 }
+  deathScene.classList.add("show");
   }
 }
 function verificarVitoria() {
   const slots = document.querySelectorAll(".slot");
   const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
   if (letrasReveladas === currentWord) {
-    document.getElementById("victory-scene").classList.add("show");
-
+    const victoryScene = document.getElementById("victory-scene");
     const status = document.getElementById("status");
     const victoryMessage = document.querySelector(".victory-message");
 
+    victoryScene.classList.add("show");
+
     if (modoJogo === "criancas") {
       status.textContent = "Parabéns você acertou!";
-      status.className = "status child-win"; // nova classe para cor suave
+      status.className = "status child-win";
       victoryMessage.textContent = "Parabéns você acertou!";
     } else {
       status.textContent = "Você venceu!";
@@ -254,6 +256,7 @@ function verificarVitoria() {
     }
   }
 }
+
 
 function mostrarParteDaForca(erros) {
   const parte = document.getElementById(`p${erros - 1}`);
