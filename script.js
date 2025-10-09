@@ -235,28 +235,23 @@ if (lives <= 0) {
   deathScene.classList.add("show");
   }
 }
-function verificarVitoria() {
-  const slots = document.querySelectorAll(".slot");
-  const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
-  if (letrasReveladas === currentWord) {
-    const victoryScene = document.getElementById("victory-scene");
-    const status = document.getElementById("status");
-    const victoryMessage = document.querySelector(".victory-message");
+ 
+document.getElementById("victory-scene").classList.add("show");
 
-    victoryScene.classList.add("show");
+const status = document.getElementById("status");
+const victoryMessage = document.querySelector(".victory-message");
 
-    if (modoJogo === "criancas") {
-      status.textContent = "Parabéns você acertou!";
-      status.className = "status child-win";
-      victoryMessage.textContent = "Parabéns você acertou!";
-    } else {
-      status.textContent = "Você venceu!";
-      status.className = "status win";
-      victoryMessage.textContent = "“Escapou dessa vez”";
-    }
-  }
+if (modoJogo === "criancas") {
+  status.textContent = "Parabéns você acertou!";
+  status.className = "status child-win";
+  victoryMessage.textContent = "Parabéns você acertou!";
+  document.querySelector(".glow").style.background = "radial-gradient(circle at center, #facc15, #b45309)";
+} else {
+  status.textContent = "Você venceu!";
+  status.className = "status win";
+  victoryMessage.textContent = "“Escapou dessa vez”";
+  document.querySelector(".glow").style.background = "radial-gradient(circle at center, #4ade80, #166534)";
 }
-
 
 function mostrarParteDaForca(erros) {
   const parte = document.getElementById(`p${erros - 1}`);

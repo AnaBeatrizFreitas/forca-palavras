@@ -385,3 +385,18 @@ header h1 {
   text-align: center;
   color: white;
 }
+
+.status.win,
+.status.child-win {
+  color: white;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  font-weight: bold;
+}
+
+.victory-message {
+  color: white;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  font-size: 1.6em;
+  text-align: center;
+  margin-bottom: 1em;
+}
