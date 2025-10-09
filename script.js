@@ -8,7 +8,7 @@ const temas = {
   "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
-let character = null;
+let character = "girl"; // personagem fixo
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -17,29 +17,13 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("girl").addEventListener("click", () => {
-    character = "girl";
-    applyCharacterShapes("girl");
-    destacarPersonagem("girl");
-    mostrarTemas();
-  });
-
-  document.getElementById("boy").addEventListener("click", () => {
-    character = "boy";
-    applyCharacterShapes("boy");
-    destacarPersonagem("boy");
-    mostrarTemas();
-  });
-
-  document.getElementById("reset").addEventListener("click", () => {
-    wordPool = shuffleWords();
-    startGame();
-    document.getElementById("category").textContent = "Geral";
-    document.getElementById("death-scene").classList.remove("show");
-    document.getElementById("victory-scene").classList.remove("show");
-  });
+  document.getElementById("girl").addEventListener("click", selecionarModoJogo);
+  document.getElementById("boy").addEventListener("click", selecionarModoJogo);
 
   document.getElementById("shuffle").addEventListener("click", () => {
+    if (wordPool.length === 0) {
+      wordPool = shuffleWords();
+    }
     startGame();
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
@@ -49,8 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("try-again-win").addEventListener("click", reiniciarJogo);
 });
 
+function selecionarModoJogo() {
+  applyCharacterShapes("girl");
+  destacarPersonagem("girl");
+  mostrarTemas();
+}
+
 function reiniciarJogo() {
-  wordPool = shuffleWords();
+  if (wordPool.length === 0) {
+    wordPool = shuffleWords();
+  }
   startGame();
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
@@ -216,21 +208,17 @@ function applyCharacterShapes(kind) {
     girl: {
       p6: "M165 75 Q190 50 215 75",
       p7: "M182 80 L190 70 L198 80 L190 90 Z"
-    },
-    boy: {
-      p6: "M165 75 L215 75 L190 50 Z",
-      p7: "M175 200 L175 240 M205 200 L205 240"
     }
   };
 
   const p6 = document.getElementById("p6");
   const p7 = document.getElementById("p7");
   if (p6 && p7) {
-    p6.setAttribute("d", SHAPES[kind].p6);
-    p7.setAttribute("d", SHAPES[kind].p7);
+    p6.setAttribute("d", SHAPES.girl.p6);
+    p7.setAttribute("d", SHAPES.girl.p7);
     p6.classList.remove("girl", "boy");
     p7.classList.remove("girl", "boy");
-    p6.classList.add(kind);
-    p7.classList.add(kind);
+    p6.classList.add("girl");
+    p7.classList.add("girl");
   }
 }
