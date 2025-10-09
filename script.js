@@ -59,6 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
     startGame();
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
+    document.querySelector(".victory-message").textContent = "";
+    document.querySelector(".glow").style.background = "";
   });
 
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
@@ -78,6 +80,8 @@ function reiniciarJogo() {
   startGame();
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
+  document.querySelector(".victory-message").textContent = "";
+  document.querySelector(".glow").style.background = "";
 }
 
 function destacarPersonagem(selecionado) {
@@ -212,45 +216,53 @@ function handleGuess(letra, btn) {
       document.getElementById("hint").textContent = `⚠️ Dica: ${originalHint}`;
       document.getElementById("hint").style.display = "block";
     }
-if (lives <= 0) {
-  const deathScene = document.getElementById("death-scene");
-  const blood = deathScene.querySelector(".blood");
-  const message = deathScene.querySelector(".death-message");
-  const status = document.getElementById("status");
 
-  deathScene.classList.add("show");
+    if (lives <= 0) {
+      const deathScene = document.getElementById("death-scene");
+      const blood = deathScene.querySelector(".blood");
+      const message = deathScene.querySelector(".death-message");
+      const status = document.getElementById("status");
 
-  if (modoJogo === "criancas") {
-    blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
-    message.textContent = "Não desista!Vamos novamente";
-    status.textContent = "Não desista!";
-    status.className = "status child-lose";
-  } else {
-    blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
-    message.textContent = "“Não é pessoal. É a lei.”";
-    status.textContent = "Você perdeu!";
-    status.className = "status lose";
+      deathScene.classList.add("show");
+
+      if (modoJogo === "criancas") {
+               blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
+        message.textContent = "Não desista! Vamos novamente";
+        status.textContent = "Não desista!";
+        status.className = "status child-lose";
+      } else {
+        blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
+        message.textContent = "“Não é pessoal. É a lei.”";
+        status.textContent = "Você perdeu!";
+        status.className = "status lose";
+      }
+    }
   }
 }
-  deathScene.classList.add("show");
+
+function verificarVitoria() {
+  const slots = document.querySelectorAll(".slot");
+  const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
+  if (letrasReveladas === currentWord) {
+    const victoryScene = document.getElementById("victory-scene");
+    const status = document.getElementById("status");
+    const victoryMessage = document.querySelector(".victory-message");
+    const glow = document.querySelector(".glow");
+
+    victoryScene.classList.add("show");
+
+    if (modoJogo === "criancas") {
+      status.textContent = "Parabéns você acertou!";
+      status.className = "status child-win";
+      victoryMessage.textContent = "Parabéns você acertou!";
+      glow.style.background = "radial-gradient(circle at center, #facc15, #b45309)";
+    } else {
+      status.textContent = "Você venceu!";
+      status.className = "status win";
+      victoryMessage.textContent = "“Escapou dessa vez”";
+      glow.style.background = "radial-gradient(circle at center, #4ade80, #166534)";
+    }
   }
-}
- 
-document.getElementById("victory-scene").classList.add("show");
-
-const status = document.getElementById("status");
-const victoryMessage = document.querySelector(".victory-message");
-
-if (modoJogo === "criancas") {
-  status.textContent = "Parabéns você acertou!";
-  status.className = "status child-win";
-  victoryMessage.textContent = "Parabéns você acertou!";
-  document.querySelector(".glow").style.background = "radial-gradient(circle at center, #facc15, #b45309)";
-} else {
-  status.textContent = "Você venceu!";
-  status.className = "status win";
-  victoryMessage.textContent = "“Escapou dessa vez”";
-  document.querySelector(".glow").style.background = "radial-gradient(circle at center, #4ade80, #166534)";
 }
 
 function mostrarParteDaForca(erros) {
@@ -281,4 +293,3 @@ function applyCharacterShapes(kind) {
     p7.classList.add(kind);
   }
 }
-o
