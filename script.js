@@ -1,15 +1,36 @@
 const temas = {
-  "Animal 🐶": { criancas: "animal_crianças.json", adultos: "animal_adultos.json" },
-  "Cantores 🎤": { criancas: "cantores_crianças.json", adultos: "cantores_adultos.json" },
-  "Comida 🍔": { criancas: "comida_crianças.json", adultos: "comida_adultos.json" },
-  "Filmes 🎬": { criancas: "filmes_crianças.json", adultos: "filmes_adultos.json" },
-  "Objeto 🧰": { criancas: "objeto_crianças.json", adultos: "objeto_adultos.json" },
-  "País 🌍": { criancas: "pais_crianças.json", adultos: "pais_adultos.json" },
-  "Profissões 👩‍⚕️": { criancas: "profissoes_crianças.json", adultos: "profissoes_adultos.json" }
+  "Animal 🐶": {
+    criancas: "palavras_criancas/animal/animal_criancas.json",
+    adultos: "palavras_adultos/animal/animal_adultos.json"
+  },
+  "Cantores 🎤": {
+    criancas: "palavras_criancas/cantores/cantores_criancas.json",
+    adultos: "palavras_adultos/cantores/cantores_adultos.json"
+  },
+  "Comida 🍔": {
+    criancas: "palavras_criancas/comida/comida_criancas.json",
+    adultos: "palavras_adultos/comida/comida_adultos.json"
+  },
+  "Filmes 🎬": {
+    criancas: "palavras_criancas/filmes/filmes_criancas.json",
+    adultos: "palavras_adultos/filmes/filmes_adultos.json"
+  },
+  "Objeto 🧰": {
+    criancas: "palavras_criancas/objeto/objeto_criancas.json",
+    adultos: "palavras_adultos/objeto/objeto_adultos.json"
+  },
+  "País 🌍": {
+    criancas: "palavras_criancas/pais/pais_criancas.json",
+    adultos: "palavras_adultos/pais/pais_adultos.json"
+  },
+  "Profissões 👩‍⚕️": {
+    criancas: "palavras_criancas/profissoes/profissoes_criancas.json",
+    adultos: "palavras_adultos/profissoes/profissoes_adultos.json"
+  }
 };
 
-let character = "girl"; // personagem fixo
-let modoJogo = "criancas"; // padrão inicial
+let character = "girl";
+let modoJogo = "criancas";
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -84,14 +105,12 @@ function selecionarTema(botao, caminhos, nomeTema) {
   document.querySelectorAll("#theme-select .theme-btn").forEach(btn => btn.classList.remove("selected"));
   botao.classList.add("selected");
 
-  const nomeArquivo = caminhos[modoJogo]; // seleciona o caminho certo
+  const nomeArquivo = caminhos[modoJogo];
   carregarPalavras(nomeArquivo, nomeTema);
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
-  const baseURL = `palavras/${nomeArquivo}`;
-
-  fetch(baseURL)
+  fetch(nomeArquivo)
     .then(res => res.json())
     .then(palavras => {
       ORIGINAL_WORDS = palavras.filter(item => item.w && typeof item.w === "string")
