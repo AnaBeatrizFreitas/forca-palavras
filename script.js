@@ -256,12 +256,13 @@ function verificarVitoria() {
       status.textContent = "Parabéns você acertou!";
       status.className = "status child-win";
       victoryMessage.textContent = "Parabéns você acertou!";
-      glow.style.background = "radial-gradient(circle at center, #facc1583, #c5692493)";
+      glow.style.background = "radial-gradient(circle at center, rgba(250,204,21,0.4), rgba(180,83,9,0.9))";
     } else {
       status.textContent = "Você venceu!";
       status.className = "status win";
       victoryMessage.textContent = "“Escapou dessa vez”";
-      glow.style.background = "radial-gradient(circle at center, #3fb76b97, #166534a8)";
+     glow.style.background = "radial-gradient(circle at center, rgba(74,222,128,0.4), rgba(22,101,52,0.9))";
+
     }
   }
 }
