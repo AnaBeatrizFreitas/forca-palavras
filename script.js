@@ -28,15 +28,17 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("girl").addEventListener("click", () => {
-    modoJogo = "criancas";
-    selecionarModoJogo();
-  });
+document.getElementById("girl").addEventListener("click", () => {
+  modoJogo = "criancas";
+  character = "girl";
+  selecionarModoJogo();
+});
 
-  document.getElementById("boy").addEventListener("click", () => {
-    modoJogo = "adultos";
-    selecionarModoJogo();
-  });
+document.getElementById("boy").addEventListener("click", () => {
+  modoJogo = "adultos";
+  character = "boy";
+  selecionarModoJogo();
+});
 
   document.getElementById("shuffle").addEventListener("click", () => {
     if (wordPool.length === 0) {
@@ -64,6 +66,11 @@ function reiniciarJogo() {
   startGame();
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
+}
+function selecionarModoJogo() {
+  applyCharacterShapes(character);
+  destacarPersonagem(character);
+  mostrarTemas();
 }
 
 function destacarPersonagem(selecionado) {
