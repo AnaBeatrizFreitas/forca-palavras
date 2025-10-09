@@ -176,6 +176,20 @@ header h1 {
   background-color: #333;
 }
 
+#character-select .selected {
+  background-color: var(--accent);
+  color: #fff;
+  cursor: default;
+  opacity: 1;
+}
+
+#character-select button:not(.selected) {
+  opacity: 0.85;
+  background-color: #1f2937;
+  color: var(--ink);
+  border-color: #555;
+}
+
 /* Escolha de tema */
 #theme-select {
   display: flex;
@@ -204,6 +218,17 @@ header h1 {
   transform: scale(0.97);
 }
 
+#theme-select .selected {
+  background-color: var(--accent);
+  color: #fff;
+  cursor: default;
+  opacity: 1;
+}
+
+#theme-select button:not(.selected) {
+  opacity: 0.5;
+}
+
 /* SVG da forca */
 .gallows {
   width: 100%;
@@ -213,11 +238,11 @@ header h1 {
 .part {
   stroke: #e5e7eb;
   stroke-width: 4;
-  display: none;
+  visibility: hidden;
 }
 
 .part.show {
-  display: block;
+  visibility: visible;
 }
 
 /* Tela de derrota */
@@ -255,21 +280,6 @@ header h1 {
   font-weight: bold;
   text-shadow: 2px 2px 6px rgb(182, 20, 20);
   animation: pulse 1.5s infinite;
-}
-
-#try-again {
-  margin-top: 20px;
-  padding: 8px 16px;
-  font-size: 14px;
-  background-color: #8a2b2b;
-  color: #eee;
-  border: 1px solid #e4e4e4;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-#try-again:hover {
-  background-color: #dd5d5d;
 }
 
 /* Tela de vitória */
@@ -347,35 +357,4 @@ header h1 {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-}
-
-.part {
-  stroke: #e5e7eb;
-  stroke-width: 4;
-  visibility: hidden;
-}
-
-.part.show {
-  visibility: visible;
-}
-#character-select .selected {
-  background-color: var(--accent);
-  color: #fff;
-  cursor: default;
-  opacity: 1;
-}
-
-#character-select button:not(.selected) {
-  opacity: 0.5;
-}
-
-#theme-select .selected {
-  background-color: var(--accent);
-  color: #fff;
-  cursor: default;
-  opacity: 1;
-}
-
-#theme-select button:not(.selected) {
-  opacity: 0.5;
 }
