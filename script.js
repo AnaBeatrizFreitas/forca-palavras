@@ -20,7 +20,6 @@ let erros = 0;
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("girl").addEventListener("click", () => selecionarPersonagem("girl"));
   document.getElementById("boy").addEventListener("click", () => selecionarPersonagem("boy"));
-  document.getElementById("reset").addEventListener("click", reiniciarJogoCompleto);
   document.getElementById("shuffle").addEventListener("click", iniciarNovaPalavra);
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogoCompleto);
   document.getElementById("try-again-win").addEventListener("click", reiniciarJogoCompleto);
