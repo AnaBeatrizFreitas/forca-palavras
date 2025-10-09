@@ -222,8 +222,8 @@ if (lives <= 0) {
 
   if (modoJogo === "criancas") {
     blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
-    message.textContent = "Não desista";
-    status.textContent = "Não desista";
+    message.textContent = "Não desista!Vamos novamente";
+    status.textContent = "Não desista!";
     status.className = "status child-lose";
   } else {
     blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
