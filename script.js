@@ -216,13 +216,20 @@ function handleGuess(letra, btn) {
     if (lives <= 0) {
       document.getElementById("death-scene").classList.add("show");
 
+      const blood = document.querySelector(".blood");
+      const message = document.querySelector(".death-message");
+      const status = document.getElementById("status");
+
       if (modoJogo === "criancas") {
-        document.querySelector(".blood").style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
-        document.querySelector(".death-message").textContent = "“Não é pessoal. É a lei.”";
-        document.getElementById("status").textContent = "Você perdeu!";
+        blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
+        status.textContent = "Não desista";
+      } else {
+        blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
+        message.textContent = "“Não é pessoal. É a lei.”";
+        status.textContent = "Você perdeu!";
       }
 
-      document.getElementById("status").className = "status lose";
+      status.className = "status lose";
     }
   }
 }
@@ -233,13 +240,9 @@ function verificarVitoria() {
   if (letrasReveladas === currentWord) {
     document.getElementById("victory-scene").classList.add("show");
 
-    if (modoJogo === "criancas") {
-      document.getElementById("status").textContent = "Parabéns você acertou!";
-    } else {
-      document.getElementById("status").textContent = "Você venceu!";
-    }
-
-    document.getElementById("status").className = "status win";
+    const status = document.getElementById("status");
+    status.className = "status win";
+    status.textContent = modoJogo === "criancas" ? "Parabéns você acertou!" : "Você venceu!";
   }
 }
 
@@ -271,3 +274,4 @@ function applyCharacterShapes(kind) {
     p7.classList.add(kind);
   }
 }
+o
