@@ -52,8 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function selecionarModoJogo() {
-  applyCharacterShapes("girl");
-  destacarPersonagem("girl");
+  applyCharacterShapes(character);
+  destacarPersonagem(character);
   mostrarTemas();
 }
 
@@ -70,6 +70,7 @@ function destacarPersonagem(selecionado) {
   document.getElementById("girl").classList.remove("selected");
   document.getElementById("boy").classList.remove("selected");
   document.getElementById(selecionado).classList.add("selected");
+  character = selecionado;
 }
 
 function mostrarTemas() {
