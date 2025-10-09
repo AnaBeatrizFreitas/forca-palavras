@@ -57,10 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     startGame();
-    document.getElementById("death-scene").classList.remove("show");
-    document.getElementById("victory-scene").classList.remove("show");
-    document.querySelector(".victory-message").textContent = "";
-    document.querySelector(".glow").style.background = "";
+    limparCenasFinais();
   });
 
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
@@ -78,6 +75,10 @@ function reiniciarJogo() {
     wordPool = shuffleWords();
   }
   startGame();
+  limparCenasFinais();
+}
+
+function limparCenasFinais() {
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
   document.querySelector(".victory-message").textContent = "";
@@ -226,7 +227,7 @@ function handleGuess(letra, btn) {
       deathScene.classList.add("show");
 
       if (modoJogo === "criancas") {
-               blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
+            blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
         message.textContent = "Não desista! Vamos novamente";
         status.textContent = "Não desista!";
         status.className = "status child-lose";
@@ -237,59 +238,5 @@ function handleGuess(letra, btn) {
         status.className = "status lose";
       }
     }
-  }
-}
-
-function verificarVitoria() {
-  const slots = document.querySelectorAll(".slot");
-  const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
-  if (letrasReveladas === currentWord) {
-    const victoryScene = document.getElementById("victory-scene");
-    const status = document.getElementById("status");
-    const victoryMessage = document.querySelector(".victory-message");
-    const glow = document.querySelector(".glow");
-
-    victoryScene.classList.add("show");
-
-    if (modoJogo === "criancas") {
-      status.textContent = "Parabéns você acertou!";
-      status.className = "status child-win";
-      victoryMessage.textContent = "Parabéns você acertou!";
-      glow.style.background = "radial-gradient(circle at center, #facc15, #b45309)";
-    } else {
-      status.textContent = "Você venceu!";
-      status.className = "status win";
-      victoryMessage.textContent = "“Escapou dessa vez”";
-      glow.style.background = "radial-gradient(circle at center, #4ade80, #166534)";
-    }
-  }
-}
-
-function mostrarParteDaForca(erros) {
-  const parte = document.getElementById(`p${erros - 1}`);
-  if (parte) parte.classList.add("show");
-}
-
-function applyCharacterShapes(kind) {
-  const SHAPES = {
-    girl: {
-      p6: "M165 75 Q190 50 215 75",
-      p7: "M182 80 L190 70 L198 80 L190 90 Z"
-    },
-    boy: {
-      p6: "M165 75 Q190 90 215 75",
-      p7: "M182 80 L190 90 L198 80 L190 70 Z"
-    }
-  };
-
-  const p6 = document.getElementById("p6");
-  const p7 = document.getElementById("p7");
-  if (p6 && p7 && SHAPES[kind]) {
-    p6.setAttribute("d", SHAPES[kind].p6);
-    p7.setAttribute("d", SHAPES[kind].p7);
-    p6.classList.remove("girl", "boy");
-    p7.classList.remove("girl", "boy");
-    p6.classList.add(kind);
-    p7.classList.add(kind);
   }
 }
