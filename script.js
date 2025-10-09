@@ -42,8 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
-    if (!character || !modoJogo) {
+    if (!character) {
       alert("Escolha seu personagem antes de começar o jogo");
+      return;
+    }
+
+    if (ORIGINAL_WORDS.length === 0) {
+      alert("Escolha um tema antes de começar o jogo");
       return;
     }
 
@@ -152,7 +157,7 @@ function startGame() {
 
   const next = wordPool.pop();
   if (!next) {
-    alert("Acabaram as palavras!");
+    alert("Escolha um tema antes de começar o jogo");
     return;
   }
 
@@ -215,7 +220,6 @@ function handleGuess(letra, btn) {
     }
   }
 }
-
 function verificarVitoria() {
   const slots = document.querySelectorAll(".slot");
   const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
