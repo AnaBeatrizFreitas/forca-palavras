@@ -215,17 +215,30 @@ function handleGuess(letra, btn) {
 
     if (lives <= 0) {
       document.getElementById("death-scene").classList.add("show");
-      document.getElementById("status").textContent = "Você perdeu!";
+
+      if (modoJogo === "criancas") {
+        document.querySelector(".blood").style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
+        document.querySelector(".death-message").textContent = "“Não é pessoal. É a lei.”";
+        document.getElementById("status").textContent = "Você perdeu!";
+      }
+
       document.getElementById("status").className = "status lose";
     }
   }
 }
+
 function verificarVitoria() {
   const slots = document.querySelectorAll(".slot");
   const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
   if (letrasReveladas === currentWord) {
     document.getElementById("victory-scene").classList.add("show");
-    document.getElementById("status").textContent = "Você venceu!";
+
+    if (modoJogo === "criancas") {
+      document.getElementById("status").textContent = "Parabéns você acertou!";
+    } else {
+      document.getElementById("status").textContent = "Você venceu!";
+    }
+
     document.getElementById("status").className = "status win";
   }
 }
