@@ -358,3 +358,13 @@ header h1 {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
+
+.status.child-lose {
+  color: #88c0ff;
+  font-weight: bold;
+}
+
+.status.child-win {
+  color: #6ee7b7;
+  font-weight: bold;
+}

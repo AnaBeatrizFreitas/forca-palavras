@@ -222,18 +222,18 @@ if (lives <= 0) {
     blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
     message.textContent = "Não desista";
     status.textContent = "Não desista";
+    status.className = "status child-lose"; // nova classe para cor suave
   } else {
     blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
     message.textContent = "“Não é pessoal. É a lei.”";
     status.textContent = "Você perdeu!";
+    status.className = "status lose";
   }
 
-  status.className = "status lose";
   deathScene.classList.add("show");
 }
   }
 }
-
 function verificarVitoria() {
   const slots = document.querySelectorAll(".slot");
   const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
@@ -241,8 +241,17 @@ function verificarVitoria() {
     document.getElementById("victory-scene").classList.add("show");
 
     const status = document.getElementById("status");
-    status.className = "status win";
-    status.textContent = modoJogo === "criancas" ? "Parabéns você acertou!" : "Você venceu!";
+    const victoryMessage = document.querySelector(".victory-message");
+
+    if (modoJogo === "criancas") {
+      status.textContent = "Parabéns você acertou!";
+      status.className = "status child-win"; // nova classe para cor suave
+      victoryMessage.textContent = "Parabéns você acertou!";
+    } else {
+      status.textContent = "Você venceu!";
+      status.className = "status win";
+      victoryMessage.textContent = "“Escapou dessa vez”";
+    }
   }
 }
 
