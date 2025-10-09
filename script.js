@@ -1,25 +1,26 @@
-const temasAdultos = {
-  "Animal 🐶": "palavras_adultos/animal/animal_adultos.json",
-  "Cantores 🎤": "palavras_adultos/cantores/cantores_adultos.json",
-  "Comida 🍔": "palavras_adultos/comida/comida_adultos.json",
-  "Filmes 🎬": "palavras_adultos/filmes/filmes_adultos.json",
-  "Objeto 🧰": "palavras_adultos/objeto/objeto_adultos.json",
-  "País 🌍": "palavras_adultos/pais/pais_adultos.json",
-  "Profissões 👩‍⚕️": "palavras_adultos/profissoes/profissoes_adultos.json"
+const temas = {
+  adultos: {
+    "Animal 🐶": "palavras_adultos/animal/animal_adultos.json",
+    "Cantores 🎤": "palavras_adultos/cantores/cantores_adultos.json",
+    "Comida 🍔": "palavras_adultos/comida/comida_adultos.json",
+    "Filmes 🎬": "palavras_adultos/filmes/filmes_adultos.json",
+    "Objeto 🧰": "palavras_adultos/objeto/objeto_adultos.json",
+    "País 🌍": "palavras_adultos/pais/pais_adultos.json",
+    "Profissões 👩‍⚕️": "palavras_adultos/profissoes/profissoes_adultos.json"
+  },
+  criancas: {
+    "Animal 🐶": "palavras_criancas/animal/animal_criancas.json",
+    "Espaço 🚀": "palavras_criancas/espaco/espaco_criancas.json",
+    "Comida 🍔": "palavras_criancas/comida/comida_criancas.json",
+    "Desenhos 📺": "palavras_criancas/desenhos/desenhos_criancas.json",
+    "Objeto 🧰": "palavras_criancas/objeto/objeto_criancas.json",
+    "País 🌍": "palavras_criancas/pais/pais_criancas.json",
+    "Profissões 👩‍⚕️": "palavras_criancas/profissoes/profissoes_criancas.json"
+  }
 };
 
-const temasCriancas = {
-  "Animal 🐶": "palavras_criancas/animal/animal_criancas.json",
-  "Espaço 🚀": "palavras_criancas/espaco/espaco_criancas.json",
-  "Comida 🍔": "palavras_criancas/comida/comida_criancas.json",
-  "Desenhos 📺": "palavras_criancas/desenhos/desenhos_criancas.json",
-  "Objeto 🧰": "palavras_criancas/objeto/objeto_criancas.json",
-  "País 🌍": "palavras_criancas/pais/pais_criancas.json",
-  "Profissões 👩‍⚕️": "palavras_criancas/profissoes/profissoes_criancas.json"
-};
-
-let character = "girl";
-let modoJogo = "criancas";
+let character = "";
+let modoJogo = "";
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -28,22 +29,28 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-document.getElementById("girl").addEventListener("click", () => {
-  modoJogo = "criancas";
-  character = "girl";
-  selecionarModoJogo();
-});
+  document.getElementById("girl").addEventListener("click", () => {
+    modoJogo = "criancas";
+    character = "girl";
+    selecionarModoJogo();
+  });
 
-document.getElementById("boy").addEventListener("click", () => {
-  modoJogo = "adultos";
-  character = "boy";
-  selecionarModoJogo();
-});
+  document.getElementById("boy").addEventListener("click", () => {
+    modoJogo = "adultos";
+    character = "boy";
+    selecionarModoJogo();
+  });
 
   document.getElementById("shuffle").addEventListener("click", () => {
+    if (!character || !modoJogo) {
+      alert("Escolha seu personagem antes de começar o jogo");
+      return;
+    }
+
     if (wordPool.length === 0) {
       wordPool = shuffleWords();
     }
+
     startGame();
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
@@ -67,11 +74,6 @@ function reiniciarJogo() {
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
 }
-function selecionarModoJogo() {
-  applyCharacterShapes(character);
-  destacarPersonagem(character);
-  mostrarTemas();
-}
 
 function destacarPersonagem(selecionado) {
   document.getElementById("girl").classList.remove("selected");
@@ -87,7 +89,7 @@ function mostrarTemas() {
   themeContainer = document.createElement("div");
   themeContainer.id = "theme-select";
 
-  const temasAtivos = modoJogo === "criancas" ? temasCriancas : temasAdultos;
+  const temasAtivos = temas[modoJogo];
 
   for (const [nome, caminho] of Object.entries(temasAtivos)) {
     const btn = document.createElement("button");
