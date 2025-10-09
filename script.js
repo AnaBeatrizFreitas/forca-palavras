@@ -212,25 +212,25 @@ function handleGuess(letra, btn) {
       document.getElementById("hint").textContent = `⚠️ Dica: ${originalHint}`;
       document.getElementById("hint").style.display = "block";
     }
+if (lives <= 0) {
+  const deathScene = document.getElementById("death-scene");
+  const blood = deathScene.querySelector(".blood");
+  const message = deathScene.querySelector(".death-message");
+  const status = document.getElementById("status");
 
-    if (lives <= 0) {
-      document.getElementById("death-scene").classList.add("show");
+  if (modoJogo === "criancas") {
+    blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
+    message.textContent = "Não desista";
+    status.textContent = "Não desista";
+  } else {
+    blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
+    message.textContent = "“Não é pessoal. É a lei.”";
+    status.textContent = "Você perdeu!";
+  }
 
-      const blood = document.querySelector(".blood");
-      const message = document.querySelector(".death-message");
-      const status = document.getElementById("status");
-
-      if (modoJogo === "criancas") {
-        blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
-        status.textContent = "Não desista";
-      } else {
-        blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
-        message.textContent = "“Não é pessoal. É a lei.”";
-        status.textContent = "Você perdeu!";
-      }
-
-      status.className = "status lose";
-    }
+  status.className = "status lose";
+  deathScene.classList.add("show");
+}
   }
 }
 
