@@ -1,30 +1,30 @@
 const temas = {
   "Animal 🐶": {
-    criancas: "palavras_criancas/animal/animal_criancas.json",
+    criancas: "palavras_criancas/animal/animal_crianças.json",
     adultos: "palavras_adultos/animal/animal_adultos.json"
   },
   "Cantores 🎤": {
-    criancas: "palavras_criancas/cantores/cantores_criancas.json",
+    criancas: "palavras_criancas/cantores/cantores_crianças.json",
     adultos: "palavras_adultos/cantores/cantores_adultos.json"
   },
   "Comida 🍔": {
-    criancas: "palavras_criancas/comida/comida_criancas.json",
+    criancas: "palavras_criancas/comida/comida_crianças.json",
     adultos: "palavras_adultos/comida/comida_adultos.json"
   },
   "Filmes 🎬": {
-    criancas: "palavras_criancas/filmes/filmes_criancas.json",
+    criancas: "palavras_criancas/filmes/filmes_crianças.json",
     adultos: "palavras_adultos/filmes/filmes_adultos.json"
   },
   "Objeto 🧰": {
-    criancas: "palavras_criancas/objeto/objeto_criancas.json",
+    criancas: "palavras_criancas/objeto/objeto_crianças.json",
     adultos: "palavras_adultos/objeto/objeto_adultos.json"
   },
   "País 🌍": {
-    criancas: "palavras_criancas/pais/pais_criancas.json",
+    criancas: "palavras_criancas/pais/pais_crianças.json",
     adultos: "palavras_adultos/pais/pais_adultos.json"
   },
   "Profissões 👩‍⚕️": {
-    criancas: "palavras_criancas/profissoes/profissoes_criancas.json",
+    criancas: "palavras_criancas/profissoes/profissoes_crianças.json",
     adultos: "palavras_adultos/profissoes/profissoes_adultos.json"
   }
 };
