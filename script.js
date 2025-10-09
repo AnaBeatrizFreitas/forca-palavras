@@ -261,7 +261,7 @@ function verificarVitoria() {
       status.textContent = "Você venceu!";
       status.className = "status win";
       victoryMessage.textContent = "“Escapou dessa vez”";
-      glow.style.background = "radial-gradient(circle at center, #4ade80, #166534)";
+      glow.style.background = "radial-gradient(circle at center, #3fb76b97, #166534a8)";
     }
   }
 }
