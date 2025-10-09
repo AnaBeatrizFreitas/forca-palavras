@@ -1,14 +1,15 @@
 const temas = {
-  "Animal 🐶": "animal/palavras.json",
-  "Cantores 🎤": "cantores/palavras.json",
-  "Comida 🍔": "comida/palavras.json",
-  "Filmes 🎬": "filmes/palavras.json",
-  "Objeto 🧰": "objeto/palavras.json",
-  "País 🌍": "pais/palavras.json",
-  "Profissões 👩‍⚕️": "profissoes/palavras.json"
+  "Animal 🐶": { criancas: "animal_crianças.json", adultos: "animal_adultos.json" },
+  "Cantores 🎤": { criancas: "cantores_crianças.json", adultos: "cantores_adultos.json" },
+  "Comida 🍔": { criancas: "comida_crianças.json", adultos: "comida_adultos.json" },
+  "Filmes 🎬": { criancas: "filmes_crianças.json", adultos: "filmes_adultos.json" },
+  "Objeto 🧰": { criancas: "objeto_crianças.json", adultos: "objeto_adultos.json" },
+  "País 🌍": { criancas: "pais_crianças.json", adultos: "pais_adultos.json" },
+  "Profissões 👩‍⚕️": { criancas: "profissoes_crianças.json", adultos: "profissoes_adultos.json" }
 };
 
 let character = "girl"; // personagem fixo
+let modoJogo = "criancas"; // padrão inicial
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -17,8 +18,15 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("girl").addEventListener("click", selecionarModoJogo);
-  document.getElementById("boy").addEventListener("click", selecionarModoJogo);
+  document.getElementById("girl").addEventListener("click", () => {
+    modoJogo = "criancas";
+    selecionarModoJogo();
+  });
+
+  document.getElementById("boy").addEventListener("click", () => {
+    modoJogo = "adultos";
+    selecionarModoJogo();
+  });
 
   document.getElementById("shuffle").addEventListener("click", () => {
     if (wordPool.length === 0) {
@@ -60,11 +68,11 @@ function mostrarTemas() {
     themeContainer = document.createElement("div");
     themeContainer.id = "theme-select";
 
-    for (const [nome, caminho] of Object.entries(temas)) {
+    for (const [nome, caminhos] of Object.entries(temas)) {
       const btn = document.createElement("button");
       btn.className = "theme-btn";
       btn.textContent = nome;
-      btn.onclick = () => selecionarTema(btn, caminho, nome);
+      btn.onclick = () => selecionarTema(btn, caminhos, nome);
       themeContainer.appendChild(btn);
     }
 
@@ -72,10 +80,12 @@ function mostrarTemas() {
   }
 }
 
-function selecionarTema(botao, caminho, nomeTema) {
+function selecionarTema(botao, caminhos, nomeTema) {
   document.querySelectorAll("#theme-select .theme-btn").forEach(btn => btn.classList.remove("selected"));
   botao.classList.add("selected");
-  carregarPalavras(caminho, nomeTema);
+
+  const nomeArquivo = caminhos[modoJogo]; // seleciona o caminho certo
+  carregarPalavras(nomeArquivo, nomeTema);
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
