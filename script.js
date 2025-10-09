@@ -1,32 +1,21 @@
-const temas = {
-  "Animal 🐶": {
-    criancas: "palavras_criancas/animal/animal_criancas.json",
-    adultos: "palavras_adultos/animal/animal_adultos.json"
-  },
-  "Cantores 🎤": {
-    criancas: "palavras_criancas/cantores/cantores_criancas.json",
-    adultos: "palavras_adultos/cantores/cantores_adultos.json"
-  },
-  "Comida 🍔": {
-    criancas: "palavras_criancas/comida/comida_criancas.json",
-    adultos: "palavras_adultos/comida/comida_adultos.json"
-  },
-  "Filmes 🎬": {
-    criancas: "palavras_criancas/filmes/filmes_criancas.json",
-    adultos: "palavras_adultos/filmes/filmes_adultos.json"
-  },
-  "Objeto 🧰": {
-    criancas: "palavras_criancas/objeto/objeto_criancas.json",
-    adultos: "palavras_adultos/objeto/objeto_adultos.json"
-  },
-  "País 🌍": {
-    criancas: "palavras_criancas/pais/pais_criancas.json",
-    adultos: "palavras_adultos/pais/pais_adultos.json"
-  },
-  "Profissões 👩‍⚕️": {
-    criancas: "palavras_criancas/profissoes/profissoes_criancas.json",
-    adultos: "palavras_adultos/profissoes/profissoes_adultos.json"
-  }
+const temasAdultos = {
+  "Animal 🐶": "palavras_adultos/animal/animal_adultos.json",
+  "Cantores 🎤": "palavras_adultos/cantores/cantores_adultos.json",
+  "Comida 🍔": "palavras_adultos/comida/comida_adultos.json",
+  "Filmes 🎬": "palavras_adultos/filmes/filmes_adultos.json",
+  "Objeto 🧰": "palavras_adultos/objeto/objeto_adultos.json",
+  "País 🌍": "palavras_adultos/pais/pais_adultos.json",
+  "Profissões 👩‍⚕️": "palavras_adultos/profissoes/profissoes_adultos.json"
+};
+
+const temasCriancas = {
+  "Animal 🐶": "palavras_criancas/animal/animal_criancas.json",
+  "Espaço 🚀": "palavras_criancas/espaco/espaco_criancas.json",
+  "Comida 🍔": "palavras_criancas/comida/comida_criancas.json",
+  "Desenhos 📺": "palavras_criancas/desenhos/desenhos_criancas.json",
+  "Objeto 🧰": "palavras_criancas/objeto/objeto_criancas.json",
+  "País 🌍": "palavras_criancas/pais/pais_criancas.json",
+  "Profissões 👩‍⚕️": "palavras_criancas/profissoes/profissoes_criancas.json"
 };
 
 let character = "girl";
@@ -85,28 +74,28 @@ function destacarPersonagem(selecionado) {
 
 function mostrarTemas() {
   let themeContainer = document.getElementById("theme-select");
-  if (!themeContainer) {
-    themeContainer = document.createElement("div");
-    themeContainer.id = "theme-select";
+  if (themeContainer) themeContainer.remove();
 
-    for (const [nome, caminhos] of Object.entries(temas)) {
-      const btn = document.createElement("button");
-      btn.className = "theme-btn";
-      btn.textContent = nome;
-      btn.onclick = () => selecionarTema(btn, caminhos, nome);
-      themeContainer.appendChild(btn);
-    }
+  themeContainer = document.createElement("div");
+  themeContainer.id = "theme-select";
 
-    document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
+  const temasAtivos = modoJogo === "criancas" ? temasCriancas : temasAdultos;
+
+  for (const [nome, caminho] of Object.entries(temasAtivos)) {
+    const btn = document.createElement("button");
+    btn.className = "theme-btn";
+    btn.textContent = nome;
+    btn.onclick = () => selecionarTema(btn, caminho, nome);
+    themeContainer.appendChild(btn);
   }
+
+  document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
 }
 
-function selecionarTema(botao, caminhos, nomeTema) {
+function selecionarTema(botao, caminho, nomeTema) {
   document.querySelectorAll("#theme-select .theme-btn").forEach(btn => btn.classList.remove("selected"));
   botao.classList.add("selected");
-
-  const nomeArquivo = caminhos[modoJogo];
-  carregarPalavras(nomeArquivo, nomeTema);
+  carregarPalavras(caminho, nomeTema);
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
@@ -237,17 +226,21 @@ function applyCharacterShapes(kind) {
     girl: {
       p6: "M165 75 Q190 50 215 75",
       p7: "M182 80 L190 70 L198 80 L190 90 Z"
+    },
+    boy: {
+      p6: "M165 75 Q190 90 215 75",
+      p7: "M182 80 L190 90 L198 80 L190 70 Z"
     }
   };
 
   const p6 = document.getElementById("p6");
   const p7 = document.getElementById("p7");
-  if (p6 && p7) {
-    p6.setAttribute("d", SHAPES.girl.p6);
-    p7.setAttribute("d", SHAPES.girl.p7);
+  if (p6 && p7 && SHAPES[kind]) {
+    p6.setAttribute("d", SHAPES[kind].p6);
+    p7.setAttribute("d", SHAPES[kind].p7);
     p6.classList.remove("girl", "boy");
     p7.classList.remove("girl", "boy");
-    p6.classList.add("girl");
-    p7.classList.add("girl");
+    p6.classList.add(kind);
+    p7.classList.add(kind);
   }
 }

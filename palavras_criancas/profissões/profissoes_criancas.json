@@ -63,7 +63,6 @@
   { "w": "marinheiro", "dica": "Trabalha em navios no mar" },
   { "w": "soldado", "dica": "Protege o país com coragem" },
   { "w": "açougueiro", "dica": "Corta e vende carnes" },
-  { "w": "frentista", "dica": "Coloca combustível nos carros" },
   { "w": "entregador", "dica": "Leva encomendas até as casas" },
   { "w": "carteiro", "dica": "Entrega cartas e pacotes" },
   { "w": "programador", "dica": "Cria programas de computador" },
@@ -74,9 +73,5 @@
   { "w": "corretor", "dica": "Ajuda a comprar casas ou seguros" },
   { "w": "tradutor", "dica": "Transforma palavras de um idioma para outro" },
   { "w": "embaixador", "dica": "Representa o país em outro lugar" },
-  { "w": "arqueólogo", "dica": "Estuda coisas antigas enterradas" },
-  { "w": "meteorologista", "dica": "Estuda o clima e prevê o tempo" },
-  { "w": "zootecnista", "dica": "Cuida da criação de animais" },
-  { "w": "geólogo", "dica": "Estuda pedras e o solo da Terra" },
   { "w": "biólogo", "dica": "Estuda plantas, animais e seres vivos" }
 ]
