@@ -229,11 +229,13 @@ function handleGuess(letra, btn) {
       if (modoJogo === "criancas") {
         blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
         message.textContent = "Não desista! Vamos novamente";
+        message.className = "death-message child-lose"; // ou "lose"
         status.textContent = "Não desista!";
         status.className = "status child-lose";
       } else {
                blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
         message.textContent = "“Não é pessoal. É a lei.”";
+        message.className = "death-message child-lose"; // ou "lose"
         status.textContent = "Você perdeu!";
         status.className = "status lose";
       }
@@ -256,11 +258,13 @@ function verificarVitoria() {
       status.textContent = "Parabéns você acertou!";
       status.className = "status child-win";
       victoryMessage.textContent = "Parabéns você acertou!";
+      victoryMessage.className = "victory-message child-win"; // ou "win"
       glow.style.background = "radial-gradient(circle at center, rgba(250,204,21,0.4), rgba(180,83,9,0.9))";
     } else {
       status.textContent = "Você venceu!";
       status.className = "status win";
       victoryMessage.textContent = "“Escapou dessa vez”";
+      victoryMessage.className = "victory-message child-win"; // ou "win"
      glow.style.background = "radial-gradient(circle at center, rgba(74,222,128,0.4), rgba(18, 52, 31, 0.9))";
 
     }
