@@ -363,21 +363,21 @@ header h1 {
 .status.child-win,
 .victory-message.child-win {
   color: white;
-  text-shadow: 0 0 12px rgb(255, 191, 0), 0 0 20px rgb(255, 117, 11);
+  text-shadow: 0 0 12px rgb(230, 176, 12), 0 0 20px rgb(184, 84, 8);
 }
 
 /* DERROTA CRIANÇAS - Roxo vivo */
 .status.child-lose,
 .death-message.child-lose {
   color: white;
-  text-shadow: 0 0 12px rgb(180, 43, 180), 0 0 20px rgb(153, 97, 190);
+  text-shadow: 0 0 12px rgb(135, 23, 135), 0 0 20px rgb(153, 97, 190);
 }
 
 /* VITÓRIA ADULTOS - Verde intenso */
 .status.win,
 .victory-message.win {
   color: white;
-  text-shadow: 0 0 12px rgb(0, 255, 128), 0 0 20px rgb(67, 190, 114);
+  text-shadow: 0 0 12px rgb(6, 213, 110), 0 0 20px rgb(8, 107, 46);
 }
 
 /* DERROTA ADULTOS - Vermelho intenso (mantido) */
