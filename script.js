@@ -18,6 +18,15 @@ const temas = {
     "Profissões 👩‍⚕️": "palavras_criancas/profissoes/profissoes_criancas.json"
   }
 };
+const equivalencias = {
+  A: ["A", "Á", "Â", "Ã", "À"],
+  E: ["E", "É", "Ê"],
+  I: ["I", "Í"],
+  O: ["O", "Ó", "Ô", "Õ"],
+  U: ["U", "Ú", "Ü"],
+  C: ["C", "Ç"]
+};
+
 
 let character = "";
 let modoJogo = "";
@@ -180,7 +189,7 @@ function startGame() {
 
   const keyboard = document.getElementById("keyboard");
   keyboard.innerHTML = "";
-  const letras = "AÁÂÃÀBCÇDEÉÊFGHIÍJKLMNOPQRSTUÚÜVWXYZ";
+  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (const letra of letras) {
     const btn = document.createElement("button");
     btn.className = "key";
@@ -196,11 +205,13 @@ function handleGuess(letra, btn) {
   const slots = document.querySelectorAll(".slot");
 
   for (let i = 0; i < currentWord.length; i++) {
-    if (currentWord[i] === letra) {
-      slots[i].textContent = letra;
-      slots[i].classList.add("revealed");
-      acerto = true;
-    }
+   const grupo = equivalencias[letra] || [letra];
+
+if (grupo.includes(currentWord[i])) {
+  slots[i].textContent = currentWord[i]; // mostra com acento
+  slots[i].classList.add("revealed");
+  acerto = true;
+}
   }
 
   if (acerto) {
