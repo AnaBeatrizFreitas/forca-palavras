@@ -359,3 +359,30 @@ header h1 {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
+/* VITÓRIA CRIANÇAS - Dourado vibrante */
+.status.child-win,
+.victory-message.child-win {
+  color: white;
+  text-shadow: 0 0 12px rgb(255, 191, 0), 0 0 20px rgb(180, 83, 9);
+}
+
+/* DERROTA CRIANÇAS - Roxo vivo */
+.status.child-lose,
+.death-message.child-lose {
+  color: white;
+  text-shadow: 0 0 12px rgb(128, 0, 128), 0 0 20px rgb(49, 18, 70);
+}
+
+/* VITÓRIA ADULTOS - Verde intenso */
+.status.win,
+.victory-message.win {
+  color: white;
+  text-shadow: 0 0 12px rgb(0, 255, 128), 0 0 20px rgba(22, 101, 52, 1);
+}
+
+/* DERROTA ADULTOS - Vermelho intenso (mantido) */
+.status.lose,
+.death-message.lose {
+  color: white;
+  text-shadow: 0 0 12px rgb(255, 0, 0), 0 0 20px rgba(120, 0, 0, 1);
+}
