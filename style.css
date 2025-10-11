@@ -388,7 +388,7 @@ header h1 {
 }
 /* Fundo divertido para modo crianças */
 body.criancas {
-  background-image: url('fundo.png'); /* substitua pelo caminho do seu arquivo */
+  background-image: url('imagens/fundo.png'); /* substitua pelo caminho do seu arquivo */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -399,7 +399,7 @@ body.criancas::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url('elementos.png'); /* desenhos leves e transparentes */
+  background-image: url('imagens/elementos.png'); /* desenhos leves e transparentes */
   background-repeat: repeat;
   background-size: 200px;
   opacity: 0.2;
