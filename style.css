@@ -18,6 +18,11 @@ body {
   font-family: sans-serif;
 }
 
+/* Fundo divertido para modo crianças */
+body.criancas {
+  background-color: #ede1ae; /* amarelo claro alegre */
+}
+
 /* Painel principal */
 .app {
   max-width: 900px;
@@ -302,22 +307,22 @@ header h1 {
 /* Brilho personalizado por personagem e resultado */
 .status.child-win,
 .victory-message.child-win {
-  text-shadow: 0 0 10px rgb(133, 65, 8); /* dourado escuro intenso */
+  text-shadow: 0 0 12px rgb(230, 176, 12), 0 0 20px rgb(184, 84, 8);
 }
 
 .status.child-lose,
 .death-message.child-lose {
-  text-shadow: 0 0 10px rgb(49, 18, 70); /* roxo escuro intenso */
+  text-shadow: 0 0 12px rgb(135, 23, 135), 0 0 20px rgb(153, 97, 190);
 }
 
 .status.win,
 .victory-message.win {
-  text-shadow: 0 0 10px rgba(22, 101, 52, 1); /* verde escuro intenso */
+  text-shadow: 0 0 12px rgb(6, 213, 110), 0 0 20px rgb(8, 107, 46);
 }
 
 .status.lose,
 .death-message.lose {
-  text-shadow: 0 0 10px rgba(120, 0, 0, 1); /* vermelho escuro intenso */
+  text-shadow: 0 0 12px rgb(234, 98, 98), 0 0 20px rgb(61, 6, 6);
 }
 
 /* Dica contextual */
@@ -359,49 +364,41 @@ header h1 {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
-/* VITÓRIA CRIANÇAS - Dourado vibrante */
-.status.child-win,
-.victory-message.child-win {
-  color: white;
-  text-shadow: 0 0 12px rgb(230, 176, 12), 0 0 20px rgb(184, 84, 8);
+/* Painéis no modo crianças */
+body.criancas .panel {
+  background-color: #d8c4f0; /* lilás claro */
+  color: #3b0764; /* roxo escuro para texto */
 }
 
-/* DERROTA CRIANÇAS - Roxo vivo */
-.status.child-lose,
-.death-message.child-lose {
-  color: white;
-  text-shadow: 0 0 12px rgb(135, 23, 135), 0 0 20px rgb(153, 97, 190);
+/* Teclado no modo crianças */
+body.criancas .key {
+  background-color: #e0d3f5; /* lilás suave */
+  color: #3b0764; /* roxo escuro */
+  border-color: #bda1e0;
 }
 
-/* VITÓRIA ADULTOS - Verde intenso */
-.status.win,
-.victory-message.win {
-  color: white;
-  text-shadow: 0 0 12px rgb(6, 213, 110), 0 0 20px rgb(8, 107, 46);
+body.criancas .key.good {
+  background-color: #a7f3d0; /* verde claro */
+  color: #065f46;
 }
 
-/* DERROTA ADULTOS - Vermelho intenso (mantido) */
-.status.lose,
-.death-message.lose {
-  color: white;
-  text-shadow: 0 0 12px rgb(234, 98, 98), 0 0 20px rgb(61, 6, 6);
+body.criancas .key.bad {
+  background-color: #fca5a5; /* vermelho claro */
+  color: #7f1d1d;
 }
-/* Fundo divertido para modo crianças */
+
+/* Botões no modo crianças */
+body.criancas .btn {
+  background-color: #f3e8ff;
+  color: #4c1d95;
+  border-color: #d8b4fe;
+}
+
+body.criancas .btn:hover {
+  background-color: #e9d5ff;
+}
+
+/* Texto geral no modo crianças */
 body.criancas {
-  background-image: url('imagens/fundo.png'); /* substitua pelo caminho do seu arquivo */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-body.criancas::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url('imagens/elementos.png'); /* desenhos leves e transparentes */
-  background-repeat: repeat;
-  background-size: 200px;
-  opacity: 0.2;
-  pointer-events: none;
-  z-index: -1;
+  color: #3b0764; /* roxo escuro para melhor contraste */
 }
