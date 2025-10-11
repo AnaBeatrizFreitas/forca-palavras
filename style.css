@@ -135,20 +135,6 @@ header h1 {
   border-color: var(--accent);
 }
 
-/* Status */
-.status {
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-.status.win {
-  color: var(--good);
-}
-
-.status.lose {
-  color: var(--bad);
-}
-
 /* Escolha de personagem */
 #character-select {
   text-align: center;
@@ -274,14 +260,6 @@ header h1 {
   pointer-events: none;
 }
 
-.death-message {
-  color: #ff4d4d;
-  font-size: 28px;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px rgb(182, 20, 20);
-  animation: pulse 1.5s infinite;
-}
-
 /* Tela de vitória */
 #victory-scene {
   position: fixed;
@@ -311,12 +289,35 @@ header h1 {
   pointer-events: none;
 }
 
-.victory-message {
-  color: var(--good);
-  font-size: 28px;
+/* Mensagens finais */
+.victory-message,
+.death-message {
+  font-size: 1.6em;
+  text-align: center;
+  margin-bottom: 1em;
+  color: white;
   font-weight: bold;
-  text-shadow: 2px 2px 6px black;
-  animation: pulse 1.5s infinite;
+}
+
+/* Brilho personalizado por personagem e resultado */
+.status.child-win,
+.victory-message.child-win {
+  text-shadow: 0 0 10px rgb(133, 65, 8); /* dourado escuro intenso */
+}
+
+.status.child-lose,
+.death-message.child-lose {
+  text-shadow: 0 0 10px rgb(49, 18, 70); /* roxo escuro intenso */
+}
+
+.status.win,
+.victory-message.win {
+  text-shadow: 0 0 10px rgba(22, 101, 52, 1); /* verde escuro intenso */
+}
+
+.status.lose,
+.death-message.lose {
+  text-shadow: 0 0 10px rgba(120, 0, 0, 1); /* vermelho escuro intenso */
 }
 
 /* Dica contextual */
@@ -357,90 +358,4 @@ header h1 {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-}
-
-.status.child-lose {
-  color: #88c0ff;
-  font-weight: bold;
-}
-
-.status.child-win {
-  color: #ecf17dc3;
-  font-weight: bold;
-}
-
-.status.child-win {
-  color: #38bdf8; /* azul claro */
-  font-weight: bold;
-}
-
-.status.child-lose {
-  color: #a78bfa; /* lilás suave */
-  font-weight: bold;
-}
-
-.victory-message,
-.death-message {
-  font-size: 1.5em;
-  text-align: center;
-  color: white;
-}
-
-.status.win,
-.status.child-win {
-  color: white;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-  font-weight: bold;
-}
-
-.victory-message {
-  color: white;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-  font-size: 1.6em;
-  text-align: center;
-  margin-bottom: 1em;
-}
-.status.child-win,
-.status.child-lose,
-.status.win,
-.status.lose {
-  color: white;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-  font-weight: bold;
-}
-
-.victory-message,
-.death-message {
-  color: white;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-  font-size: 1.6em;
-  text-align: center;
-  margin-bottom: 1em;
-}
-/* VITÓRIA CRIANÇAS - Dourado intenso */
-.status.child-win,
-.victory-message.child-win {
-  color: white;
-  text-shadow: 0 0 10px rgb(133, 65, 8); /* dourado escuro intenso */
-}
-
-/* DERROTA CRIANÇAS - Roxo escuro */
-.status.child-lose,
-.death-message.child-lose {
-  color: white;
-  text-shadow: 0 0 10px rgb(49, 18, 70); /* roxo escuro intenso */
-}
-
-/* VITÓRIA ADULTOS - Verde escuro */
-.status.win,
-.victory-message.win {
-  color: white;
-  text-shadow: 0 0 10px rgba(22, 101, 52, 1); /* verde escuro intenso */
-}
-
-/* DERROTA ADULTOS - Vermelho escuro */
-.status.lose,
-.death-message.lose {
-  color: white;
-  text-shadow: 0 0 10px rgba(120, 0, 0, 1); /* vermelho escuro intenso */
 }
