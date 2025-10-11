@@ -417,46 +417,30 @@ header h1 {
   text-align: center;
   margin-bottom: 1em;
 }
-.status.child-win {
-  color: white;
-  text-shadow: 0 0 8px rgba(180, 83, 9, 0.8); /* brilho dourado */
-}
-
-.status.win {
-  color: white;
-  text-shadow: 0 0 8px rgba(22, 101, 52, 0.8); /* brilho verde escuro */
-}
-
-.status.child-lose {
-  color: white;
-  text-shadow: 0 0 8px rgba(0, 0, 50, 0.8); /* brilho azul escuro */
-}
-
-.status.lose {
-  color: white;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8); /* brilho preto */
-}
-
-.victory-message,
-.death-message {
-  color: white;
-  font-size: 1.6em;
-  text-align: center;
-  margin-bottom: 1em;
-}
-
+/* VITÓRIA CRIANÇAS - Dourado intenso */
+.status.child-win,
 .victory-message.child-win {
-  text-shadow: 0 0 8px rgba(180, 83, 9, 0.8);
+  color: white;
+  text-shadow: 0 0 10px rgba(180, 83, 9, 1); /* dourado escuro intenso */
 }
 
-.victory-message.win {
-  text-shadow: 0 0 8px rgba(22, 101, 52, 0.8);
-}
-
+/* DERROTA CRIANÇAS - Roxo escuro */
+.status.child-lose,
 .death-message.child-lose {
-  text-shadow: 0 0 8px rgba(0, 0, 50, 0.8);
+  color: white;
+  text-shadow: 0 0 10px rgba(60, 0, 100, 1); /* roxo escuro intenso */
 }
 
+/* VITÓRIA ADULTOS - Verde escuro */
+.status.win,
+.victory-message.win {
+  color: white;
+  text-shadow: 0 0 10px rgba(22, 101, 52, 1); /* verde escuro intenso */
+}
+
+/* DERROTA ADULTOS - Vermelho escuro */
+.status.lose,
 .death-message.lose {
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  color: white;
+  text-shadow: 0 0 10px rgba(120, 0, 0, 1); /* vermelho escuro intenso */
 }
