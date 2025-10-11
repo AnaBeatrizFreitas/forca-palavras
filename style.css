@@ -392,7 +392,7 @@ body.criancas {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #fef3c7; /* cor base clara e alegre */
+  background-color: #ede1ae; /* cor base clara e alegre */
 }
 
 body.criancas::before {
