@@ -256,7 +256,7 @@ function verificarVitoria() {
       status.textContent = "Parabéns você acertou!";
       status.className = "status child-win";
       victoryMessage.textContent = "Parabéns você acertou!";
-      glow.style.background = "radial-gradient(circle at center, rgba(250,204,21,0.4), rgba(180,83,9,0.9))";
+      glow.style.background = "radial-gradient(circle at center, rgba(250,204,21,0.4), rgba(191, 106, 42, 0.68))";
     } else {
       status.textContent = "Você venceu!";
       status.className = "status win";
