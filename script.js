@@ -74,10 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function selecionarModoJogo() {
+  // Aplica a classe no <body> para mudar o estilo visual
+  document.body.classList.remove("criancas", "adultos");
+  document.body.classList.add(modoJogo);
+
   applyCharacterShapes(character);
   destacarPersonagem(character);
   mostrarTemas();
 }
+
 
 function reiniciarJogo() {
   if (wordPool.length === 0) {

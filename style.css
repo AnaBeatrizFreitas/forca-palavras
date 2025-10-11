@@ -386,3 +386,23 @@ header h1 {
   color: white;
   text-shadow: 0 0 12px rgb(234, 98, 98), 0 0 20px rgb(61, 6, 6);
 }
+/* Fundo divertido para modo crianças */
+body.criancas {
+  background-image: url('fundo.png'); /* substitua pelo caminho do seu arquivo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fef3c7; /* cor base clara e alegre */
+}
+
+body.criancas::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('elementos.png'); /* desenhos leves e transparentes */
+  background-repeat: repeat;
+  background-size: 200px;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
