@@ -37,12 +37,6 @@ body.criancas::before {
   white-space: pre-wrap;
   pointer-events: none;
   z-index: -1;
-  animation: floatEmojis 20s linear infinite;
-}
-
-@keyframes floatEmojis {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100px); }
 }
 
 /* Painel principal */
