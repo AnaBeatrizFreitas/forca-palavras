@@ -10,12 +10,23 @@
 
   <div id="contextual-hint"></div>
 
+  <!-- Escolha de personagem -->
   <div id="character-select">
-    <h2>Escolha seu personagem:</h2>
-    <button id="girl">🧒 Crianças</button>
-    <button id="boy">🧑 Adultos</button>
+    <h2>Escolha o modo:</h2>
+    <button id="girl" data-character="criancas">🧒 Crianças</button>
+    <button id="boy" data-character="adultos">🧑 Adultos</button>
   </div>
 
+  <!-- Escolha de tema -->
+  <div id="theme-select">
+    <h2>Escolha o tema:</h2>
+    <button data-theme="classico" data-group="adultos">Clássico</button>
+    <button data-theme="noturno" data-group="adultos">Noturno</button>
+    <button data-theme="divertido" data-group="criancas">Divertido</button>
+    <button data-theme="colorido" data-group="criancas">Colorido</button>
+  </div>
+
+  <!-- Área principal do jogo -->
   <div class="app">
     <header>
       <h1>Forca</h1>
@@ -26,6 +37,7 @@
     </header>
 
     <div class="board">
+      <!-- Painel da forca -->
       <div class="panel">
         <svg class="gallows" viewBox="0 0 300 300" aria-label="Forca">
           <line x1="20" y1="280" x2="160" y2="280" stroke="#6b7280" stroke-width="8"/>
@@ -43,6 +55,7 @@
         </svg>
       </div>
 
+      <!-- Painel de interação -->
       <div class="panel">
         <div class="word" id="word"></div>
         <div class="hint" id="hint"></div>
@@ -57,12 +70,14 @@
     </div>
   </div>
 
+  <!-- Tela de derrota -->
   <div id="death-scene">
     <div class="blood"></div>
     <div class="death-message">“Não é pessoal. É a lei.”</div>
     <button id="try-again-loss" class="btn">Tente novamente</button>
   </div>
 
+  <!-- Tela de vitória -->
   <div id="victory-scene">
     <div class="glow"></div>
     <div class="victory-message">“Escapou dessa vez”</div>

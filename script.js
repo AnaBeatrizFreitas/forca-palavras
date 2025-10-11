@@ -18,6 +18,7 @@ const temas = {
     "Profissões 👩‍⚕️": "palavras_criancas/profissoes/profissoes_criancas.json"
   }
 };
+
 const equivalencias = {
   A: ["A", "Á", "Â", "Ã", "À"],
   E: ["E", "É", "Ê"],
@@ -26,7 +27,6 @@ const equivalencias = {
   U: ["U", "Ú", "Ü"],
   C: ["C", "Ç"]
 };
-
 
 let character = "";
 let modoJogo = "";
@@ -51,20 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
-    if (!character) {
-      alert("Escolha seu personagem antes de começar o jogo");
-      return;
-    }
-
-    if (ORIGINAL_WORDS.length === 0) {
-      alert("Escolha um tema antes de começar o jogo");
-      return;
-    }
-
-    if (wordPool.length === 0) {
-      wordPool = shuffleWords();
-    }
-
+    if (!character) return alert("Escolha seu personagem antes de começar o jogo");
+    if (ORIGINAL_WORDS.length === 0) return alert("Escolha um tema antes de começar o jogo");
+    if (wordPool.length === 0) wordPool = shuffleWords();
     startGame();
     limparCenasFinais();
   });
@@ -74,36 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function selecionarModoJogo() {
-  // Aplica a classe no <body> para mudar o estilo visual
   document.body.classList.remove("criancas", "adultos");
   document.body.classList.add(modoJogo);
-
   applyCharacterShapes(character);
   destacarPersonagem(character);
+
+  // Resetar tema e palavras
+  ORIGINAL_WORDS = [];
+  wordPool = [];
+  document.getElementById("category").textContent = "Geral";
+
   mostrarTemas();
-}
-
-
-function reiniciarJogo() {
-  if (wordPool.length === 0) {
-    wordPool = shuffleWords();
-  }
-  startGame();
-  limparCenasFinais();
-}
-
-function limparCenasFinais() {
-  document.getElementById("death-scene").classList.remove("show");
-  document.getElementById("victory-scene").classList.remove("show");
-  document.querySelector(".victory-message").textContent = "";
-  document.querySelector(".glow").style.background = "";
-}
-
-function destacarPersonagem(selecionado) {
-  document.getElementById("girl").classList.remove("selected");
-  document.getElementById("boy").classList.remove("selected");
-  document.getElementById(selecionado).classList.add("selected");
-  character = selecionado;
 }
 
 function mostrarTemas() {
@@ -113,8 +83,11 @@ function mostrarTemas() {
   themeContainer = document.createElement("div");
   themeContainer.id = "theme-select";
 
-  const temasAtivos = temas[modoJogo];
+  const titulo = document.createElement("h2");
+  titulo.textContent = "Escolha o tema:";
+  themeContainer.appendChild(titulo);
 
+  const temasAtivos = temas[modoJogo];
   for (const [nome, caminho] of Object.entries(temasAtivos)) {
     const btn = document.createElement("button");
     btn.className = "theme-btn";
@@ -124,6 +97,7 @@ function mostrarTemas() {
   }
 
   document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
+  alert("Escolha um tema compatível com o modo selecionado!");
 }
 
 function selecionarTema(botao, caminho, nomeTema) {
@@ -141,7 +115,6 @@ function carregarPalavras(nomeArquivo, nomeTema) {
           w: item.w.toUpperCase(),
           dica: item.dica || "Sem dica disponível"
         }));
-
       wordPool = shuffleWords();
       startGame();
       document.getElementById("category").textContent = nomeTema;
@@ -175,10 +148,7 @@ function startGame() {
   }
 
   const next = wordPool.pop();
-  if (!next) {
-    alert("Escolha um tema antes de começar o jogo");
-    return;
-  }
+  if (!next) return alert("Escolha um tema antes de começar o jogo");
 
   currentWord = next.w;
   originalHint = next.dica;
@@ -210,13 +180,12 @@ function handleGuess(letra, btn) {
   const slots = document.querySelectorAll(".slot");
 
   for (let i = 0; i < currentWord.length; i++) {
-   const grupo = equivalencias[letra] || [letra];
-
-if (grupo.includes(currentWord[i])) {
-  slots[i].textContent = currentWord[i]; // mostra com acento
-  slots[i].classList.add("revealed");
-  acerto = true;
-}
+    const grupo = equivalencias[letra] || [letra];
+    if (grupo.includes(currentWord[i])) {
+      slots[i].textContent = currentWord[i];
+      slots[i].classList.add("revealed");
+      acerto = true;
+    }
   }
 
   if (acerto) {
@@ -234,28 +203,7 @@ if (grupo.includes(currentWord[i])) {
       document.getElementById("hint").style.display = "block";
     }
 
-    if (lives <= 0) {
-      const deathScene = document.getElementById("death-scene");
-      const blood = deathScene.querySelector(".blood");
-      const message = deathScene.querySelector(".death-message");
-      const status = document.getElementById("status");
-
-      deathScene.classList.add("show");
-
-      if (modoJogo === "criancas") {
-        blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
-        message.textContent = "Não desista! Vamos novamente";
-        message.className = "death-message child-lose"; // para crianças
-        status.textContent = "Não desista!";
-        status.className = "status child-lose";
-      } else {
-               blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
-        message.textContent = "“Não é pessoal. É a lei.”";
-        message.className = "death-message lose"; // para adultos
-        status.textContent = "Você perdeu!";
-        status.className = "status lose";
-      }
-    }
+    if (lives <= 0) mostrarDerrota();
   }
 }
 
@@ -274,16 +222,38 @@ function verificarVitoria() {
       status.textContent = "Parabéns você acertou!";
       status.className = "status child-win";
       victoryMessage.textContent = "Parabéns você acertou!";
-      victoryMessage.className = "victory-message child-win"; // para crianças
+      victoryMessage.className = "victory-message child-win";
       glow.style.background = "radial-gradient(circle at center, rgba(250,204,21,0.4), rgba(180,83,9,0.9))";
     } else {
       status.textContent = "Você venceu!";
       status.className = "status win";
       victoryMessage.textContent = "“Escapou dessa vez”";
-      victoryMessage.className = "victory-message win"; // para adultos
-     glow.style.background = "radial-gradient(circle at center, rgba(74,222,128,0.4), rgba(18, 52, 31, 0.9))";
-
+      victoryMessage.className = "victory-message win";
+      glow.style.background = "radial-gradient(circle at center, rgba(74,222,128,0.4), rgba(18,52,31,0.9))";
     }
+  }
+}
+
+function mostrarDerrota() {
+  const deathScene = document.getElementById("death-scene");
+  const blood = deathScene.querySelector(".blood");
+  const message = deathScene.querySelector(".death-message");
+  const status = document.getElementById("status");
+
+  deathScene.classList.add("show");
+
+  if (modoJogo === "criancas") {
+    blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
+    message.textContent = "Não desista! Vamos novamente";
+    message.className = "death-message child-lose";
+    status.textContent = "Não desista!";
+    status.className = "status child-lose";
+  } else {
+    blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
+    message.textContent = "“Não é pessoal. É a lei.”";
+    message.className = "death-message lose";
+    status.textContent = "Você perdeu!";
+    status.className = "status lose";
   }
 }
 
@@ -314,4 +284,26 @@ function applyCharacterShapes(kind) {
     p6.classList.add(kind);
     p7.classList.add(kind);
   }
+}
+
+function destacarPersonagem(selecionado) {
+  document.getElementById("girl").classList.remove("selected");
+  document.getElementById("boy").classList.remove("selected");
+  document.getElementById(selecionado).classList.add("selected");
+  character = selecionado;
+}
+
+function reiniciarJogo() {
+  if (wordPool.length === 0) {
+    wordPool = shuffleWords();
+  }
+  startGame();
+  limparCenasFinais();
+}
+
+function limparCenasFinais() {
+  document.getElementById("death-scene").classList.remove("show");
+  document.getElementById("victory-scene").classList.remove("show");
+  document.querySelector(".victory-message").textContent = "";
+  document.querySelector(".glow").style.background = "";
 }
