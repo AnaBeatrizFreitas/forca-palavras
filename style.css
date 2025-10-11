@@ -421,14 +421,14 @@ header h1 {
 .status.child-win,
 .victory-message.child-win {
   color: white;
-  text-shadow: 0 0 10px rgba(180, 83, 9, 1); /* dourado escuro intenso */
+  text-shadow: 0 0 10px rgb(133, 65, 8); /* dourado escuro intenso */
 }
 
 /* DERROTA CRIANÇAS - Roxo escuro */
 .status.child-lose,
 .death-message.child-lose {
   color: white;
-  text-shadow: 0 0 10px rgba(60, 0, 100, 1); /* roxo escuro intenso */
+  text-shadow: 0 0 10px rgb(49, 18, 70); /* roxo escuro intenso */
 }
 
 /* VITÓRIA ADULTOS - Verde escuro */
