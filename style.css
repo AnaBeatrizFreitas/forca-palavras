@@ -18,16 +18,53 @@ body {
   font-family: sans-serif;
 }
 
-/* Fundo divertido para modo crianças */
+/* Modo crianças - fundo, texto e decoração */
 body.criancas {
-  background-color: #ede1ae; /* amarelo claro alegre */
+  background-color: #ede1ae;
+  color: #3b0764;
 }
 
-/* Painel principal */
+body.criancas::before {
+  content: "☁️ 🚀 🧸 ☁️ 🧸 🚀 ☁️";
+  position: fixed;
+  inset: 0;
+  font-size: 120px;
+  line-height: 1.2;
+  color: rgba(0, 0, 0, 0.05);
+  text-align: center;
+  white-space: pre-wrap;
+  pointer-events: none;
+  z-index: -1;
+  animation: floatEmojis 20s linear infinite;
+}
+
+@keyframes floatEmojis {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100px); }
+}
+
+/* Painéis */
 .app {
   max-width: 900px;
   width: 100%;
   padding: 20px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.panel {
+  background-color: var(--panel);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+body.criancas .panel {
+  background-color: #d8c4f0;
+  color: #3b0764;
 }
 
 /* Cabeçalho */
@@ -40,19 +77,6 @@ header h1 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-}
-
-/* Painéis */
-.board {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.panel {
-  background-color: var(--panel);
-  padding: 20px;
-  border-radius: 8px;
 }
 
 /* Palavra */
@@ -113,6 +137,22 @@ header h1 {
   color: #fff;
 }
 
+body.criancas .key {
+  background-color: #e0d3f5;
+  color: #3b0764;
+  border-color: #bda1e0;
+}
+
+body.criancas .key.good {
+  background-color: #a7f3d0;
+  color: #065f46;
+}
+
+body.criancas .key.bad {
+  background-color: #fca5a5;
+  color: #7f1d1d;
+}
+
 /* Ações */
 .actions {
   display: flex;
@@ -138,6 +178,16 @@ header h1 {
   background-color: var(--accent);
   color: #fff;
   border-color: var(--accent);
+}
+
+body.criancas .btn {
+  background-color: #f3e8ff;
+  color: #4c1d95;
+  border-color: #d8b4fe;
+}
+
+body.criancas .btn:hover {
+  background-color: #e9d5ff;
 }
 
 /* Escolha de personagem */
@@ -251,7 +301,7 @@ header h1 {
 #death-scene.show {
   display: flex;
   pointer-events: auto;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeIn 0.4s ease forwards;
 }
 
 .blood {
@@ -261,7 +311,7 @@ header h1 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  animation: drip 2s ease-in-out forwards;
+  animation: drip 0.8s ease-in-out forwards;
   pointer-events: none;
 }
 
@@ -280,7 +330,7 @@ header h1 {
 #victory-scene.show {
   display: flex;
   pointer-events: auto;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeIn 0.4s ease forwards;
 }
 
 .glow {
@@ -290,7 +340,7 @@ header h1 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  animation: shine 0.5s ease-in-out forwards;
+  animation: shine 0.4s ease-in-out forwards;
   pointer-events: none;
 }
 
@@ -363,42 +413,4 @@ header h1 {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-}
-/* Painéis no modo crianças */
-body.criancas .panel {
-  background-color: #d8c4f0; /* lilás claro */
-  color: #3b0764; /* roxo escuro para texto */
-}
-
-/* Teclado no modo crianças */
-body.criancas .key {
-  background-color: #e0d3f5; /* lilás suave */
-  color: #3b0764; /* roxo escuro */
-  border-color: #bda1e0;
-}
-
-body.criancas .key.good {
-  background-color: #a7f3d0; /* verde claro */
-  color: #065f46;
-}
-
-body.criancas .key.bad {
-  background-color: #fca5a5; /* vermelho claro */
-  color: #7f1d1d;
-}
-
-/* Botões no modo crianças */
-body.criancas .btn {
-  background-color: #f3e8ff;
-  color: #4c1d95;
-  border-color: #d8b4fe;
-}
-
-body.criancas .btn:hover {
-  background-color: #e9d5ff;
-}
-
-/* Texto geral no modo crianças */
-body.criancas {
-  color: #3b0764; /* roxo escuro para melhor contraste */
 }
