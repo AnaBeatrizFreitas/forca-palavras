@@ -2,7 +2,7 @@ let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
 let originalHint = "";
-let lives = 15;
+let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -157,10 +157,24 @@ function verificarVitoria() {
 }
 
 function mostrarParteDaForca(erros) {
-  const ordem = [0, 1, 2, 3, 4, 5, 6, 12, 13, 14, 7, 8, 9, 10, 11]; // máscara completa antes do corpo
-  const parteId = `p${ordem[erros - 1]}`;
-  const parte = document.getElementById(parteId);
-  if (parte) parte.classList.add("show");
+  const ordem = [
+    ['p0'], // cabeça
+    ['p1', 'p2'], // olhos
+    ['p3','p4','p5','p6','p7','p8','p9','p10','p11','p12'], // triângulos + furos
+    ['p13'], // corpo
+    ['p14'], // braço esq
+    ['p15'], // braço dir
+    ['p16'], // perna esq
+    ['p17']  // perna dir
+  ];
+
+  const partes = ordem[erros - 1];
+  if (!partes) return;
+
+  partes.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add("show");
+  });
 }
 
 function reiniciarJogo() {
