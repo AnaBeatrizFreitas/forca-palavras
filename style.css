@@ -206,9 +206,10 @@ header h1 {
   visibility: visible;
 }
 
-/* Cabeça da forca escura */
+/* Cabeça da forca sem cor */
 #p0 {
-  fill: #0a0a0a; /* mesma cor do fundo para não destacar */
+  fill: none;
+  stroke: none;
 }
 
 /* Tela de derrota */
