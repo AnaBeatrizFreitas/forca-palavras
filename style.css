@@ -408,3 +408,26 @@ header h1 {
   fill: none;
   stroke: none;
 }
+.mask-base {
+  fill: #eee; /* branco da máscara */
+  stroke: #e5e7eb;
+  stroke-width: 2;
+  visibility: hidden;
+}
+
+.mask-eye {
+  fill: #111;
+  stroke: none;
+  visibility: hidden;
+}
+
+.mask-red {
+  stroke: #ef4444;
+  stroke-width: 2;
+  fill: none;
+  visibility: hidden;
+}
+
+.part.show {
+  visibility: visible;
+}

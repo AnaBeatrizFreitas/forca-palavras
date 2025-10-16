@@ -157,7 +157,7 @@ function verificarVitoria() {
 }
 
 function mostrarParteDaForca(erros) {
-  const ordem = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; // máscara primeiro, corpo depois
+  const ordem = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // máscara primeiro
   const parteId = `p${ordem[erros - 1]}`;
   const parte = document.getElementById(parteId);
   if (parte) parte.classList.add("show");

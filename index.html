@@ -37,28 +37,34 @@
     <div class="board">
       <!-- Painel da forca -->
       <div class="panel">
-     <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
+    <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
   <!-- Estrutura da forca -->
   <line x1="100" y1="250" x2="300" y2="250" stroke="#444" stroke-width="6"/>
   <line x1="150" y1="250" x2="150" y2="50" stroke="#444" stroke-width="6"/>
   <line x1="150" y1="50" x2="190" y2="50" stroke="#444" stroke-width="6"/>
   <line x1="190" y1="50" x2="190" y2="70" stroke="#444" stroke-width="4"/>
 
-  <!-- Cabeça (máscara oval) -->
-  <ellipse id="p0" cx="190" cy="95" rx="22" ry="28" class="part"/> <!-- máscara oval -->
+  <!-- Cabeça branca (máscara oval) -->
+  <ellipse id="p0" cx="190" cy="95" rx="22" ry="28" class="part mask-base"/>
 
-  <!-- Detalhes da máscara -->
-  <circle id="p1" cx="180" cy="90" r="3" class="part mask-detail"/> <!-- olho esq -->
-  <circle id="p2" cx="200" cy="90" r="3" class="part mask-detail"/> <!-- olho dir -->
-  <path id="p3" d="M190 100 L188 104 L192 104 Z" class="part mask-detail"/> <!-- nariz -->
-  <path id="p4" d="M180 85 L185 80 M195 80 L200 85 M190 75 L190 70" class="part mask-red"/> <!-- marcas vermelhas -->
+  <!-- Olhos pretos -->
+  <circle id="p1" cx="180" cy="90" r="3" class="part mask-eye"/>
+  <circle id="p2" cx="200" cy="90" r="3" class="part mask-eye"/>
+
+  <!-- Marcas vermelhas acima dos olhos -->
+  <path id="p3" d="M175 85 L185 80" class="part mask-red"/>
+  <path id="p4" d="M195 80 L205 85" class="part mask-red"/>
+
+  <!-- Marcas vermelhas abaixo dos olhos -->
+  <path id="p5" d="M175 95 L185 100" class="part mask-red"/>
+  <path id="p6" d="M195 100 L205 95" class="part mask-red"/>
 
   <!-- Corpo e membros -->
-  <line id="p5" x1="190" y1="120" x2="190" y2="170" class="part"/> <!-- corpo -->
-  <line id="p6" x1="190" y1="130" x2="170" y2="150" class="part"/> <!-- braço esq -->
-  <line id="p7" x1="190" y1="130" x2="210" y2="150" class="part"/> <!-- braço dir -->
-  <line id="p8" x1="190" y1="170" x2="170" y2="200" class="part"/> <!-- perna esq -->
-  <line id="p9" x1="190" y1="170" x2="210" y2="200" class="part"/> <!-- perna dir -->
+  <line id="p7" x1="190" y1="120" x2="190" y2="170" class="part"/>
+  <line id="p8" x1="190" y1="130" x2="170" y2="150" class="part"/>
+  <line id="p9" x1="190" y1="130" x2="210" y2="150" class="part"/>
+  <line id="p10" x1="190" y1="170" x2="170" y2="200" class="part"/>
+  <line id="p11" x1="190" y1="170" x2="210" y2="200" class="part"/>
 </svg>
       </div>
 
