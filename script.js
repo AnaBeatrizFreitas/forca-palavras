@@ -70,7 +70,7 @@ function startGame() {
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
 
-  for (let i = 0; i <= 11; i++) {
+  for (let i = 0; i <= 7; i++) {
     const parte = document.getElementById(`p${i}`);
     if (parte) parte.classList.remove("show", "mask-glow");
   }
@@ -158,14 +158,13 @@ function verificarVitoria() {
 
 function mostrarParteDaForca(erros) {
   const ordem = [
-    ['p0'], // cabeça
-    ['p1', 'p2'], // olhos X
-    ['p3', 'p4', 'p5', 'p6'], // boca
-    ['p7'], // tronco
-    ['p8'], // braço esq
-    ['p9'], // braço dir
-    ['p10'], // perna esq
-    ['p11']  // perna dir
+    ['p0'],             // Cabeça com capuz
+    ['p1', 'p2'],       // Olhos em X
+    ['p3'],             // Nariz
+    ['p4'],             // Boca
+    ['p5'],             // Tronco com capa
+    ['p6'],             // Manga esquerda
+    ['p7']              // Manga direita
   ];
 
   const partes = ordem[erros - 1];
@@ -178,7 +177,7 @@ function mostrarParteDaForca(erros) {
 }
 
 function ativarGlowDerrota() {
-  ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'].forEach(id => {
+  ['p1', 'p2', 'p3', 'p4'].forEach(id => {
     document.getElementById(id)?.classList.add("mask-glow");
   });
 }
