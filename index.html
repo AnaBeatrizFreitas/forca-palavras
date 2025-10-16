@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jogo da Forca</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .mask-outline {
+      fill: transparent;
+      stroke: #a855f7;
+      stroke-width: 2.5;
+      visibility: hidden;
+    }
+
+    .mask-led {
+      stroke: #a855f7;
+      stroke-width: 2.5;
+      fill: none;
+      visibility: hidden;
+    }
+
+    .mask-glow {
+      stroke: #a855f7;
+      animation: brilharMascara 1.2s ease-in-out infinite;
+    }
+
+    @keyframes brilharMascara {
+      0% { opacity: 1; stroke-width: 2.5; }
+      50% { opacity: 0.4; stroke-width: 3.5; }
+      100% { opacity: 1; stroke-width: 2.5; }
+    }
+  </style>
 </head>
 <body class="sombrio">
 
@@ -37,33 +63,33 @@
     <div class="board">
       <!-- Painel da forca -->
       <div class="panel">
-   <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
-  <!-- Estrutura da forca -->
-  <line x1="100" y1="250" x2="300" y2="250" stroke="#444" stroke-width="6"/>
-  <line x1="150" y1="250" x2="150" y2="50" stroke="#444" stroke-width="6"/>
-  <line x1="150" y1="50" x2="190" y2="50" stroke="#444" stroke-width="6"/>
-  <line x1="190" y1="50" x2="190" y2="70" stroke="#444" stroke-width="4"/>
+        <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
+          <!-- Estrutura da forca -->
+          <line x1="100" y1="250" x2="300" y2="250" stroke="#444" stroke-width="6"/>
+          <line x1="150" y1="250" x2="150" y2="50" stroke="#444" stroke-width="6"/>
+          <line x1="150" y1="50" x2="190" y2="50" stroke="#444" stroke-width="6"/>
+          <line x1="190" y1="50" x2="190" y2="70" stroke="#444" stroke-width="4"/>
 
-  <!-- Cabeça transparente com contorno LED roxo -->
-  <ellipse id="p0" cx="190" cy="95" rx="20" ry="26" class="part mask-outline"/>
+          <!-- Cabeça menor com contorno LED roxo -->
+          <ellipse id="p0" cx="190" cy="95" rx="16" ry="22" class="part mask-outline"/>
 
-  <!-- Olhos em X -->
-  <path id="p1" d="M178 88 L182 92 M182 88 L178 92" class="part mask-led"/>
-  <path id="p2" d="M198 88 L202 92 M202 88 L198 92" class="part mask-led"/>
+          <!-- Olhos em X -->
+          <path id="p1" d="M178 88 L182 92 M182 88 L178 92" class="part mask-led"/>
+          <path id="p2" d="M198 88 L202 92 M202 88 L198 92" class="part mask-led"/>
 
-  <!-- Boca costurada (mais alta e menor) -->
-  <path id="p3" d="M180 102 Q190 108 200 102" class="part mask-led"/>
-  <line id="p4" x1="183" y1="103" x2="183" y2="107" class="part mask-led"/>
-  <line id="p5" x1="190" y1="104" x2="190" y2="108" class="part mask-led"/>
-  <line id="p6" x1="197" y1="103" x2="197" y2="107" class="part mask-led"/>
+          <!-- Boca costurada -->
+          <path id="p3" d="M180 102 Q190 108 200 102" class="part mask-led"/>
+          <line id="p4" x1="183" y1="103" x2="183" y2="107" class="part mask-led"/>
+          <line id="p5" x1="190" y1="104" x2="190" y2="108" class="part mask-led"/>
+          <line id="p6" x1="197" y1="103" x2="197" y2="107" class="part mask-led"/>
 
-  <!-- Corpo e membros -->
-  <line id="p7" x1="190" y1="120" x2="190" y2="170" class="part"/>
-  <line id="p8" x1="190" y1="140" x2="170" y2="160" class="part"/>
-  <line id="p9" x1="190" y1="140" x2="210" y2="160" class="part"/>
-  <line id="p10" x1="190" y1="170" x2="170" y2="200" class="part"/>
-  <line id="p11" x1="190" y1="170" x2="210" y2="200" class="part"/>
-</svg>
+          <!-- Corpo e membros -->
+          <line id="p7" x1="190" y1="120" x2="190" y2="170" class="part"/>
+          <line id="p8" x1="190" y1="140" x2="170" y2="160" class="part"/>
+          <line id="p9" x1="190" y1="140" x2="210" y2="160" class="part"/>
+          <line id="p10" x1="190" y1="170" x2="170" y2="200" class="part"/>
+          <line id="p11" x1="190" y1="170" x2="210" y2="200" class="part"/>
+        </svg>
       </div>
 
       <!-- Painel de interação -->
@@ -94,6 +120,36 @@
     <div class="victory-message">“Escapou dessa vez”</div>
     <button id="try-again-win" class="btn">Tente novamente</button>
   </div>
+
+  <script>
+    function mostrarParteDaForca(erros) {
+      const ordem = [
+        ['p0'],                 // 1 - Cabeça
+        ['p1', 'p2'],           // 2 - Olhos em X
+        ['p3', 'p4', 'p5', 'p6'], // 3 - Boca costurada
+        ['p7'],                 // 4 - Tronco
+        ['p8'],                 // 5 - Braço esquerdo
+        ['p9'],                 // 6 - Braço direito
+        ['p10'],                // 7 - Perna esquerda
+        ['p11']                 // 8 - Perna direita
+      ];
+
+      const partes = ordem[erros - 1];
+      if (!partes) return;
+
+      partes.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add("show");
+      });
+    }
+
+    // Dentro da função handleGuess, no trecho de derrota:
+    function ativarGlowDerrota() {
+      ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'].forEach(id => {
+        document.getElementById(id)?.classList.add("mask-glow");
+      });
+    }
+  </script>
 
   <script src="script.js" defer></script>
 </body>

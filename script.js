@@ -137,6 +137,7 @@ function handleGuess(letra, btn) {
       document.getElementById("death-scene").classList.add("show");
       document.getElementById("status").textContent = "Você perdeu!";
       document.getElementById("status").className = "status lose";
+      ativarGlowDerrota();
     }
   }
 }
@@ -154,6 +155,7 @@ function verificarVitoria() {
     }
   }
 }
+
 function mostrarParteDaForca(erros) {
   const ordem = [
     ['p0'], // cabeça
@@ -172,6 +174,12 @@ function mostrarParteDaForca(erros) {
   partes.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.add("show");
+  });
+}
+
+function ativarGlowDerrota() {
+  ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'].forEach(id => {
+    document.getElementById(id)?.classList.add("mask-glow");
   });
 }
 
