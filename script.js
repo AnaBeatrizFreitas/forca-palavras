@@ -2,7 +2,7 @@ let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
 let originalHint = "";
-let lives = 12;
+let lives = 15;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -157,7 +157,7 @@ function verificarVitoria() {
 }
 
 function mostrarParteDaForca(erros) {
-  const ordem = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // máscara primeiro
+  const ordem = [0, 1, 2, 3, 4, 5, 6, 12, 13, 14, 7, 8, 9, 10, 11]; // máscara completa antes do corpo
   const parteId = `p${ordem[erros - 1]}`;
   const parte = document.getElementById(parteId);
   if (parte) parte.classList.add("show");

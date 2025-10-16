@@ -367,3 +367,39 @@ header h1 {
   50% { opacity: 0.4; stroke-width: 3; }
   100% { opacity: 1; stroke-width: 2; }
 }
+.mask-base {
+  fill: #eee;
+  stroke: #e5e7eb;
+  stroke-width: 2;
+  visibility: hidden;
+}
+
+.mask-eye {
+  fill: #111;
+  stroke: none;
+  visibility: hidden;
+}
+
+.mask-red {
+  stroke: #ef4444;
+  stroke-width: 4; /* mais grosso */
+  fill: none;
+  visibility: hidden;
+}
+
+.mask-dot {
+  fill: #444;
+  stroke: none;
+  visibility: hidden;
+}
+
+.part {
+  stroke: #e5e7eb;
+  stroke-width: 2;
+  fill: none;
+  visibility: hidden;
+}
+
+.part.show {
+  visibility: visible;
+}
