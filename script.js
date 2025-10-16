@@ -1,35 +1,14 @@
 const temas = {
-  adultos: {
-    "Animal 🐶": "palavras_adultos/animal/animal_adultos.json",
-    "Cantores 🎤": "palavras_adultos/cantores/cantores_adultos.json",
-    "Comida 🍔": "palavras_adultos/comida/comida_adultos.json",
-    "Filmes 🎬": "palavras_adultos/filmes/filmes_adultos.json",
-    "Objeto 🧰": "palavras_adultos/objeto/objeto_adultos.json",
-    "País 🌍": "palavras_adultos/pais/pais_adultos.json",
-    "Profissões 👩‍⚕️": "palavras_adultos/profissoes/profissoes_adultos.json"
-  },
-  criancas: {
-    "Animal 🐶": "palavras_criancas/animal/animal_criancas.json",
-    "Espaço 🚀": "palavras_criancas/espaco/espaco_criancas.json",
-    "Comida 🍔": "palavras_criancas/comida/comida_criancas.json",
-    "Desenhos 📺": "palavras_criancas/desenhos/desenhos_criancas.json",
-    "Objeto 🧰": "palavras_criancas/objeto/objeto_criancas.json",
-    "País 🌍": "palavras_criancas/pais/pais_criancas.json",
-    "Profissões 👩‍⚕️": "palavras_criancas/profissoes/profissoes_criancas.json"
-  }
-};
-const equivalencias = {
-  A: ["A", "Á", "Â", "Ã", "À"],
-  E: ["E", "É", "Ê"],
-  I: ["I", "Í"],
-  O: ["O", "Ó", "Ô", "Õ"],
-  U: ["U", "Ú", "Ü"],
-  C: ["C", "Ç"]
+  "Animal 🐶": "animal/palavras.json",
+  "Cantores 🎤": "cantores/palavras.json",
+  "Comida 🍔": "comida/palavras.json",
+  "Filmes 🎬": "filmes/palavras.json",
+  "Objeto 🧰": "objetos/palavras.json",
+  "País 🌍": "pais/palavras.json",
+  "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
-
-let character = "";
-let modoJogo = "";
+let character = null;
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -39,91 +18,66 @@ let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("girl").addEventListener("click", () => {
-    modoJogo = "criancas";
     character = "girl";
-    selecionarModoJogo();
+    applyCharacterShapes("girl");
+    destacarPersonagem("girl");
+    mostrarTemas();
   });
 
   document.getElementById("boy").addEventListener("click", () => {
-    modoJogo = "adultos";
     character = "boy";
-    selecionarModoJogo();
+    applyCharacterShapes("boy");
+    destacarPersonagem("boy");
+    mostrarTemas();
+  });
+
+  document.getElementById("reset").addEventListener("click", () => {
+    wordPool = shuffleWords();
+    startGame();
+    document.getElementById("category").textContent = "Geral";
+    document.getElementById("death-scene").classList.remove("show");
+    document.getElementById("victory-scene").classList.remove("show");
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
-    if (!character) {
-      alert("Escolha seu personagem antes de começar o jogo");
-      return;
-    }
-
-    if (ORIGINAL_WORDS.length === 0) {
-      alert("Escolha um tema antes de começar o jogo");
-      return;
-    }
-
-    if (wordPool.length === 0) {
-      wordPool = shuffleWords();
-    }
-
     startGame();
-    limparCenasFinais();
+    document.getElementById("death-scene").classList.remove("show");
+    document.getElementById("victory-scene").classList.remove("show");
   });
 
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
   document.getElementById("try-again-win").addEventListener("click", reiniciarJogo);
 });
 
-function selecionarModoJogo() {
-  // Aplica a classe no <body> para mudar o estilo visual
-  document.body.classList.remove("criancas", "adultos");
-  document.body.classList.add(modoJogo);
-
-  applyCharacterShapes(character);
-  destacarPersonagem(character);
-  mostrarTemas();
-}
-
-
 function reiniciarJogo() {
-  if (wordPool.length === 0) {
-    wordPool = shuffleWords();
-  }
+  wordPool = shuffleWords();
   startGame();
-  limparCenasFinais();
-}
-
-function limparCenasFinais() {
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
-  document.querySelector(".victory-message").textContent = "";
-  document.querySelector(".glow").style.background = "";
 }
 
 function destacarPersonagem(selecionado) {
   document.getElementById("girl").classList.remove("selected");
   document.getElementById("boy").classList.remove("selected");
   document.getElementById(selecionado).classList.add("selected");
-  character = selecionado;
 }
 
 function mostrarTemas() {
   let themeContainer = document.getElementById("theme-select");
-  if (themeContainer) themeContainer.remove();
+  if (!themeContainer) {
+    themeContainer = document.createElement("div");
+    themeContainer.id = "theme-select";
 
-  themeContainer = document.createElement("div");
-  themeContainer.id = "theme-select";
+    for (const [nome, caminho] of Object.entries(temas)) {
+      const btn = document.createElement("button");
+      btn.className = "theme-btn";
+      btn.textContent = nome;
+      btn.onclick = () => selecionarTema(btn, caminho, nome);
+      themeContainer.appendChild(btn);
+    }
 
-  const temasAtivos = temas[modoJogo];
-
-  for (const [nome, caminho] of Object.entries(temasAtivos)) {
-    const btn = document.createElement("button");
-    btn.className = "theme-btn";
-    btn.textContent = nome;
-    btn.onclick = () => selecionarTema(btn, caminho, nome);
-    themeContainer.appendChild(btn);
+    document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
   }
-
-  document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
 }
 
 function selecionarTema(botao, caminho, nomeTema) {
@@ -133,7 +87,9 @@ function selecionarTema(botao, caminho, nomeTema) {
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
-  fetch(nomeArquivo)
+  const baseURL = `palavras/${nomeArquivo}`;
+
+  fetch(baseURL)
     .then(res => res.json())
     .then(palavras => {
       ORIGINAL_WORDS = palavras.filter(item => item.w && typeof item.w === "string")
@@ -176,7 +132,7 @@ function startGame() {
 
   const next = wordPool.pop();
   if (!next) {
-    alert("Escolha um tema antes de começar o jogo");
+    alert("Acabaram as palavras!");
     return;
   }
 
@@ -194,7 +150,7 @@ function startGame() {
 
   const keyboard = document.getElementById("keyboard");
   keyboard.innerHTML = "";
-  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const letras = "AÁÂÃÀBCÇDEÉÊFGHIÍJKLMNOPQRSTUÚÜVWXYZ";
   for (const letra of letras) {
     const btn = document.createElement("button");
     btn.className = "key";
@@ -210,13 +166,11 @@ function handleGuess(letra, btn) {
   const slots = document.querySelectorAll(".slot");
 
   for (let i = 0; i < currentWord.length; i++) {
-   const grupo = equivalencias[letra] || [letra];
-
-if (grupo.includes(currentWord[i])) {
-  slots[i].textContent = currentWord[i]; // mostra com acento
-  slots[i].classList.add("revealed");
-  acerto = true;
-}
+    if (currentWord[i] === letra) {
+      slots[i].textContent = letra;
+      slots[i].classList.add("revealed");
+      acerto = true;
+    }
   }
 
   if (acerto) {
@@ -235,26 +189,9 @@ if (grupo.includes(currentWord[i])) {
     }
 
     if (lives <= 0) {
-      const deathScene = document.getElementById("death-scene");
-      const blood = deathScene.querySelector(".blood");
-      const message = deathScene.querySelector(".death-message");
-      const status = document.getElementById("status");
-
-      deathScene.classList.add("show");
-
-      if (modoJogo === "criancas") {
-        blood.style.background = "radial-gradient(circle at center, rgba(100,100,255,0.4), rgba(0,0,50,0.9))";
-        message.textContent = "Não desista! Vamos novamente";
-        message.className = "death-message child-lose"; // para crianças
-        status.textContent = "Não desista!";
-        status.className = "status child-lose";
-      } else {
-               blood.style.background = "radial-gradient(circle at center, rgba(255,0,0,0.4), rgba(0,0,0,0.9))";
-        message.textContent = "“Não é pessoal. É a lei.”";
-        message.className = "death-message lose"; // para adultos
-        status.textContent = "Você perdeu!";
-        status.className = "status lose";
-      }
+      document.getElementById("death-scene").classList.add("show");
+      document.getElementById("status").textContent = "Você perdeu!";
+      document.getElementById("status").className = "status lose";
     }
   }
 }
@@ -263,27 +200,9 @@ function verificarVitoria() {
   const slots = document.querySelectorAll(".slot");
   const letrasReveladas = Array.from(slots).map(s => s.textContent).join("");
   if (letrasReveladas === currentWord) {
-    const victoryScene = document.getElementById("victory-scene");
-    const status = document.getElementById("status");
-    const victoryMessage = document.querySelector(".victory-message");
-    const glow = document.querySelector(".glow");
-
-    victoryScene.classList.add("show");
-
-    if (modoJogo === "criancas") {
-      status.textContent = "Parabéns você acertou!";
-      status.className = "status child-win";
-      victoryMessage.textContent = "Parabéns você acertou!";
-      victoryMessage.className = "victory-message child-win"; // para crianças
-      glow.style.background = "radial-gradient(circle at center, rgba(250,204,21,0.4), rgba(180,83,9,0.9))";
-    } else {
-      status.textContent = "Você venceu!";
-      status.className = "status win";
-      victoryMessage.textContent = "“Escapou dessa vez”";
-      victoryMessage.className = "victory-message win"; // para adultos
-     glow.style.background = "radial-gradient(circle at center, rgba(74,222,128,0.4), rgba(18, 52, 31, 0.9))";
-
-    }
+    document.getElementById("victory-scene").classList.add("show");
+    document.getElementById("status").textContent = "Você venceu!";
+    document.getElementById("status").className = "status win";
   }
 }
 
@@ -299,14 +218,14 @@ function applyCharacterShapes(kind) {
       p7: "M182 80 L190 70 L198 80 L190 90 Z"
     },
     boy: {
-      p6: "M165 75 Q190 90 215 75",
-      p7: "M182 80 L190 90 L198 80 L190 70 Z"
+      p6: "M165 75 L215 75 L190 50 Z",
+      p7: "M175 200 L175 240 M205 200 L205 240"
     }
   };
 
   const p6 = document.getElementById("p6");
   const p7 = document.getElementById("p7");
-  if (p6 && p7 && SHAPES[kind]) {
+  if (p6 && p7) {
     p6.setAttribute("d", SHAPES[kind].p6);
     p7.setAttribute("d", SHAPES[kind].p7);
     p6.classList.remove("girl", "boy");
