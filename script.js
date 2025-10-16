@@ -16,7 +16,7 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
- applyCharacterShapes("ceifador");
+  applyCharacterShapes("caveira");
   mostrarTemas();
 
   document.getElementById("reset").addEventListener("click", () => {
@@ -108,7 +108,7 @@ function startGame() {
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 9; i++) {
     document.getElementById(`p${i}`)?.classList.remove("show");
   }
 
@@ -195,20 +195,23 @@ function mostrarParteDaForca(erros) {
 
 function applyCharacterShapes(kind) {
   const SHAPES = {
-    ceifador: {
-      // Cabeça com capuz
-      p6: "M170 75 Q190 40 210 75 Q190 110 170 75 Z", // formato oval com capuz
-      // Corpo com manto rasgado
-      p7: "M160 120 Q190 160 220 120 Q210 180 190 200 Q170 180 160 120 Z"
+    caveira: {
+      p6: "M180 85 Q190 75 200 85 Q190 95 180 85 Z", // olho esquerdo
+      p7: "M200 85 Q210 75 220 85 Q210 95 200 85 Z", // olho direito
+      p8: "M195 100 Q190 105 195 110 Q200 105 195 100 Z" // nariz
     }
   };
 
   const p6 = document.getElementById("p6");
   const p7 = document.getElementById("p7");
-  if (p6 && p7 && SHAPES[kind]) {
+  const p8 = document.getElementById("p8");
+
+  if (p6 && p7 && p8 && SHAPES[kind]) {
     p6.setAttribute("d", SHAPES[kind].p6);
     p7.setAttribute("d", SHAPES[kind].p7);
+    p8.setAttribute("d", SHAPES[kind].p8);
     p6.className = kind;
     p7.className = kind;
+    p8.className = kind;
   }
 }
