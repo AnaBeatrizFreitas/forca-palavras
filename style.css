@@ -393,11 +393,9 @@ header h1 {
   stroke-width: 4;
   filter: drop-shadow(0 0 6px red);
 }
-.ghostface-part {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.ghostface-part.show {
-  opacity: 1;
+.ghostface {
+  stroke: #fff;
+  fill: #111; /* cor da capa/máscara */
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px red);
 }

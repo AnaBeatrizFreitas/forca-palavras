@@ -187,16 +187,19 @@ function verificarVitoria() {
     document.getElementById("status").className = "status win";
   }
 }
+
 function mostrarParteDaForca(erros) {
-  if (erros === 8) {
-    document.getElementById("ghostface-img").classList.add("show");
-  }
+  const parte = document.getElementById(`p${erros - 1}`);
+  if (parte) parte.classList.add("show");
 }
+
 function applyCharacterShapes(kind) {
   const SHAPES = {
     ghostface: {
-      p6: "M165 75 Q190 40 215 75", // cabeça
-      p7: "M180 80 Q190 100 200 80 Q190 120 180 80 Z" // máscara
+      // Cabeça com capuz e máscara
+      p6: "M165 75 Q190 40 215 75 Q190 110 165 75 Z",
+      // Capa com mangas abertas
+      p7: "M160 120 Q190 160 220 120 Q190 200 160 120 Z"
     }
   };
 
