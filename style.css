@@ -387,3 +387,23 @@ header h1 {
 #theme-select button:not(.selected) {
   opacity: 0.5;
 }
+body.sombrio {
+  background-color: #0a0a0a;
+  color: #e5e7eb;
+}
+
+body.sombrio .panel {
+  background-color: #111;
+  border: 1px solid #333;
+}
+
+body.sombrio .btn,
+body.sombrio .key {
+  background-color: #222;
+  color: #eee;
+  border-color: #444;
+}
+
+body.sombrio .btn:hover {
+  background-color: #333;
+}
