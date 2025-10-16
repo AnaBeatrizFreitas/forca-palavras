@@ -2,12 +2,10 @@ let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
 let originalHint = "";
-let lives = 8;
+let lives = 10;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyCharacterShapes();
-
   document.querySelectorAll(".theme-btn").forEach(button => {
     button.addEventListener("click", () => {
       const tema = button.dataset.tema;
@@ -64,7 +62,7 @@ function shuffleWords() {
 }
 
 function startGame() {
-  lives = 8;
+  lives = 10;
   erros = 0;
   document.getElementById("lives").textContent = lives;
   document.getElementById("hint").textContent = "";
@@ -72,8 +70,9 @@ function startGame() {
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
 
-  for (let i = 0; i < 8; i++) {
-    document.getElementById(`p${i}`)?.classList.remove("show");
+  for (let i = 0; i < 10; i++) {
+    const parte = document.getElementById(`p${i}`);
+    if (parte) parte.classList.remove("show", "mask-glow");
   }
 
   const next = wordPool.pop();
@@ -149,6 +148,12 @@ function verificarVitoria() {
     document.getElementById("victory-scene").classList.add("show");
     document.getElementById("status").textContent = "Você venceu!";
     document.getElementById("status").className = "status win";
+
+    // Brilho na máscara
+    document.getElementById("p6")?.classList.add("mask-glow");
+    document.getElementById("p7")?.classList.add("mask-glow");
+    document.getElementById("p8")?.classList.add("mask-glow");
+    document.getElementById("p9")?.classList.add("mask-glow");
   }
 }
 
@@ -166,30 +171,11 @@ function reiniciarJogo() {
 function limparCenasFinais() {
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
-  document.querySelector(".victory-message").textContent = "";
+  document.querySelector(".victory-message").textContent = "“Escapou dessa vez”";
   document.querySelector(".glow").style.background = "";
-}
 
-function applyCharacterShapes() {
-  const p6 = document.getElementById("p6"); // caveira: olhos e nariz
-  const p7 = document.getElementById("p7"); // caveira: dentes
-
-  if (p6 && p7) {
-    p6.setAttribute("d", `
-      M180 90 Q185 85 190 90 Q185 95 180 90
-      M200 90 Q205 85 210 90 Q205 95 200 90
-      M190 100 Q192 98 194 100 Q192 102 190 100
-    `);
-
-    p7.setAttribute("d", "M185 110 L195 110 M195 110 L205 110");
-
-    p6.classList.add("skull");
-    p7.classList.add("skull");
-  }
-
-  const head = document.getElementById("p0");
-  if (head) {
-    head.setAttribute("fill", "none");
-    head.setAttribute("stroke", "none");
+  // Remover brilho da máscara
+  for (let i = 6; i <= 9; i++) {
+    document.getElementById(`p${i}`)?.classList.remove("mask-glow");
   }
 }
