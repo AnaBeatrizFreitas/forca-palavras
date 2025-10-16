@@ -368,3 +368,43 @@ header h1 {
   50% { opacity: 0.4; stroke-width: 3; }
   100% { opacity: 1; stroke-width: 2; }
 }
+/* 🎭 Máscara estilo Jason e partes da forca */
+.part {
+  stroke: #e5e7eb;
+  stroke-width: 2;
+  fill: none;
+  visibility: hidden;
+}
+
+.part.show {
+  visibility: visible;
+}
+
+/* Detalhes da máscara */
+.mask-detail {
+  stroke: #e5e7eb;
+  fill: #111;
+}
+
+.mask-red {
+  stroke: #ef4444;
+  stroke-width: 2;
+}
+
+/* Brilho na vitória */
+.mask-glow {
+  stroke: #10b981;
+  animation: brilharMascara 1.2s ease-in-out infinite;
+}
+
+@keyframes brilharMascara {
+  0% { opacity: 1; stroke-width: 2; }
+  50% { opacity: 0.4; stroke-width: 3; }
+  100% { opacity: 1; stroke-width: 2; }
+}
+
+/* Cabeça sem preenchimento visível */
+#p0 {
+  fill: none;
+  stroke: none;
+}

@@ -37,27 +37,29 @@
     <div class="board">
       <!-- Painel da forca -->
       <div class="panel">
-        <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
-          <!-- Estrutura da forca -->
-          <line x1="100" y1="250" x2="300" y2="250" stroke="#444" stroke-width="6"/>
-          <line x1="150" y1="250" x2="150" y2="50" stroke="#444" stroke-width="6"/>
-          <line x1="150" y1="50" x2="190" y2="50" stroke="#444" stroke-width="6"/>
-          <line x1="190" y1="50" x2="190" y2="70" stroke="#444" stroke-width="4"/>
+     <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
+  <!-- Estrutura da forca -->
+  <line x1="100" y1="250" x2="300" y2="250" stroke="#444" stroke-width="6"/>
+  <line x1="150" y1="250" x2="150" y2="50" stroke="#444" stroke-width="6"/>
+  <line x1="150" y1="50" x2="190" y2="50" stroke="#444" stroke-width="6"/>
+  <line x1="190" y1="50" x2="190" y2="70" stroke="#444" stroke-width="4"/>
 
-          <!-- Partes do boneco -->
-          <circle id="p0" cx="190" cy="95" r="25" class="part"/>         
-          <line id="p1" x1="190" y1="120" x2="190" y2="170" class="part"/>
-          <line id="p2" x1="190" y1="130" x2="170" y2="150" class="part"/>
-          <line id="p3" x1="190" y1="130" x2="210" y2="150" class="part"/>
-          <line id="p4" x1="190" y1="170" x2="170" y2="200" class="part"/>
-          <line id="p5" x1="190" y1="170" x2="210" y2="200" class="part"/>
+  <!-- Cabeça (máscara oval) -->
+  <ellipse id="p0" cx="190" cy="95" rx="22" ry="28" class="part"/> <!-- máscara oval -->
 
-          <!-- Máscara estilo Jason -->
-          <circle id="p6" cx="180" cy="90" r="3" class="part mask-detail"/> <!-- olho esq -->
-          <circle id="p7" cx="200" cy="90" r="3" class="part mask-detail"/> <!-- olho dir -->
-          <path id="p8" d="M190 100 L188 104 L192 104 Z" class="part mask-detail"/> <!-- nariz -->
-          <path id="p9" d="M180 85 L185 80 M195 80 L200 85 M190 75 L190 70" class="part mask-red"/> <!-- marcas vermelhas -->
-        </svg>
+  <!-- Detalhes da máscara -->
+  <circle id="p1" cx="180" cy="90" r="3" class="part mask-detail"/> <!-- olho esq -->
+  <circle id="p2" cx="200" cy="90" r="3" class="part mask-detail"/> <!-- olho dir -->
+  <path id="p3" d="M190 100 L188 104 L192 104 Z" class="part mask-detail"/> <!-- nariz -->
+  <path id="p4" d="M180 85 L185 80 M195 80 L200 85 M190 75 L190 70" class="part mask-red"/> <!-- marcas vermelhas -->
+
+  <!-- Corpo e membros -->
+  <line id="p5" x1="190" y1="120" x2="190" y2="170" class="part"/> <!-- corpo -->
+  <line id="p6" x1="190" y1="130" x2="170" y2="150" class="part"/> <!-- braço esq -->
+  <line id="p7" x1="190" y1="130" x2="210" y2="150" class="part"/> <!-- braço dir -->
+  <line id="p8" x1="190" y1="170" x2="170" y2="200" class="part"/> <!-- perna esq -->
+  <line id="p9" x1="190" y1="170" x2="210" y2="200" class="part"/> <!-- perna dir -->
+</svg>
       </div>
 
       <!-- Painel de interação -->

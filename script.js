@@ -150,15 +150,16 @@ function verificarVitoria() {
     document.getElementById("status").className = "status win";
 
     // Brilho na máscara
-    document.getElementById("p6")?.classList.add("mask-glow");
-    document.getElementById("p7")?.classList.add("mask-glow");
-    document.getElementById("p8")?.classList.add("mask-glow");
-    document.getElementById("p9")?.classList.add("mask-glow");
+    for (let i = 1; i <= 4; i++) {
+      document.getElementById(`p${i}`)?.classList.add("mask-glow");
+    }
   }
 }
 
 function mostrarParteDaForca(erros) {
-  const parte = document.getElementById(`p${erros - 1}`);
+  const ordem = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; // máscara primeiro, corpo depois
+  const parteId = `p${ordem[erros - 1]}`;
+  const parte = document.getElementById(parteId);
   if (parte) parte.classList.add("show");
 }
 
@@ -174,8 +175,7 @@ function limparCenasFinais() {
   document.querySelector(".victory-message").textContent = "“Escapou dessa vez”";
   document.querySelector(".glow").style.background = "";
 
-  // Remover brilho da máscara
-  for (let i = 6; i <= 9; i++) {
+  for (let i = 1; i <= 4; i++) {
     document.getElementById(`p${i}`)?.classList.remove("mask-glow");
   }
 }
