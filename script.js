@@ -1,13 +1,3 @@
-const temas = {
-  "Animal 🐶": "animal/palavras.json",
-  "Cantores 🎤": "cantores/palavras.json",
-  "Comida 🍔": "comida/palavras.json",
-  "Filmes 🎬": "filmes/palavras.json",
-  "Objeto 🧰": "objetos/palavras.json",
-  "País 🌍": "pais/palavras.json",
-  "Profissões 👩‍⚕️": "profissoes/palavras.json"
-};
-
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -19,11 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Aplica forma da cabeça da menina
   applyCharacterShapes("girl");
 
-  // Ativa botões de tema
+  // Botões de tema
   document.querySelectorAll(".theme-btn").forEach(button => {
     button.addEventListener("click", () => {
+      const tema = button.dataset.tema;
       const nomeTema = button.textContent;
-      const caminho = `palavras/${temas[nomeTema]}`;
+      const caminho = `palavras/${tema}/palavras.json`;
 
       document.querySelectorAll(".theme-btn").forEach(btn => btn.classList.remove("selected"));
       button.classList.add("selected");
