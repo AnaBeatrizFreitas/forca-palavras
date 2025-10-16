@@ -62,7 +62,7 @@ function shuffleWords() {
 }
 
 function startGame() {
-  lives = 10;
+  lives = 8;
   erros = 0;
   document.getElementById("lives").textContent = lives;
   document.getElementById("hint").textContent = "";
@@ -70,7 +70,7 @@ function startGame() {
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i <= 11; i++) {
     const parte = document.getElementById(`p${i}`);
     if (parte) parte.classList.remove("show", "mask-glow");
   }
@@ -149,8 +149,7 @@ function verificarVitoria() {
     document.getElementById("status").textContent = "Você venceu!";
     document.getElementById("status").className = "status win";
 
-    // Brilho na máscara
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 0; i <= 2; i++) {
       document.getElementById(`p${i}`)?.classList.add("mask-glow");
     }
   }
@@ -159,13 +158,13 @@ function verificarVitoria() {
 function mostrarParteDaForca(erros) {
   const ordem = [
     ['p0'], // cabeça
-    ['p1', 'p2'], // olhos
-    ['p3','p4','p5','p6','p7','p8','p9','p10','p11','p12'], // triângulos + furos
-    ['p13'], // corpo
-    ['p14'], // braço esq
-    ['p15'], // braço dir
-    ['p16'], // perna esq
-    ['p17']  // perna dir
+    ['p1', 'p2'], // olhos X
+    ['p3', 'p4', 'p5', 'p6'], // boca
+    ['p7'], // tronco
+    ['p8'], // braço esq
+    ['p9'], // braço dir
+    ['p10'], // perna esq
+    ['p11']  // perna dir
   ];
 
   const partes = ordem[erros - 1];
@@ -189,7 +188,7 @@ function limparCenasFinais() {
   document.querySelector(".victory-message").textContent = "“Escapou dessa vez”";
   document.querySelector(".glow").style.background = "";
 
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 0; i <= 2; i++) {
     document.getElementById(`p${i}`)?.classList.remove("mask-glow");
   }
 }
