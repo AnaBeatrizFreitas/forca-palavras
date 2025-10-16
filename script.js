@@ -16,7 +16,7 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyCharacterShapes("caveira");
+  applyCharacterShapes(); // desenha os acessórios da caveira
   mostrarTemas();
 
   document.getElementById("reset").addEventListener("click", () => {
@@ -193,25 +193,19 @@ function mostrarParteDaForca(erros) {
   if (parte) parte.classList.add("show");
 }
 
-function applyCharacterShapes(kind) {
-  const SHAPES = {
-    caveira: {
-      p6: "M180 85 Q190 75 200 85 Q190 95 180 85 Z", // olho esquerdo
-      p7: "M200 85 Q210 75 220 85 Q210 95 200 85 Z", // olho direito
-      p8: "M195 100 Q190 105 195 110 Q200 105 195 100 Z" // nariz
-    }
+// 🎯 Adiciona acessórios da caveira (olhos e nariz)
+function applyCharacterShapes() {
+  const shapes = {
+    p6: "M180 85 Q190 75 200 85 Q190 95 180 85 Z", // olho esquerdo
+    p7: "M200 85 Q210 75 220 85 Q210 95 200 85 Z", // olho direito
+    p8: "M195 100 Q190 105 195 110 Q200 105 195 100 Z" // nariz
   };
 
-  const p6 = document.getElementById("p6");
-  const p7 = document.getElementById("p7");
-  const p8 = document.getElementById("p8");
-
-  if (p6 && p7 && p8 && SHAPES[kind]) {
-    p6.setAttribute("d", SHAPES[kind].p6);
-    p7.setAttribute("d", SHAPES[kind].p7);
-    p8.setAttribute("d", SHAPES[kind].p8);
-    p6.className = kind;
-    p7.className = kind;
-    p8.className = kind;
+  for (const [id, path] of Object.entries(shapes)) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.setAttribute("d", path);
+      el.classList.add("part");
+    }
   }
 }

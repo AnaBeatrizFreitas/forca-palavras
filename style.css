@@ -1,10 +1,11 @@
+/* Reset e base */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background-color: #111;
   color: #eee;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
@@ -12,8 +13,8 @@ body {
 h1 {
   font-size: 2.5rem;
   margin: 1rem 0;
-  text-align: center;
   color: #ff4444;
+  text-align: center;
   text-shadow: 0 0 8px #ff0000;
 }
 
@@ -30,6 +31,7 @@ h1 {
   font-size: 1.2rem;
 }
 
+/* Painéis e estrutura */
 .board {
   display: flex;
   gap: 2rem;
@@ -50,14 +52,19 @@ h1 {
   padding: 1rem;
 }
 
+/* Partes do personagem */
 .part {
   display: none;
+  stroke: #fff;
+  stroke-width: 2;
+  fill: #111;
 }
 
 .part.show {
   display: inline;
 }
 
+/* Palavra e slots */
 .word {
   font-size: 2rem;
   letter-spacing: 0.5rem;
@@ -73,6 +80,7 @@ h1 {
   color: #0f0;
 }
 
+/* Dica */
 .hint {
   font-size: 1rem;
   color: #ff0;
@@ -81,6 +89,7 @@ h1 {
   display: none;
 }
 
+/* Teclado */
 .keyboard {
   display: flex;
   flex-wrap: wrap;
@@ -112,6 +121,7 @@ h1 {
   background-color: #a00;
 }
 
+/* Botões */
 .actions {
   display: flex;
   justify-content: center;
@@ -133,6 +143,7 @@ h1 {
   background-color: #ff4444;
 }
 
+/* Status */
 .status {
   text-align: center;
   font-size: 1.5rem;
@@ -147,6 +158,7 @@ h1 {
   color: #f00;
 }
 
+/* Cenas de fim */
 #death-scene,
 #victory-scene {
   display: none;
@@ -179,6 +191,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
+/* Tema */
 #theme-select {
   display: flex;
   flex-wrap: wrap;
@@ -201,9 +214,12 @@ h1 {
   border-color: #ff0000;
 }
 
-/* Estilo da caveira */
-.caveira {
-  stroke: #fff;
-  fill: #111;
-  stroke-width: 2;
+/* Acessórios macabros */
+.part#p6,
+.part#p7,
+.part#p8 {
+  fill: red;
+  stroke: darkred;
+  stroke-width: 1.5;
+  opacity: 0.9;
 }
