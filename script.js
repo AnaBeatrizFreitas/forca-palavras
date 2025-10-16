@@ -8,7 +8,6 @@ const temas = {
   "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
-let character = null;
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -17,79 +16,39 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("girl").addEventListener("click", () => {
-    character = "girl";
-    applyCharacterShapes("girl");
-    destacarPersonagem("girl");
-    mostrarTemas();
+  // Aplica forma da cabeça da menina
+  applyCharacterShapes("girl");
+
+  // Ativa botões de tema
+  document.querySelectorAll(".theme-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      const nomeTema = button.textContent;
+      const caminho = `palavras/${temas[nomeTema]}`;
+
+      document.querySelectorAll(".theme-btn").forEach(btn => btn.classList.remove("selected"));
+      button.classList.add("selected");
+
+      carregarPalavras(caminho, nomeTema);
+    });
   });
 
-  document.getElementById("boy").addEventListener("click", () => {
-    character = "boy";
-    applyCharacterShapes("boy");
-    destacarPersonagem("boy");
-    mostrarTemas();
-  });
-
-  document.getElementById("reset").addEventListener("click", () => {
-    wordPool = shuffleWords();
-    startGame();
-    document.getElementById("category").textContent = "Geral";
-    document.getElementById("death-scene").classList.remove("show");
-    document.getElementById("victory-scene").classList.remove("show");
-  });
-
+  // Botões de ação
   document.getElementById("shuffle").addEventListener("click", () => {
+    if (ORIGINAL_WORDS.length === 0) {
+      alert("Escolha um tema antes de começar o jogo");
+      return;
+    }
+    if (wordPool.length === 0) wordPool = shuffleWords();
     startGame();
-    document.getElementById("death-scene").classList.remove("show");
-    document.getElementById("victory-scene").classList.remove("show");
+    limparCenasFinais();
   });
 
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
   document.getElementById("try-again-win").addEventListener("click", reiniciarJogo);
 });
 
-function reiniciarJogo() {
-  wordPool = shuffleWords();
-  startGame();
-  document.getElementById("death-scene").classList.remove("show");
-  document.getElementById("victory-scene").classList.remove("show");
-}
-
-function destacarPersonagem(selecionado) {
-  document.getElementById("girl").classList.remove("selected");
-  document.getElementById("boy").classList.remove("selected");
-  document.getElementById(selecionado).classList.add("selected");
-}
-
-function mostrarTemas() {
-  let themeContainer = document.getElementById("theme-select");
-  if (!themeContainer) {
-    themeContainer = document.createElement("div");
-    themeContainer.id = "theme-select";
-
-    for (const [nome, caminho] of Object.entries(temas)) {
-      const btn = document.createElement("button");
-      btn.className = "theme-btn";
-      btn.textContent = nome;
-      btn.onclick = () => selecionarTema(btn, caminho, nome);
-      themeContainer.appendChild(btn);
-    }
-
-    document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
-  }
-}
-
-function selecionarTema(botao, caminho, nomeTema) {
-  document.querySelectorAll("#theme-select .theme-btn").forEach(btn => btn.classList.remove("selected"));
-  botao.classList.add("selected");
-  carregarPalavras(caminho, nomeTema);
-}
-
-function carregarPalavras(nomeArquivo, nomeTema) {
-  const baseURL = `palavras/${nomeArquivo}`;
-
-  fetch(baseURL)
+function carregarPalavras(caminho, nomeTema) {
+  fetch(caminho)
     .then(res => res.json())
     .then(palavras => {
       ORIGINAL_WORDS = palavras.filter(item => item.w && typeof item.w === "string")
@@ -97,7 +56,6 @@ function carregarPalavras(nomeArquivo, nomeTema) {
           w: item.w.toUpperCase(),
           dica: item.dica || "Sem dica disponível"
         }));
-
       wordPool = shuffleWords();
       startGame();
       document.getElementById("category").textContent = nomeTema;
@@ -211,25 +169,32 @@ function mostrarParteDaForca(erros) {
   if (parte) parte.classList.add("show");
 }
 
+function reiniciarJogo() {
+  if (wordPool.length === 0) wordPool = shuffleWords();
+  startGame();
+  limparCenasFinais();
+}
+
+function limparCenasFinais() {
+  document.getElementById("death-scene").classList.remove("show");
+  document.getElementById("victory-scene").classList.remove("show");
+  document.querySelector(".victory-message").textContent = "";
+  document.querySelector(".glow").style.background = "";
+}
+
 function applyCharacterShapes(kind) {
   const SHAPES = {
     girl: {
       p6: "M165 75 Q190 50 215 75",
       p7: "M182 80 L190 70 L198 80 L190 90 Z"
-    },
-    boy: {
-      p6: "M165 75 L215 75 L190 50 Z",
-      p7: "M175 200 L175 240 M205 200 L205 240"
     }
   };
 
   const p6 = document.getElementById("p6");
   const p7 = document.getElementById("p7");
-  if (p6 && p7) {
+  if (p6 && p7 && SHAPES[kind]) {
     p6.setAttribute("d", SHAPES[kind].p6);
     p7.setAttribute("d", SHAPES[kind].p7);
-    p6.classList.remove("girl", "boy");
-    p7.classList.remove("girl", "boy");
     p6.classList.add(kind);
     p7.classList.add(kind);
   }
