@@ -19,14 +19,12 @@ let erros = 0;
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("girl").addEventListener("click", () => {
     character = "girl";
-    applyCharacterShapes("girl");
     destacarPersonagem("girl");
     mostrarTemas();
   });
 
   document.getElementById("boy").addEventListener("click", () => {
     character = "boy";
-    applyCharacterShapes("boy");
     destacarPersonagem("boy");
     mostrarTemas();
   });
@@ -126,8 +124,10 @@ function startGame() {
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
 
-  for (let i = 0; i < 8; i++) {
-    document.getElementById(`p${i}`)?.classList.remove("show");
+  // Esconde todas as partes do Ghostface
+  for (let i = 1; i <= 8; i++) {
+    const parte = document.getElementById(`ghostface${i}`);
+    if (parte) parte.classList.remove("show");
   }
 
   const next = wordPool.pop();
@@ -207,35 +207,6 @@ function verificarVitoria() {
 }
 
 function mostrarParteDaForca(erros) {
-  const parteSvg = document.getElementById(`p${erros - 1}`);
-  const parteImg = document.getElementById(`ghostface${erros - 1}`);
-
-  if (parteSvg) parteSvg.classList.add("show");
-  parteImg.classList.add("show");
-
-}
-
-
-function applyCharacterShapes(kind) {
-  const SHAPES = {
-    girl: {
-      p6: "M165 75 Q190 50 215 75",
-      p7: "M182 80 L190 70 L198 80 L190 90 Z"
-    },
-    boy: {
-      p6: "M165 75 L215 75 L190 50 Z",
-      p7: "M175 200 L175 240 M205 200 L205 240"
-    }
-  };
-
-  const p6 = document.getElementById("p6");
-  const p7 = document.getElementById("p7");
-  if (p6 && p7) {
-    p6.setAttribute("d", SHAPES[kind].p6);
-    p7.setAttribute("d", SHAPES[kind].p7);
-    p6.classList.remove("girl", "boy");
-    p7.classList.remove("girl", "boy");
-    p6.classList.add(kind);
-    p7.classList.add(kind);
-  }
+  const parteImg = document.getElementById(`ghostface${erros}`);
+  if (parteImg) parteImg.classList.add("show");
 }
