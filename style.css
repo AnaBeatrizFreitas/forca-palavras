@@ -387,3 +387,9 @@ header h1 {
 #theme-select button:not(.selected) {
   opacity: 0.5;
 }
+.ghostface {
+  stroke: #fff;
+  fill: none;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 6px red);
+}

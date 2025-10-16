@@ -8,7 +8,6 @@ const temas = {
   "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
-let character = null;
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -17,19 +16,8 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("girl").addEventListener("click", () => {
-    character = "girl";
-    applyCharacterShapes("girl");
-    destacarPersonagem("girl");
-    mostrarTemas();
-  });
-
-  document.getElementById("boy").addEventListener("click", () => {
-    character = "boy";
-    applyCharacterShapes("boy");
-    destacarPersonagem("boy");
-    mostrarTemas();
-  });
+  applyCharacterShapes("ghostface");
+  mostrarTemas();
 
   document.getElementById("reset").addEventListener("click", () => {
     wordPool = shuffleWords();
@@ -56,12 +44,6 @@ function reiniciarJogo() {
   document.getElementById("victory-scene").classList.remove("show");
 }
 
-function destacarPersonagem(selecionado) {
-  document.getElementById("girl").classList.remove("selected");
-  document.getElementById("boy").classList.remove("selected");
-  document.getElementById(selecionado).classList.add("selected");
-}
-
 function mostrarTemas() {
   let themeContainer = document.getElementById("theme-select");
   if (!themeContainer) {
@@ -76,7 +58,7 @@ function mostrarTemas() {
       themeContainer.appendChild(btn);
     }
 
-    document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
+    document.querySelector(".app").insertAdjacentElement("afterbegin", themeContainer);
   }
 }
 
@@ -213,24 +195,18 @@ function mostrarParteDaForca(erros) {
 
 function applyCharacterShapes(kind) {
   const SHAPES = {
-    girl: {
-      p6: "M165 75 Q190 50 215 75",
-      p7: "M182 80 L190 70 L198 80 L190 90 Z"
-    },
-    boy: {
-      p6: "M165 75 L215 75 L190 50 Z",
-      p7: "M175 200 L175 240 M205 200 L205 240"
+    ghostface: {
+      p6: "M165 75 Q190 40 215 75", // cabeça
+      p7: "M180 80 Q190 100 200 80 Q190 120 180 80 Z" // máscara
     }
   };
 
   const p6 = document.getElementById("p6");
   const p7 = document.getElementById("p7");
-  if (p6 && p7) {
+  if (p6 && p7 && SHAPES[kind]) {
     p6.setAttribute("d", SHAPES[kind].p6);
     p7.setAttribute("d", SHAPES[kind].p7);
-    p6.classList.remove("girl", "boy");
-    p7.classList.remove("girl", "boy");
-    p6.classList.add(kind);
-    p7.classList.add(kind);
+    p6.className = kind;
+    p7.className = kind;
   }
 }
