@@ -362,3 +362,38 @@ header h1 {
   50% { opacity: 0.4; stroke-width: 3.5; }
   100% { opacity: 1; stroke-width: 2.5; }
 }
+.mask-outline {
+  fill: transparent;
+  stroke: #a855f7;
+  stroke-width: 2.5;
+  visibility: hidden;
+}
+
+.mask-led {
+  stroke: #a855f7;
+  stroke-width: 2.5;
+  fill: none;
+  visibility: hidden;
+}
+
+.mask-glow {
+  stroke: #a855f7;
+  animation: brilharMascara 1.2s ease-in-out infinite;
+}
+
+@keyframes brilharMascara {
+  0% { opacity: 1; stroke-width: 2.5; }
+  50% { opacity: 0.4; stroke-width: 3.5; }
+  100% { opacity: 1; stroke-width: 2.5; }
+}
+
+.part {
+  stroke: #e5e7eb;
+  stroke-width: 2;
+  fill: none;
+  visibility: hidden;
+}
+
+.part.show {
+  visibility: visible;
+}

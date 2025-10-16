@@ -37,7 +37,7 @@
     <div class="board">
       <!-- Painel da forca -->
       <div class="panel">
-    <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
+   <svg class="gallows" viewBox="0 0 400 300" aria-label="Forca">
   <!-- Estrutura da forca -->
   <line x1="100" y1="250" x2="300" y2="250" stroke="#444" stroke-width="6"/>
   <line x1="150" y1="250" x2="150" y2="50" stroke="#444" stroke-width="6"/>
@@ -47,25 +47,23 @@
   <!-- Cabeça transparente com contorno LED roxo -->
   <ellipse id="p0" cx="190" cy="95" rx="20" ry="26" class="part mask-outline"/>
 
-  <!-- X nos olhos -->
-  <path id="p1" d="M175 85 L185 95 M185 85 L175 95" class="part mask-led"/>
-  <path id="p2" d="M195 85 L205 95 M205 85 L195 95" class="part mask-led"/>
+  <!-- Olhos em X -->
+  <path id="p1" d="M178 88 L182 92 M182 88 L178 92" class="part mask-led"/>
+  <path id="p2" d="M198 88 L202 92 M202 88 L198 92" class="part mask-led"/>
 
-  <!-- Boca costurada -->
-  <path id="p3" d="M175 110 Q190 120 205 110" class="part mask-led"/>
-  <line id="p4" x1="180" y1="112" x2="180" y2="118" class="part mask-led"/>
-  <line id="p5" x1="190" y1="114" x2="190" y2="120" class="part mask-led"/>
-  <line id="p6" x1="200" y1="112" x2="200" y2="118" class="part mask-led"/>
+  <!-- Boca costurada (mais alta e menor) -->
+  <path id="p3" d="M180 102 Q190 108 200 102" class="part mask-led"/>
+  <line id="p4" x1="183" y1="103" x2="183" y2="107" class="part mask-led"/>
+  <line id="p5" x1="190" y1="104" x2="190" y2="108" class="part mask-led"/>
+  <line id="p6" x1="197" y1="103" x2="197" y2="107" class="part mask-led"/>
 
   <!-- Corpo e membros -->
-  <line id="p7" x1="190" y1="130" x2="190" y2="170" class="part"/>
+  <line id="p7" x1="190" y1="120" x2="190" y2="170" class="part"/>
   <line id="p8" x1="190" y1="140" x2="170" y2="160" class="part"/>
   <line id="p9" x1="190" y1="140" x2="210" y2="160" class="part"/>
   <line id="p10" x1="190" y1="170" x2="170" y2="200" class="part"/>
   <line id="p11" x1="190" y1="170" x2="210" y2="200" class="part"/>
 </svg>
-
-
       </div>
 
       <!-- Painel de interação -->

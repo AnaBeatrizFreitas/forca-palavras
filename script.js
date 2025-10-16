@@ -154,7 +154,6 @@ function verificarVitoria() {
     }
   }
 }
-
 function mostrarParteDaForca(erros) {
   const ordem = [
     ['p0'], // cabeça
