@@ -1,3 +1,14 @@
+const temas = {
+  "Animal 🐶": "animal/palavras.json",
+  "Cantores 🎤": "cantores/palavras.json",
+  "Comida 🍔": "comida/palavras.json",
+  "Filmes 🎬": "filmes/palavras.json",
+  "Objeto 🧰": "objetos/palavras.json",
+  "País 🌍": "pais/palavras.json",
+  "Profissões 👩‍⚕️": "profissoes/palavras.json"
+};
+
+let character = null;
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -6,35 +17,79 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".theme-btn").forEach(button => {
-    button.addEventListener("click", () => {
-      const tema = button.dataset.tema;
-      const nomeTema = button.textContent;
-      const caminho = `palavras/${tema}/palavras.json`;
+  document.getElementById("girl").addEventListener("click", () => {
+    character = "girl";
+    applyCharacterShapes("girl");
+    destacarPersonagem("girl");
+    mostrarTemas();
+  });
 
-      document.querySelectorAll(".theme-btn").forEach(btn => btn.classList.remove("selected"));
-      button.classList.add("selected");
+  document.getElementById("boy").addEventListener("click", () => {
+    character = "boy";
+    applyCharacterShapes("boy");
+    destacarPersonagem("boy");
+    mostrarTemas();
+  });
 
-      carregarPalavras(caminho, nomeTema);
-    });
+  document.getElementById("reset").addEventListener("click", () => {
+    wordPool = shuffleWords();
+    startGame();
+    document.getElementById("category").textContent = "Geral";
+    document.getElementById("death-scene").classList.remove("show");
+    document.getElementById("victory-scene").classList.remove("show");
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
-    if (ORIGINAL_WORDS.length === 0) {
-      alert("Escolha um tema antes de começar o jogo");
-      return;
-    }
-    if (wordPool.length === 0) wordPool = shuffleWords();
     startGame();
-    limparCenasFinais();
+    document.getElementById("death-scene").classList.remove("show");
+    document.getElementById("victory-scene").classList.remove("show");
   });
 
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
   document.getElementById("try-again-win").addEventListener("click", reiniciarJogo);
 });
 
-function carregarPalavras(caminho, nomeTema) {
-  fetch(caminho)
+function reiniciarJogo() {
+  wordPool = shuffleWords();
+  startGame();
+  document.getElementById("death-scene").classList.remove("show");
+  document.getElementById("victory-scene").classList.remove("show");
+}
+
+function destacarPersonagem(selecionado) {
+  document.getElementById("girl").classList.remove("selected");
+  document.getElementById("boy").classList.remove("selected");
+  document.getElementById(selecionado).classList.add("selected");
+}
+
+function mostrarTemas() {
+  let themeContainer = document.getElementById("theme-select");
+  if (!themeContainer) {
+    themeContainer = document.createElement("div");
+    themeContainer.id = "theme-select";
+
+    for (const [nome, caminho] of Object.entries(temas)) {
+      const btn = document.createElement("button");
+      btn.className = "theme-btn";
+      btn.textContent = nome;
+      btn.onclick = () => selecionarTema(btn, caminho, nome);
+      themeContainer.appendChild(btn);
+    }
+
+    document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
+  }
+}
+
+function selecionarTema(botao, caminho, nomeTema) {
+  document.querySelectorAll("#theme-select .theme-btn").forEach(btn => btn.classList.remove("selected"));
+  botao.classList.add("selected");
+  carregarPalavras(caminho, nomeTema);
+}
+
+function carregarPalavras(nomeArquivo, nomeTema) {
+  const baseURL = `palavras/${nomeArquivo}`;
+
+  fetch(baseURL)
     .then(res => res.json())
     .then(palavras => {
       ORIGINAL_WORDS = palavras.filter(item => item.w && typeof item.w === "string")
@@ -42,6 +97,7 @@ function carregarPalavras(caminho, nomeTema) {
           w: item.w.toUpperCase(),
           dica: item.dica || "Sem dica disponível"
         }));
+
       wordPool = shuffleWords();
       startGame();
       document.getElementById("category").textContent = nomeTema;
@@ -70,9 +126,8 @@ function startGame() {
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
 
-  for (let i = 0; i <= 7; i++) {
-    const parte = document.getElementById(`p${i}`);
-    if (parte) parte.classList.remove("show", "mask-glow");
+  for (let i = 0; i < 8; i++) {
+    document.getElementById(`p${i}`)?.classList.remove("show");
   }
 
   const next = wordPool.pop();
@@ -137,7 +192,6 @@ function handleGuess(letra, btn) {
       document.getElementById("death-scene").classList.add("show");
       document.getElementById("status").textContent = "Você perdeu!";
       document.getElementById("status").className = "status lose";
-      ativarGlowDerrota();
     }
   }
 }
@@ -149,52 +203,34 @@ function verificarVitoria() {
     document.getElementById("victory-scene").classList.add("show");
     document.getElementById("status").textContent = "Você venceu!";
     document.getElementById("status").className = "status win";
-
-    for (let i = 0; i <= 2; i++) {
-      document.getElementById(`p${i}`)?.classList.add("mask-glow");
-    }
   }
 }
 
 function mostrarParteDaForca(erros) {
-  const ordem = [
-    ['p0'],             // Cabeça com capuz
-    ['p1', 'p2'],       // Olhos em X
-    ['p3'],             // Nariz
-    ['p4'],             // Boca
-    ['p5'],             // Tronco com capa
-    ['p6'],             // Manga esquerda
-    ['p7']              // Manga direita
-  ];
-
-  const partes = ordem[erros - 1];
-  if (!partes) return;
-
-  partes.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.add("show");
-  });
+  const parte = document.getElementById(`p${erros - 1}`);
+  if (parte) parte.classList.add("show");
 }
 
-function ativarGlowDerrota() {
-  ['p1', 'p2', 'p3', 'p4'].forEach(id => {
-    document.getElementById(id)?.classList.add("mask-glow");
-  });
-}
+function applyCharacterShapes(kind) {
+  const SHAPES = {
+    girl: {
+      p6: "M165 75 Q190 50 215 75",
+      p7: "M182 80 L190 70 L198 80 L190 90 Z"
+    },
+    boy: {
+      p6: "M165 75 L215 75 L190 50 Z",
+      p7: "M175 200 L175 240 M205 200 L205 240"
+    }
+  };
 
-function reiniciarJogo() {
-  if (wordPool.length === 0) wordPool = shuffleWords();
-  startGame();
-  limparCenasFinais();
-}
-
-function limparCenasFinais() {
-  document.getElementById("death-scene").classList.remove("show");
-  document.getElementById("victory-scene").classList.remove("show");
-  document.querySelector(".victory-message").textContent = "“Escapou dessa vez”";
-  document.querySelector(".glow").style.background = "";
-
-  for (let i = 0; i <= 2; i++) {
-    document.getElementById(`p${i}`)?.classList.remove("mask-glow");
+  const p6 = document.getElementById("p6");
+  const p7 = document.getElementById("p7");
+  if (p6 && p7) {
+    p6.setAttribute("d", SHAPES[kind].p6);
+    p7.setAttribute("d", SHAPES[kind].p7);
+    p6.classList.remove("girl", "boy");
+    p7.classList.remove("girl", "boy");
+    p6.classList.add(kind);
+    p7.classList.add(kind);
   }
 }

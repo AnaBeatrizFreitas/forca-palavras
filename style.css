@@ -1,12 +1,11 @@
 :root {
-  --bg: #0a0a0a;
-  --panel: #111;
+  --bg: #0f1320;
+  --panel: #111827;
   --ink: #e5e7eb;
   --muted: #9ca3af;
-  --accent: #565661d2;
+  --accent: #5a5f64;
   --bad: #ef4444;
   --good: #10b981;
-  --led: #a855f7;
 }
 
 body {
@@ -19,12 +18,14 @@ body {
   font-family: sans-serif;
 }
 
+/* Painel principal */
 .app {
   max-width: 900px;
   width: 100%;
   padding: 20px;
 }
 
+/* Cabeçalho */
 header h1 {
   font-size: 32px;
   margin-bottom: 10px;
@@ -36,6 +37,7 @@ header h1 {
   margin-bottom: 20px;
 }
 
+/* Painéis */
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -46,9 +48,9 @@ header h1 {
   background-color: var(--panel);
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #333;
 }
 
+/* Palavra */
 .word {
   display: flex;
   gap: 8px;
@@ -66,12 +68,14 @@ header h1 {
   border-color: var(--accent);
 }
 
+/* Dica */
 .hint {
   font-size: 14px;
   color: var(--muted);
   margin-bottom: 20px;
 }
 
+/* Teclado */
 .keyboard {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
@@ -104,6 +108,7 @@ header h1 {
   color: #fff;
 }
 
+/* Ações */
 .actions {
   display: flex;
   gap: 10px;
@@ -130,6 +135,7 @@ header h1 {
   border-color: var(--accent);
 }
 
+/* Status */
 .status {
   font-size: 16px;
   margin-top: 10px;
@@ -143,35 +149,53 @@ header h1 {
   color: var(--bad);
 }
 
-/* Escolha de tema */
-#theme-select {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Escolha de personagem */
+#character-select {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-#theme-select h2 {
-  font-size: 22px;
-  margin-bottom: 16px;
-  color: var(--ink);
-  text-align: center;
+#character-select h2 {
+  margin-bottom: 10px;
 }
 
-.tema-botoes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.theme-btn {
+#character-select button {
+  font-size: 16px;
   padding: 8px 16px;
-  font-size: 14px;
+  margin: 0 8px;
   border-radius: 6px;
   border: 1px solid #444;
   background-color: #222;
   color: #eee;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+#character-select button:hover {
+  background-color: #333;
+}
+#character-select button.selected {
+  background-color: #565661d2; /* azul escuro */
+}
+
+
+/* Escolha de tema */
+#theme-select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.theme-btn {
+  background-color: var(--panel);
+  color: var(--ink);
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -180,52 +204,28 @@ header h1 {
   background-color: #333;
 }
 
+.theme-btn:active {
+  transform: scale(0.97);
+}
 .theme-btn.selected {
-  background-color: var(--accent);
-  color: #fff;
-  cursor: default;
-  opacity: 1;
+  background-color:  #565661d2; /* azul escuro */
 }
 
-.theme-btn:not(.selected) {
-  opacity: 0.5;
-}
 
-/* SVG da forca e máscara LED */
+/* SVG da forca */
 .gallows {
   width: 100%;
   height: auto;
 }
 
 .part {
-  stroke: var(--ink);
-  stroke-width: 2;
-  fill: none;
-  visibility: hidden;
+  stroke: #e5e7eb;
+  stroke-width: 4;
+  display: none;
 }
 
 .part.show {
-  visibility: visible;
-}
-
-/* Máscara LED roxa estilo Noite de Crime */
-.mask-outline {
-  fill: transparent;
-  stroke: var(--led);
-  stroke-width: 2.5;
-  visibility: hidden;
-}
-
-.mask-led {
-  stroke: var(--led);
-  stroke-width: 2.5;
-  fill: none;
-  visibility: hidden;
-}
-
-.mask-glow {
-  stroke: var(--led);
-  animation: brilharMascara 1.2s ease-in-out infinite;
+  display: block;
 }
 
 /* Tela de derrota */
@@ -265,7 +265,7 @@ header h1 {
   animation: pulse 1.5s infinite;
 }
 
-#try-again-loss {
+#try-again {
   margin-top: 20px;
   padding: 8px 16px;
   font-size: 14px;
@@ -276,7 +276,7 @@ header h1 {
   cursor: pointer;
 }
 
-#try-again-loss:hover {
+#try-again:hover {
   background-color: #dd5d5d;
 }
 
@@ -301,7 +301,7 @@ header h1 {
 .glow {
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, rgba(168, 85, 247, 0.4), rgba(0, 0, 0, 0.9));
+  background: radial-gradient(circle at center, rgba(10, 117, 19, 0.61), rgb(2, 63, 29));
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -310,7 +310,7 @@ header h1 {
 }
 
 .victory-message {
-  color: var(--led);
+  color: var(--good);
   font-size: 28px;
   font-weight: bold;
   text-shadow: 2px 2px 6px black;
@@ -357,8 +357,33 @@ header h1 {
   50% { transform: scale(1.05); }
 }
 
-@keyframes brilharMascara {
-  0% { opacity: 1; stroke-width: 2.5; }
-  50% { opacity: 0.4; stroke-width: 3.5; }
-  100% { opacity: 1; stroke-width: 2.5; }
+.part {
+  stroke: #e5e7eb;
+  stroke-width: 4;
+  visibility: hidden;
+}
+
+.part.show {
+  visibility: visible;
+}
+#character-select .selected {
+  background-color: var(--accent);
+  color: #fff;
+  cursor: default;
+  opacity: 1;
+}
+
+#character-select button:not(.selected) {
+  opacity: 0.5;
+}
+
+#theme-select .selected {
+  background-color: var(--accent);
+  color: #fff;
+  cursor: default;
+  opacity: 1;
+}
+
+#theme-select button:not(.selected) {
+  opacity: 0.5;
 }
