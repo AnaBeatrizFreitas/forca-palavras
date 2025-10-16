@@ -16,7 +16,7 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyCharacterShapes("ghostface");
+ applyCharacterShapes("ceifador");
   mostrarTemas();
 
   document.getElementById("reset").addEventListener("click", () => {
@@ -195,11 +195,11 @@ function mostrarParteDaForca(erros) {
 
 function applyCharacterShapes(kind) {
   const SHAPES = {
-    ghostface: {
-      // Cabeça com capuz e máscara
-      p6: "M165 75 Q190 40 215 75 Q190 110 165 75 Z",
-      // Capa com mangas abertas
-      p7: "M160 120 Q190 160 220 120 Q190 200 160 120 Z"
+    ceifador: {
+      // Cabeça com capuz
+      p6: "M170 75 Q190 40 210 75 Q190 110 170 75 Z", // formato oval com capuz
+      // Corpo com manto rasgado
+      p7: "M160 120 Q190 160 220 120 Q210 180 190 200 Q170 180 160 120 Z"
     }
   };
 

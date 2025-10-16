@@ -399,3 +399,9 @@ header h1 {
   stroke-width: 2;
   filter: drop-shadow(0 0 4px red);
 }
+.ceifador {
+  stroke: #fff;
+  fill: #111;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px red);
+}
