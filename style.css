@@ -407,3 +407,40 @@ body.sombrio .key {
 body.sombrio .btn:hover {
   background-color: #333;
 }
+#theme-select {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#theme-select h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.tema-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.theme-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: #eee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-btn:hover {
+  background-color: #333;
+}
+
+.theme-btn.selected {
+  background-color: var(--accent);
+  color: #fff;
+}
