@@ -187,12 +187,11 @@ function verificarVitoria() {
     document.getElementById("status").className = "status win";
   }
 }
-
 function mostrarParteDaForca(erros) {
-  const parte = document.getElementById(`p${erros - 1}`);
-  if (parte) parte.classList.add("show");
+  if (erros === 8) {
+    document.getElementById("ghostface-img").classList.add("show");
+  }
 }
-
 function applyCharacterShapes(kind) {
   const SHAPES = {
     ghostface: {
