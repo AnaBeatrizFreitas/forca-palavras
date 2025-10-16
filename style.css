@@ -387,3 +387,29 @@ header h1 {
 #theme-select button:not(.selected) {
   opacity: 0.5;
 }
+#ghostface-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ghostface-part {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: none;
+  z-index: 10;
+}
+.ghostface-part {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.ghostface-part.show {
+  display: block;
+  opacity: 1;
+}

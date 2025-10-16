@@ -207,9 +207,14 @@ function verificarVitoria() {
 }
 
 function mostrarParteDaForca(erros) {
-  const parte = document.getElementById(`p${erros - 1}`);
-  if (parte) parte.classList.add("show");
+  const parteSvg = document.getElementById(`p${erros - 1}`);
+  const parteImg = document.getElementById(`ghostface${erros - 1}`);
+
+  if (parteSvg) parteSvg.classList.add("show");
+  parteImg.classList.add("show");
+
 }
+
 
 function applyCharacterShapes(kind) {
   const SHAPES = {
