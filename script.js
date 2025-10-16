@@ -2,7 +2,7 @@ let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
 let originalHint = "";
-let lives = 10;
+let lives = 12;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
