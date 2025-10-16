@@ -6,10 +6,8 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Aplica forma da cabeça da menina
-  applyCharacterShapes("girl");
+  applyCharacterShapes();
 
-  // Botões de tema
   document.querySelectorAll(".theme-btn").forEach(button => {
     button.addEventListener("click", () => {
       const tema = button.dataset.tema;
@@ -23,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Botões de ação
   document.getElementById("shuffle").addEventListener("click", () => {
     if (ORIGINAL_WORDS.length === 0) {
       alert("Escolha um tema antes de começar o jogo");
@@ -173,20 +170,26 @@ function limparCenasFinais() {
   document.querySelector(".glow").style.background = "";
 }
 
-function applyCharacterShapes(kind) {
-  const SHAPES = {
-    girl: {
-      p6: "M165 75 Q190 50 215 75",
-      p7: "M182 80 L190 70 L198 80 L190 90 Z"
-    }
-  };
+function applyCharacterShapes() {
+  const p6 = document.getElementById("p6"); // caveira: olhos e nariz
+  const p7 = document.getElementById("p7"); // caveira: dentes
 
-  const p6 = document.getElementById("p6");
-  const p7 = document.getElementById("p7");
-  if (p6 && p7 && SHAPES[kind]) {
-    p6.setAttribute("d", SHAPES[kind].p6);
-    p7.setAttribute("d", SHAPES[kind].p7);
-    p6.classList.add(kind);
-    p7.classList.add(kind);
+  if (p6 && p7) {
+    p6.setAttribute("d", `
+      M180 90 Q185 85 190 90 Q185 95 180 90
+      M200 90 Q205 85 210 90 Q205 95 200 90
+      M190 100 Q192 98 194 100 Q192 102 190 100
+    `);
+
+    p7.setAttribute("d", "M185 110 L195 110 M195 110 L205 110");
+
+    p6.classList.add("skull");
+    p7.classList.add("skull");
+  }
+
+  const head = document.getElementById("p0");
+  if (head) {
+    head.setAttribute("fill", "none");
+    head.setAttribute("stroke", "none");
   }
 }

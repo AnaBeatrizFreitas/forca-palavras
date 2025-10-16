@@ -340,3 +340,13 @@ header h1 {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
+.skull {
+  stroke: #e5e7eb;
+  stroke-width: 2;
+  fill: none;
+}
+.skull {
+  stroke: #aaa;
+  stroke-width: 1.5;
+  fill: none;
+}
