@@ -8,7 +8,7 @@ const temas = {
   "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
-let character = "girl"; // personagem padrão
+let character = "girl";
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -17,7 +17,8 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyCharacterShapes("girl"); // aplica forma da menina
+  applyCharacterShapes("girl");
+  mostrarTemas();
 
   document.getElementById("reset").addEventListener("click", () => {
     wordPool = shuffleWords();
@@ -58,7 +59,7 @@ function mostrarTemas() {
       themeContainer.appendChild(btn);
     }
 
-    document.body.insertAdjacentElement("afterbegin", themeContainer);
+    document.querySelector(".app").insertAdjacentElement("afterbegin", themeContainer);
   }
 }
 
