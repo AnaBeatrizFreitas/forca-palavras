@@ -339,3 +339,11 @@ header h1 {
 #theme-select button:not(.selected) {
   opacity: 0.5;
 }
+@keyframes fallAway {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100px); opacity: 0; }
+}
+
+.part.fall {
+  animation: fallAway 1s ease forwards;
+}

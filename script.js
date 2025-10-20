@@ -110,7 +110,7 @@ function startGame() {
   document.getElementById("status").className = "status";
 
   for (let i = 0; i < 8; i++) {
-    document.getElementById(`p${i}`)?.classList.remove("show");
+    document.getElementById(`p${i}`)?.classList.remove("show", "fall");
   }
 
   const next = wordPool.pop();
@@ -164,17 +164,28 @@ function handleGuess(letra, btn) {
     lives--;
     erros++;
     document.getElementById("lives").textContent = lives;
-    mostrarParteDaForca(erros);
+
+    if (erros === 7) {
+      const arco = document.getElementById("p6");
+      arco.setAttribute("d", "M165 75 Q190 90 215 75");
+      arco.style.stroke = "#8b0000";
+      arco.classList.add("show");
+    } else if (erros === 8) {
+      const partes = document.querySelectorAll(".part");
+      partes.forEach(p => p.classList.add("fall"));
+      setTimeout(() => {
+        partes.forEach(p => p.classList.remove("show"));
+        document.getElementById("death-scene").classList.add("show");
+      }, 1000);
+      document.getElementById("status").textContent = "Você perdeu!";
+      document.getElementById("status").className = "status lose";
+    } else {
+      mostrarParteDaForca(erros);
+    }
 
     if (lives === 3) {
       document.getElementById("hint").textContent = `⚠️ Dica: ${originalHint}`;
       document.getElementById("hint").style.display = "block";
-    }
-
-    if (lives <= 0) {
-      document.getElementById("death-scene").classList.add("show");
-      document.getElementById("status").textContent = "Você perdeu!";
-      document.getElementById("status").className = "status lose";
     }
   }
 }
