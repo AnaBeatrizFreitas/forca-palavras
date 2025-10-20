@@ -8,7 +8,7 @@ const temas = {
   "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
-let character = null;
+let character = "girl"; // personagem padrão
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -17,19 +17,7 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("girl").addEventListener("click", () => {
-    character = "girl";
-    applyCharacterShapes("girl");
-    destacarPersonagem("girl");
-    mostrarTemas();
-  });
-
-  document.getElementById("boy").addEventListener("click", () => {
-    character = "boy";
-    applyCharacterShapes("boy");
-    destacarPersonagem("boy");
-    mostrarTemas();
-  });
+  applyCharacterShapes("girl"); // aplica forma da menina
 
   document.getElementById("reset").addEventListener("click", () => {
     wordPool = shuffleWords();
@@ -56,12 +44,6 @@ function reiniciarJogo() {
   document.getElementById("victory-scene").classList.remove("show");
 }
 
-function destacarPersonagem(selecionado) {
-  document.getElementById("girl").classList.remove("selected");
-  document.getElementById("boy").classList.remove("selected");
-  document.getElementById(selecionado).classList.add("selected");
-}
-
 function mostrarTemas() {
   let themeContainer = document.getElementById("theme-select");
   if (!themeContainer) {
@@ -76,7 +58,7 @@ function mostrarTemas() {
       themeContainer.appendChild(btn);
     }
 
-    document.getElementById("character-select").insertAdjacentElement("afterend", themeContainer);
+    document.body.insertAdjacentElement("afterbegin", themeContainer);
   }
 }
 

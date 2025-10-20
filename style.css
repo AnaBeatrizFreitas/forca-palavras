@@ -149,37 +149,6 @@ header h1 {
   color: var(--bad);
 }
 
-/* Escolha de personagem */
-#character-select {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#character-select h2 {
-  margin-bottom: 10px;
-}
-
-#character-select button {
-  font-size: 16px;
-  padding: 8px 16px;
-  margin: 0 8px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background-color: #222;
-  color: #eee;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s ease;
-}
-
-#character-select button:hover {
-  background-color: #333;
-}
-#character-select button.selected {
-  background-color: #565661d2; /* azul escuro */
-}
-
-
 /* Escolha de tema */
 #theme-select {
   display: flex;
@@ -207,10 +176,10 @@ header h1 {
 .theme-btn:active {
   transform: scale(0.97);
 }
-.theme-btn.selected {
-  background-color:  #565661d2; /* azul escuro */
-}
 
+.theme-btn.selected {
+  background-color: #565661d2;
+}
 
 /* SVG da forca */
 .gallows {
@@ -222,10 +191,13 @@ header h1 {
   stroke: #e5e7eb;
   stroke-width: 4;
   display: none;
+  fill: none;
+  visibility: hidden;
 }
 
 .part.show {
   display: block;
+  visibility: visible;
 }
 
 /* Tela de derrota */
@@ -355,26 +327,6 @@ header h1 {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-}
-
-.part {
-  stroke: #e5e7eb;
-  stroke-width: 4;
-  visibility: hidden;
-}
-
-.part.show {
-  visibility: visible;
-}
-#character-select .selected {
-  background-color: var(--accent);
-  color: #fff;
-  cursor: default;
-  opacity: 1;
-}
-
-#character-select button:not(.selected) {
-  opacity: 0.5;
 }
 
 #theme-select .selected {
