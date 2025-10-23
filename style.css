@@ -48,6 +48,17 @@ header h1 {
   background-color: var(--panel);
   padding: 20px;
   border-radius: 8px;
+  position: relative; /* necessário para posicionar a imagem da poça */
+}
+
+/* Imagem da poça de sangue */
+#blood-image {
+  position: absolute;
+  top: 70px;
+  left: 160px;
+  width: 60px;
+  display: none;
+  pointer-events: none;
 }
 
 /* Palavra */
@@ -329,16 +340,6 @@ header h1 {
   50% { transform: scale(1.05); }
 }
 
-#theme-select .selected {
-  background-color: var(--accent);
-  color: #fff;
-  cursor: default;
-  opacity: 1;
-}
-
-#theme-select button:not(.selected) {
-  opacity: 0.5;
-}
 @keyframes fallAway {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(100px); opacity: 0; }
