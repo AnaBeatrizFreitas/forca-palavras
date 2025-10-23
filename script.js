@@ -8,7 +8,6 @@ const temas = {
   "Profissões 👩‍⚕️": "profissoes/palavras.json"
 };
 
-let character = "girl";
 let ORIGINAL_WORDS = [];
 let wordPool = [];
 let currentWord = "";
@@ -17,7 +16,6 @@ let lives = 8;
 let erros = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyCharacterShapes("girl");
   mostrarTemas();
 
   document.getElementById("reset").addEventListener("click", () => {
@@ -26,14 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("category").textContent = "Geral";
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
-    document.getElementById("blood-pool").style.display = "none";
+    document.getElementById("blood-image").style.display = "none";
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
     startGame();
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
-    document.getElementById("blood-pool").style.display = "none";
+    document.getElementById("blood-image").style.display = "none";
   });
 
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
@@ -46,7 +44,6 @@ function reiniciarJogo() {
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
   document.getElementById("blood-image").style.display = "none";
-  document.getElementById("blood-pool").style.display = "none";
 }
 
 function mostrarTemas() {
@@ -74,9 +71,7 @@ function selecionarTema(botao, caminho, nomeTema) {
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
-  const baseURL = `palavras/${nomeArquivo}`;
-
-  fetch(baseURL)
+  fetch(nomeArquivo)
     .then(res => res.json())
     .then(palavras => {
       ORIGINAL_WORDS = palavras.filter(item => item.w && typeof item.w === "string")
@@ -110,10 +105,9 @@ function startGame() {
   document.getElementById("lives").textContent = lives;
   document.getElementById("hint").textContent = "";
   document.getElementById("hint").style.display = "none";
-  document.getElementById("blood-image").style.display = "none";
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
-  document.getElementById("blood-pool").style.display = "none";
+  document.getElementById("blood-image").style.display = "none";
 
   for (let i = 0; i < 8; i++) {
     document.getElementById(`p${i}`)?.classList.remove("show", "fall");
@@ -171,9 +165,9 @@ function handleGuess(letra, btn) {
     erros++;
     document.getElementById("lives").textContent = lives;
 
-   if (erros === 7) {
-  document.getElementById("blood-image").style.display = "block";
-} else if (erros === 8) {
+    if (erros === 7) {
+      document.getElementById("blood-image").style.display = "block";
+    } else if (erros === 8) {
       const partes = document.querySelectorAll(".part");
       partes.forEach(p => p.classList.add("fall"));
       setTimeout(() => {
@@ -206,28 +200,4 @@ function verificarVitoria() {
 function mostrarParteDaForca(erros) {
   const parte = document.getElementById(`p${erros - 1}`);
   if (parte) parte.classList.add("show");
-}
-
-function applyCharacterShapes(kind) {
-  const SHAPES = {
-    girl: {
-      p6: "",
-      p7: ""
-    },
-    boy: {
-      p6: "",
-      p7: ""
-    }
-  };
-
-  const p6 = document.getElementById("p6");
-  const p7 = document.getElementById("p7");
-  if (p6 && p7) {
-    p6.setAttribute("d", SHAPES[kind].p6);
-    p7.setAttribute("d", SHAPES[kind].p7);
-    p6.classList.remove("girl", "boy");
-    p7.classList.remove("girl", "boy");
-    p6.classList.add(kind);
-    p7.classList.add(kind);
-  }
 }
