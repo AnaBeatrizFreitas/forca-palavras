@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function reiniciarJogo() {
   wordPool = shuffleWords();
   startGame();
+  document.getElementById("blood-image").style.display = "none";
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
   document.getElementById("blood-image").style.display = "none";
@@ -104,6 +105,7 @@ function shuffleWords() {
 function startGame() {
   lives = 8;
   erros = 0;
+  document.getElementById("blood-image").style.display = "none";
   document.getElementById("lives").textContent = lives;
   document.getElementById("hint").textContent = "";
   document.getElementById("hint").style.display = "none";
@@ -167,9 +169,9 @@ function handleGuess(letra, btn) {
     erros++;
     document.getElementById("lives").textContent = lives;
 
-    if (erros === 7) {
-      document.getElementById("blood-image").style.display = "block";
-    } else if (erros === 8) {
+  if (erros === 7) {
+  document.getElementById("blood-image").style.display = "block";
+} else if (erros === 8) {
       const partes = document.querySelectorAll(".part");
       partes.forEach(p => p.classList.add("fall"));
       setTimeout(() => {
