@@ -209,12 +209,12 @@ function mostrarParteDaForca(erros) {
 function applyCharacterShapes(kind) {
   const SHAPES = {
     girl: {
-      p6: "M165 75 Q190 50 215 75",
-      p7: "M182 80 L190 70 L198 80 L190 90 Z"
+      p6: "",
+      p7: ""
     },
     boy: {
-      p6: "M165 75 L215 75 L190 50 Z",
-      p7: "M175 200 L175 240 M205 200 L205 240"
+      p6: "",
+      p7: ""
     }
   };
 
@@ -225,7 +225,7 @@ function applyCharacterShapes(kind) {
     p7.setAttribute("d", SHAPES[kind].p7);
     p6.classList.remove("girl", "boy");
     p7.classList.remove("girl", "boy");
-     p6.classList.add(kind);
+    p6.classList.add(kind);
     p7.classList.add(kind);
   }
 }
