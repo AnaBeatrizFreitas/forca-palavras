@@ -26,12 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("category").textContent = "Geral";
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
+    document.getElementById("blood-pool").style.display = "none";
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
     startGame();
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
+    document.getElementById("blood-pool").style.display = "none";
   });
 
   document.getElementById("try-again-loss").addEventListener("click", reiniciarJogo);
@@ -43,6 +45,7 @@ function reiniciarJogo() {
   startGame();
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
+  document.getElementById("blood-pool").style.display = "none";
 }
 
 function mostrarTemas() {
@@ -108,6 +111,7 @@ function startGame() {
   document.getElementById("hint").style.display = "none";
   document.getElementById("status").textContent = "";
   document.getElementById("status").className = "status";
+  document.getElementById("blood-pool").style.display = "none";
 
   for (let i = 0; i < 8; i++) {
     document.getElementById(`p${i}`)?.classList.remove("show", "fall");
@@ -166,10 +170,7 @@ function handleGuess(letra, btn) {
     document.getElementById("lives").textContent = lives;
 
     if (erros === 7) {
-      const arco = document.getElementById("p6");
-      arco.setAttribute("d", "M165 75 Q190 90 215 75");
-      arco.style.stroke = "#8b0000";
-      arco.classList.add("show");
+      document.getElementById("blood-pool").style.display = "block";
     } else if (erros === 8) {
       const partes = document.querySelectorAll(".part");
       partes.forEach(p => p.classList.add("fall"));
@@ -224,7 +225,7 @@ function applyCharacterShapes(kind) {
     p7.setAttribute("d", SHAPES[kind].p7);
     p6.classList.remove("girl", "boy");
     p7.classList.remove("girl", "boy");
-    p6.classList.add(kind);
+     p6.classList.add(kind);
     p7.classList.add(kind);
   }
 }
