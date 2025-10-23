@@ -1,11 +1,11 @@
 const temas = {
-  "Animal 🐶": "animal/palavras.json",
-  "Cantores 🎤": "cantores/palavras.json",
-  "Comida 🍔": "comida/palavras.json",
-  "Filmes 🎬": "filmes/palavras.json",
-  "Objeto 🧰": "objetos/palavras.json",
-  "País 🌍": "pais/palavras.json",
-  "Profissões 👩‍⚕️": "profissoes/palavras.json"
+  "Animal 🐶": "palavras/animal/palavras.json",
+  "Cantores 🎤": "palavras/cantores/palavras.json",
+  "Comida 🍔": "palavras/comida/palavras.json",
+  "Filmes 🎬": "palavras/filmes/palavras.json",
+  "Objeto 🧰": "palavras/objetos/palavras.json",
+  "País 🌍": "palavras/pais/palavras.json",
+  "Profissões 👩‍⚕️": "palavras/profissoes/palavras.json"
 };
 
 let ORIGINAL_WORDS = [];
