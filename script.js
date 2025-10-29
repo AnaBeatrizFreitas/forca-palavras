@@ -19,7 +19,6 @@ let erros = 0;
 document.addEventListener("DOMContentLoaded", () => {
   applyCharacterShapes("girl");
   mostrarTemas();
-
   document.getElementById("reset").addEventListener("click", () => {
     wordPool = shuffleWords();
     startGame();
@@ -41,12 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function reiniciarJogo() {
+  mostrarTemas(); // <- garante que os botões reapareçam
   wordPool = shuffleWords();
   startGame();
   document.getElementById("blood-pool").classList.remove("show");
   document.getElementById("death-scene").classList.remove("show");
   document.getElementById("victory-scene").classList.remove("show");
 }
+
 
 function mostrarTemas() {
   let themeContainer = document.getElementById("theme-select");
