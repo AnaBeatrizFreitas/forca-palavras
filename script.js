@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
     document.getElementById("blood-pool").classList.remove("show");
+    document.getElementById("p0").classList.remove("head-tilt");
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
@@ -171,7 +172,13 @@ function handleGuess(letra, btn) {
       document.getElementById("blood-pool").classList.add("show");
     } else if (erros === 8) {
       const partes = document.querySelectorAll(".part");
-      partes.forEach(p => p.classList.add("fall"));
+      partes.forEach(p => {
+  if (p.id === "p0") {
+    p.classList.add("head-tilt");
+  } else {
+    p.classList.add("fall");
+  }
+});
       setTimeout(() => {
         partes.forEach(p => p.classList.remove("show"));
         document.getElementById("death-scene").classList.add("show");

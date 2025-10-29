@@ -346,3 +346,9 @@ header h1 {
 .part.fall {
   animation: fallAway 1s ease forwards;
 }
+
+.head-tilt {
+  transform: rotate(20deg);
+  transform-origin: center;
+  transition: transform 0.5s ease;
+}
