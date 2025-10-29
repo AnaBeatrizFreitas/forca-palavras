@@ -172,17 +172,16 @@ function handleGuess(letra, btn) {
       document.getElementById("blood-pool").classList.add("show");
     } else if (erros === 8) {
       const partes = document.querySelectorAll(".part");
-      partes.forEach(p => {
+     partes.forEach(p => {
   if (p.id === "p0") {
     p.classList.add("head-tilt");
-  } else {
+  }
+});
+ else {
     p.classList.add("fall");
   }
 });
-      setTimeout(() => {
-        partes.forEach(p => p.classList.remove("show"));
-        document.getElementById("death-scene").classList.add("show");
-      }, 1000);
+   document.getElementById("death-scene").classList.add("show");
       document.getElementById("status").textContent = "Você perdeu!";
       document.getElementById("status").className = "status lose";
     } else {
