@@ -48,17 +48,7 @@ header h1 {
   background-color: var(--panel);
   padding: 20px;
   border-radius: 8px;
-  position: relative; /* necessário para posicionar a imagem da poça */
-}
-
-/* Imagem da poça de sangue */
-#blood-image {
-  position: absolute;
-  top: 70px;
-  left: 160px;
-  width: 60px;
-  display: none;
-  pointer-events: none;
+  position: relative;
 }
 
 /* Palavra */
@@ -209,6 +199,14 @@ header h1 {
 .part.show {
   display: block;
   visibility: visible;
+}
+
+/* Poça de sangue SVG */
+#blood-pool {
+  display: none;
+}
+#blood-pool.show {
+  display: block;
 }
 
 /* Tela de derrota */

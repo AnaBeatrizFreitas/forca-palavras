@@ -6,13 +6,11 @@
   <title>Jogo da Forca</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    #blood-image {
-      position: absolute;
-      top: 70px;
-      left: 160px;
-      width: 60px;
+    #blood-pool {
       display: none;
-      pointer-events: none;
+    }
+    #blood-pool.show {
+      display: block;
     }
     .panel {
       position: relative;
@@ -35,11 +33,21 @@
     <div class="board">
       <div class="panel">
         <svg class="gallows" viewBox="0 0 300 300" aria-label="Forca">
+          <defs>
+            <radialGradient id="bloodGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#8b0000" stop-opacity="0.8" />
+              <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
           <!-- Estrutura da forca -->
           <line x1="20" y1="280" x2="160" y2="280" stroke="#6b7280" stroke-width="8"/>
           <line x1="60" y1="280" x2="60" y2="40"  stroke="#6b7280" stroke-width="8"/>
           <line x1="60" y1="40"  x2="190" y2="40"  stroke="#6b7280" stroke-width="8"/>
           <line x1="190" y1="40" x2="190" y2="70"  stroke="#6b7280" stroke-width="6"/>
+
+          <!-- Poça de sangue SVG -->
+          <circle id="blood-pool" cx="190" cy="95" r="35" fill="url(#bloodGlow)" />
 
           <!-- Cabeça e corpo -->
           <circle class="part" id="p0" cx="190" cy="95" r="25" fill="none" stroke="#e5e7eb" stroke-width="4"/>
@@ -51,15 +59,6 @@
           <path class="part" id="p6" d=""/>
           <path class="part" id="p7" d=""/>
         </svg>
-
-        <!-- Imagem da poça de sangue (PNG) -->
-         <img
-  id="blood-image"
-  src="imagem/blood.png"
-  alt="Poça de sangue"
-  style="position: absolute; top: 70px; left: 165px; width: 200px; height: 200px; display: none; pointer-events: none;"
-/>
-
       </div>
 
       <div class="panel">
