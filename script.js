@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function reiniciarJogo() {
+  mostrarTemas(); // <- garante que os botões reapareçam
   wordPool = shuffleWords();
   startGame();
   document.getElementById("blood-pool").classList.remove("show");
@@ -48,24 +49,21 @@ function reiniciarJogo() {
   document.getElementById("victory-scene").classList.remove("show");
 }
 
+
 function mostrarTemas() {
-  let themeContainer = document.getElementById("theme-select");
-  if (!themeContainer) {
-    themeContainer = document.createElement("div");
-    themeContainer.id = "theme-select";
+  const themeContainer = document.getElementById("theme-select");
+  themeContainer.innerHTML = ""; // limpa botões antigos
 
-    for (const [nome, caminho] of Object.entries(temas)) {
-      const btn = document.createElement("button");
-      btn.className = "theme-btn";
-      btn.textContent = nome;
-      btn.onclick = () => selecionarTema(btn, caminho, nome);
-      themeContainer.appendChild(btn);
-    }
-
-    document.querySelector(".app").insertAdjacentElement("afterbegin", themeContainer);
+  for (const [nome, caminho] of Object.entries(temas)) {
+    const btn = document.createElement("button");
+    btn.className = "theme-btn";
+    btn.textContent = nome;
+    btn.onclick = () => selecionarTema(btn, caminho, nome);
+    themeContainer.appendChild(btn);
   }
 }
-
+    document.querySelector(".app").insertAdjacentElement("afterbegin", themeContainer);
+ 
 function selecionarTema(botao, caminho, nomeTema) {
   document.querySelectorAll("#theme-select .theme-btn").forEach(btn => btn.classList.remove("selected"));
   botao.classList.add("selected");
