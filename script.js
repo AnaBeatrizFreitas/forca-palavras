@@ -221,7 +221,7 @@ function applyCharacterShapes(kind) {
   if (p6 && p7) {
     p6.setAttribute("d", SHAPES[kind].p6);
     p7.setAttribute("d", SHAPES[kind].p7);
-       p6.classList.add(kind);
+    p6.classList.add(kind);
     p7.classList.add(kind);
   }
 }
