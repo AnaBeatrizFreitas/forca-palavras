@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("death-scene").classList.remove("show");
     document.getElementById("victory-scene").classList.remove("show");
     document.getElementById("blood-pool").classList.remove("show");
-    document.getElementById("p0").classList.remove("head-tilt");
   });
 
   document.getElementById("shuffle").addEventListener("click", () => {
@@ -172,16 +171,11 @@ function handleGuess(letra, btn) {
       document.getElementById("blood-pool").classList.add("show");
     } else if (erros === 8) {
       const partes = document.querySelectorAll(".part");
-     partes.forEach(p => {
-  if (p.id === "p0") {
-    p.classList.add("head-tilt");
-  }
-});
- else {
-    p.classList.add("fall");
-  }
-});
-   document.getElementById("death-scene").classList.add("show");
+      partes.forEach(p => p.classList.add("fall"));
+      setTimeout(() => {
+        partes.forEach(p => p.classList.remove("show"));
+        document.getElementById("death-scene").classList.add("show");
+      }, 1000);
       document.getElementById("status").textContent = "Você perdeu!";
       document.getElementById("status").className = "status lose";
     } else {
@@ -227,7 +221,7 @@ function applyCharacterShapes(kind) {
   if (p6 && p7) {
     p6.setAttribute("d", SHAPES[kind].p6);
     p7.setAttribute("d", SHAPES[kind].p7);
-    p6.classList.remove("girl", "boy");
-        p7.classList.add(kind);
+    p6.classList.add(kind);
+    p7.classList.add(kind);
   }
 }
