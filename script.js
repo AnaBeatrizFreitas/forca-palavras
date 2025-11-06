@@ -88,8 +88,10 @@ function selecionarTema(botao, caminho, nomeTema) {
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
-  const baseURL = `${window.location.origin}/palavras/${nomeArquivo}`;
+  /*const baseURL = `${window.location.origin}/palavras/${nomeArquivo}`;*/
+  const baseURL = `${window.location.pathname.replace(/\/[^\/]*$/, '')}/palavras/${nomeArquivo}`;
 
+  
   fetch(baseURL)
     .then(res => res.json())
     .then(palavras => {
@@ -235,3 +237,4 @@ function applyCharacterShapes(kind) {
     p7.classList.add(kind);
   }
 }
+
