@@ -88,7 +88,7 @@ function selecionarTema(botao, caminho, nomeTema) {
 }
 
 function carregarPalavras(nomeArquivo, nomeTema) {
-  const baseURL = `${window.location.origin}/palavras/${nomeArquivo}`;
+  const baseURL = `${window.location.origin}../palavras/${nomeArquivo}`;
 
   fetch(baseURL)
     .then(res => res.json())
